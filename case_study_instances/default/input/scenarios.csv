@@ -1,7 +1,0 @@
-Scenario,Location,private_evac,Demand,Probability
-Scenario 1: Mount Collins,Snug Cove,56,2067,0.4
-Scenario 1: Mount Collins,Hood Point,148,1037,0.4
-Scenario 2: Mid Island,Tunstall Bay,174,1884,0.1
-Scenario 2: Mid Island,Bowen Bay,170,1861,0.1
-Scenario 3: Killarney Lake,Mt Gardner,29,270,0.15
-Scenario 4: Eaglecliff,Hood Point,148,560,0.35
