@@ -401,8 +401,8 @@ def main(vessel_source, vessel_pos_source,
     m.k = Set(initialize = round_trips, ordered = True)
     # m.k.pprint()
 
-    # scenarios = np.unique(scenarios_source['Scenario'].tolist())
-    scenarios = ['Scenario 1']
+    scenarios = np.unique(scenarios_source['Scenario'].tolist())
+    # scenarios = ['Scenario 1']
     #print(scenarios)
     m.xi = Set(initialize = scenarios, ordered = True)
     # m.xi.pprint()
@@ -785,7 +785,7 @@ def main(vessel_source, vessel_pos_source,
     # m.time_per_vess.pprint()
 
     m.time_counts = Constraint(m.i, m.xi, rule = times_vess_count)
-    m.time_counts.pprint()
+    # m.time_counts.pprint()
 
     ## Capacity vessel choice dependent constraints
 

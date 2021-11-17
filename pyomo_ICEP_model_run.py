@@ -18,6 +18,23 @@ from os.path import basename
 # import modules
 import pyomo_ICEP_model_generator
 
+def reformat_compatibility(matrix):
+    """An auxiliary function to reformat the compatibility file"""
+
+    newframe = pd.DataFrame()
+    j = 1
+    while j < len(matrix.columns):
+        i = 0
+        while i < matrix.shape[0]:
+            newframe = newframe.append({"Dock": matrix.iloc[i,0],
+                                        "Resource": matrix.columns[j],
+                                        "Compatibility": int(matrix.iloc[i,j])}, ignore_index = True)
+            i += 1
+        j += 1
+    newframe = newframe.drop_duplicates()
+
+    return newframe
+
 def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
 
     import gurobipy
@@ -110,7 +127,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
     # create target directories
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    DATA_DIR = os.path.join(BASE_DIR, "core_code/instances", dirname)
+    DATA_DIR = os.path.join(BASE_DIR, "ICEP-exact-implementation/case_study_instances", dirname)
     # print(DATA_DIR)
     SOL_DIR = os.path.join(DATA_DIR, "Solutions")
     # print(SOL_DIR)
@@ -287,10 +304,10 @@ def main():
     dirname = os.getcwd()
 
     rel_path = args.path
-    path = os.path.join(dirname, 'instances' ,rel_path)
+    path = os.path.join(dirname, 'case_study_instances', rel_path)
 
-    source = os.path.join(path, 'Input/')
-    inc_source = os.path.join(path, 'Incidences/')
+    source = os.path.join(path, 'input/')
+    inc_source = os.path.join(path, 'incidences/')
 
     # check if a solution directory exists
     if not os.path.exists(os.path.join(path, 'Solutions')):
@@ -334,6 +351,12 @@ def main():
     compat_source = pd.read_csv(source + 'vessel compatibility.csv', index_col=False, 
                         header=0, delimiter = ',', skipinitialspace=True)
     #print(compat_source)
+
+    # check the forma tof the compat_source. If it is wrong, change the format:
+    if compat_source.shape[1] > 3:
+        compat_source = reformat_compatibility(compat_source)
+    else:
+        pass
 
     alpha_source = pd.read_csv(inc_source + 'alpha.csv', index_col=False, 
                     header=0, delimiter = ',', skipinitialspace=True)
