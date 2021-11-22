@@ -1,0 +1,10 @@
+Scenario,Location,private_evac,Demand,Probability
+Scenario 1,Evac Location 0,17.0,170,0.3762877106886221
+Scenario 1,Evac Location 1,7.0,75,0.3762877106886221
+Scenario 1,Evac Location 2,3.0,32,0.3762877106886221
+Scenario 2,Evac Location 0,12.0,128,0.09214539471326721
+Scenario 2,Evac Location 1,6.0,64,0.09214539471326721
+Scenario 2,Evac Location 2,12.0,123,0.09214539471326721
+Scenario 3,Evac Location 0,6.0,68,0.5315668945981107
+Scenario 3,Evac Location 1,16.0,164,0.5315668945981107
+Scenario 3,Evac Location 2,23.0,231,0.5315668945981107

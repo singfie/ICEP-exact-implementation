@@ -1,14 +1,14 @@
-Dock,Location
-Snug Cove Ferry Terminal,Snug Cove
-Snug Cove Marina,Snug Cove
-Mannion Bay Wharf,Snug Cove
-Mannion Bay Beach,Snug Cove
-Bowen Bay Marina,Bowen Bay
-Bowen Bay Beach,Bowen Bay
-Hood Point Dock,Hood Point
-Cates Bay Dock,Hood Point
-Cates Bay Beach,Hood Point
-Tunstall Bay Dock,Tunstall Bay
-Tunstall Bay Beach,Tunstall Bay
-Mt Gardner Wharf,Mt Gardner
-Mt Gardner Beach,Mt Gardner
+Dock,Location,Type
+Snug Cove Ferry Terminal,Snug Cove,Evacuation
+Snug Cove Marina,Snug Cove,Evacuation
+Mannion Bay Wharf,Snug Cove,Evacuation
+Mannion Bay Beach,Snug Cove,Evacuation
+Bowen Bay Marina,Bowen Bay,Evacuation
+Bowen Bay Beach,Bowen Bay,Evacuation
+Hood Point Dock,Hood Point,Evacuation
+Cates Bay Dock,Hood Point,Evacuation
+Cates Bay Beach,Hood Point,Evacuation
+Tunstall Bay Dock,Tunstall Bay,Evacuation
+Tunstall Bay Beach,Tunstall Bay,Evacuation
+Mt Gardner Wharf,Mt Gardner,Evacuation
+Mt Gardner Beach,Mt Gardner,Evacuation

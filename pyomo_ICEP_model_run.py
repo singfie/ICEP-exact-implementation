@@ -5,13 +5,10 @@ December 9, 2020
 
 
 from pyomo.environ import *
-import glob
 import pandas as pd
 import time
 import os
-import itertools as it
 import numpy as np
-# from gurobipy import *
 import argparse
 from os.path import basename
 
@@ -315,6 +312,7 @@ def main():
 
     # parse remaining arguments
     penalty = args.penalty
+    print(penalty)
     route_time_limit = args.route_time_limit
     run_time_limit = args.run_time_limit
     # print(run_time_limit)

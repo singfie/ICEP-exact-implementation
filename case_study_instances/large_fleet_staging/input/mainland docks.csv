@@ -1,6 +1,6 @@
-Dock,Location
-Horseshoe Bay Terminal,Horseshoe Bay
-Gibsons Harbor,Gibsons
-Fishermans Cove,Horseshoe Bay
-Keats Island Eastbourne Wharf,Keats Island
-Pasley Island Wharf,Pasley Island
+Dock,Location,Type
+Horseshoe Bay Terminal,Horseshoe Bay,Safe
+Gibsons Harbor,Gibsons,Safe
+Fishermans Cove,Horseshoe Bay,Safe
+Keats Island Eastbourne Wharf,Keats Island,Safe
+Pasley Island Wharf,Pasley Island,Safe

@@ -3,13 +3,8 @@
 # @fiete
 
 from pyomo.environ import *
-import glob
-import pandas as pd
-import time
 import itertools as it
 import numpy as np
-# from gurobipy import *
-# import argparse
 
 # auxiliary functions
 
@@ -191,7 +186,7 @@ def flow_a(m, a, x):
     for xi, a1, i, k1, b, k2 in m.beta:
         if a == a1 and x == xi:
             m.sub_beta.add((xi, a1, i, k1, b, k2))
-    constr = (sum(m.flab[x,a,i,k1,b,k2] for x,a,i,k1,b,k2 in m.sub_beta) + m.flat[x,a,'Mainland'] + m.flan[a,x] == m.demand[x,'Island',a])
+    constr = (sum(m.flab[x,a,i,k1,b,k2] for x,a,i,k1,b,k2 in m.sub_beta) + m.flat[x,a,'Mainland'] == m.demand[x,'Island',a]) #+ m.flan[a,x]
     m.del_component(m.sub_beta)
     return(constr)
 
@@ -402,7 +397,7 @@ def main(vessel_source, vessel_pos_source,
     # m.k.pprint()
 
     scenarios = np.unique(scenarios_source['Scenario'].tolist())
-    # scenarios = ['Scenario 1']
+    # scenarios = ['Scenario 1: Mount Collins'] # for testing
     #print(scenarios)
     m.xi = Set(initialize = scenarios, ordered = True)
     # m.xi.pprint()
@@ -433,7 +428,7 @@ def main(vessel_source, vessel_pos_source,
     ## source node
     source_node = list(it.product(src_node, scenarios))
     m.s = Set(initialize = source_node, ordered = True)
-    #m.s.pprint()
+    # m.s.pprint()
 
     ## initial vessel locations
     h = []
@@ -442,12 +437,12 @@ def main(vessel_source, vessel_pos_source,
             h.append((vessel_pos_source['Dock'].iloc[i],
                          vessel_pos_source['Vessel'].iloc[i], s))
     m.h = Set(initialize = h, ordered = True)
-    #m.h.pprint()
+    # m.h.pprint()
 
     ## island locations
     is_locs = list(it.product(is_loc, scenarios))
     m.a = Set(initialize = is_locs, ordered = True)
-    #m.a.pprint()
+    # m.a.pprint()
 
     ## island docks
     #is_schedule = list(it.product(is_docks, vessels, round_trips, scenarios))
@@ -459,7 +454,7 @@ def main(vessel_source, vessel_pos_source,
                     if m.compat[(j, is_docks_source['Dock'].iloc[i])] == 1:
                         is_schedule.append((is_docks_source['Dock'].iloc[i], j, k, xi))
     m.b = Set(initialize = is_schedule, ordered = True)
-    #m.b.pprint()
+    # m.b.pprint()
 
     ## mainland docks
     #mn_schedule = list(it.product(mn_docks, vessels, round_trips, scenarios))
@@ -476,7 +471,7 @@ def main(vessel_source, vessel_pos_source,
     ## mainland location
     mn_locs = list(it.product(mn_loc, scenarios))
     m.t = Set(initialize = mn_locs, ordered = True)
-    #m.t.pprint()
+    # m.t.pprint()
 
     ############################# ARCS ##############################
 
@@ -488,7 +483,7 @@ def main(vessel_source, vessel_pos_source,
             alpha.append((xi, alpha_source['Source'].iloc[i],
                          alpha_source['Island location'].iloc[i]))
     m.alpha = Set(initialize = alpha, ordered = True)
-    #m.alpha.pprint()
+    # m.alpha.pprint()
 
     # betas
     beta = []
@@ -500,7 +495,10 @@ def main(vessel_source, vessel_pos_source,
                         beta.append((xi, beta_source['Island location'].iloc[i], j, k,
                                      beta_source['Island dock'].iloc[i], k))
     m.beta = Set(initialize = beta, ordered = True)
-    #m.beta.pprint()
+    # m.beta.pprint()
+    # for i in m.beta:
+    #     print(i)
+
 
     # gammas
     gamma = []
@@ -513,6 +511,8 @@ def main(vessel_source, vessel_pos_source,
                                       gamma_source['Destination'].iloc[i], k))
     m.gamma = Set(initialize = gamma, ordered = True)
     # m.gamma.pprint()
+    # for i in m.gamma:
+    #     print(i)
 
     # deltas
     delta = []
@@ -525,6 +525,8 @@ def main(vessel_source, vessel_pos_source,
                                       delta_source['Destination'].iloc[i], round_trips[k+1]))
     m.delta = Set(initialize = delta, ordered = True)
     #m.delta.pprint()
+    # for i in m.delta:
+    #     print(i)
 
     # epsilons
     epsilon = []
@@ -536,6 +538,8 @@ def main(vessel_source, vessel_pos_source,
                                     epsilon_source['Destination'].iloc[i]))
     m.epsilon = Set(initialize = epsilon, ordered = True)
     #m.epsilon.pprint()
+    # for i in m.epsilon:
+    #     print(i)
 
     # mus
     zeta = []
@@ -545,15 +549,17 @@ def main(vessel_source, vessel_pos_source,
                 for t in range(0, len(round_trips)-1):
                     if round_trips[t] == min(round_trips):
                         if m.compat[(k, zeta_source['Origin'].iloc[i])] == 1 and m.compat[(k, zeta_source['Destination'].iloc[i])] == 1:
-                            #print((k, zeta_source['Origin'].iloc[i]), (k, zeta_source['Destination'].iloc[i]))
-                            #print(vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string(index=False))#.to_string()[5:])
-                            #print(zeta_source['Origin'].iloc[i])
-                            if vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string(index=False)[1:] == zeta_source['Origin'].iloc[i]:
-                                #print(vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string()[5:], zeta_source['Origin'].iloc[i])
+                            # print((k, zeta_source['Origin'].iloc[i]), (k, zeta_source['Destination'].iloc[i]))
+                            # print(vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string(index=False))#.to_string()[5:])
+                            # print(zeta_source['Origin'].iloc[i])
+                            if vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string(index=False) == zeta_source['Origin'].iloc[i]: # [1:]
+                                # print(vessel_source['Regular_origin'].loc[vessel_source['Vessel_name'] == k].to_string()[5:], zeta_source['Origin'].iloc[i])
                                 zeta.append((xi, round_trips[t], zeta_source['Origin'].iloc[i],
                                              zeta_source['Destination'].iloc[i],k))
     m.zeta = Set(initialize = zeta, ordered = True)
     #m.zeta.pprint()
+    # for i in m.zeta:
+    #     print(i)
 
     # .to_string()[5:]
     # lambdas
@@ -703,7 +709,7 @@ def main(vessel_source, vessel_pos_source,
             Evac_demand[i] = float(scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) & 
                                                         (scenarios_source['Location'] == i[2])])
     m.demand = Param(m.xi, src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
-    # m.demand.pprint()
+    m.demand.pprint()
 
     ############################# REMAINING PARAMETERS ##############################
 
@@ -715,7 +721,7 @@ def main(vessel_source, vessel_pos_source,
     # m.var_cost.pprint()
 
     # variable cost per time
-    m.cvar = Param(initialize = 100) # cost per minute elapsed
+    m.cvar = Param(initialize = 10) # cost per minute elapsed
 
     # max time of evacuation
     m.T = Param(initialize = time_limit)
@@ -731,7 +737,7 @@ def main(vessel_source, vessel_pos_source,
     for i in probs:
         probs[i] = float(np.unique(scenarios_source['Probability'].loc[(scenarios_source['Scenario'] == i)])) 
     m.ps = Param(m.xi, initialize = probs)
-    #m.ps.pprint()
+    m.ps.pprint()
 
     # fixed cost per vessel selection
     fixed_cost = dict.fromkeys(vessels)
@@ -797,6 +803,7 @@ def main(vessel_source, vessel_pos_source,
     m.capa_bc_rt = Constraint(m.gamma, rule = cap_bc_rt)
     # m.capa_bc_rt.pprint()
 
+
     ### lambda arcs (island to mainland through private evacuation)
     m.capa_at = Constraint(m.lambdas, rule = cap_at)
     #m.capa_at.pprint()  
@@ -822,20 +829,20 @@ def main(vessel_source, vessel_pos_source,
     #m.select_delta.pprint()
 
     m.ad_b = Constraint(m.b, rule = adj_b)
-    #m.ad_b.pprint()
+    # m.ad_b.pprint()
 
     m.ad_c = Constraint(m.c, rule = adj_c)
     # m.ad_c.pprint()
 
-    m.sum_time = Constraint(m.xi, rule = tsum_calc)
+    # m.sum_time = Constraint(m.xi, rule = tsum_calc)
     # m.sum_time.pprint()
 
     # Variable Cost high enough
-    m.K = Param(initialize = sum(m.var_cost[i] * m.T for i in m.i)) #len(vessel_source) * time_limit)/10)
-    # m.K.pprint()
+    m.K = Param(initialize = (sum(m.cfix[i] for i in m.i) + sum(m.var_cost[i] * m.T for i in m.i))) #len(vessel_source) * time_limit)/10)
+    #m.K.pprint()
 
     # fixed cost high enough
-    # m.J = Param(initialize = sum(m.cfix[i] for i in m.i))
+    # m.J = Param(initialize = sum(m.cfix[i] for i in m.i)) # DELETE THIS
     #m.J.pprint()
 
     # Objective function definitions

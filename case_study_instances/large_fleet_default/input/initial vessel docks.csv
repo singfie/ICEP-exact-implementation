@@ -1,22 +1,22 @@
-Dock,Location,Vessel
-Horseshoe Bay Terminal,Horseshoe Bay,Queen of Capilano
-Snug Cove Marina,Snug Cove,Cormorant
-Snug Cove Marina,Snug Cove,Bowen Arrow
-Snug Cove Marina,Snug Cove,Apodaca
-Snug Cove Marina,Snug Cove,Kinbasket Queen
-Horseshoe Bay Terminal,Horseshoe Bay,Mercury 1
-Horseshoe Bay Terminal,Horseshoe Bay,Mercury 2
-Horseshoe Bay Terminal,Horseshoe Bay,Mercury 3
-Gibsons Harbor,Gibsons,Sunshine Coast Water Taxi
-Gibsons Harbor,Gibsons,Harbour Ferry Bertram
-Gibsons Harbor,Gibsons,Kona Winds Charters 1
-Gibsons Harbor,Gibsons,Stormaway III
-Horseshoe Bay Terminal,Horseshoe Bay,RCM SAR 01
-Horseshoe Bay Terminal,Horseshoe Bay,RCM SAR 01b
-Gibsons Harbor,Gibsons,RCM SAR 14
-Lynwood Marina,North Vancouver,RCM SAR 02
-Kitsilano CCG,Kitsilano,CCG response 1
-Kitsilano CCG,Kitsilano,CCG response 2
-Kitsilano CCG,Kitsilano,CCG landing vessel
-Richmond Hovercraft Base,Richmond,CCG Siyay
-Richmond Hovercraft Base,Richmond,CCG Moytel
+Dock,Location,Type,Vessel
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,Queen of Capilano
+Snug Cove Marina,Snug Cove,Evacuation,Cormorant
+Snug Cove Marina,Snug Cove,Evacuation,Bowen Arrow
+Snug Cove Marina,Snug Cove,Evacuation,Apodaca
+Snug Cove Marina,Snug Cove,Evacuation,Kinbasket Queen
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,Mercury 1
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,Mercury 2
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,Mercury 3
+Gibsons Harbor,Gibsons,Safe,Sunshine Coast Water Taxi
+Gibsons Harbor,Gibsons,Safe,Harbour Ferry Bertram
+Gibsons Harbor,Gibsons,Safe,Kona Winds Charters 1
+Gibsons Harbor,Gibsons,Safe,Stormaway III
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,RCM SAR 01
+Horseshoe Bay Terminal,Horseshoe Bay,Safe,RCM SAR 01b
+Gibsons Harbor,Gibsons,Safe,RCM SAR 14
+Lynwood Marina,North Vancouver,Safe,RCM SAR 02
+Kitsilano CCG,Kitsilano,Safe,CCG response 1
+Kitsilano CCG,Kitsilano,Safe,CCG response 2
+Kitsilano CCG,Kitsilano,Safe,CCG landing vessel
+Richmond Hovercraft Base,Richmond,Safe,CCG Siyay
+Richmond Hovercraft Base,Richmond,Safe,CCG Moytel
