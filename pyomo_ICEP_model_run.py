@@ -32,7 +32,7 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
+def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
 
     import gurobipy
 
@@ -43,7 +43,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
     # import pyomo.environ
     opt = SolverFactory('gurobi')
     opt.options['IntFeasTol']= 10e-10
-    opt.options['MIPGap'] = 1e-4
+    opt.options['MIPGap'] = 0.25#1e-4
     opt.options['TimeLimit'] = runtime_limit
     results = opt.solve(m, tee=True)
     m.solutions.load_from(results)
@@ -162,7 +162,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                        'load_start_time': pd.Series([], dtype='float'),
                        'load_end_time': pd.Series([], dtype='float'),
                        'resource_speed': pd.Series([], dtype='float'),
-                       'evacuees': pd.Series([], dtype='int')
+                       'evacuees': pd.Series([], dtype='int'),
+                       'evacuated_location': pd.Series([], dtype='str')
         })
 
         # assign the data to each entry
@@ -187,7 +188,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                                                                       'load_start_time': load_start_time,
                                                                       'load_end_time': load_end_time,
                                                                       'resource_speed': vessel_source['vmax'].loc[vessel_source['Vessel_name'] == j].values[0],
-                                                                      'evacuees': 0}, ignore_index = True)
+                                                                      'evacuees': 0,
+                                                                      'evacuated_location': "None"}, ignore_index = True)
                                 segment_id += 1
                     for a in m.x:
                         if j in a and k in a and t in a:
@@ -207,7 +209,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                                                                       'load_start_time': load_start_time,
                                                                       'load_end_time': load_end_time,
                                                                       'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
-                                                                      'evacuees': 0}, ignore_index = True)
+                                                                      'evacuees': round(m.flbc[a].value),
+                                                                      'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[1]].values[0]}, ignore_index = True)
                                 segment_id += 1
                     for a in m.y:
                         if j in a and k in a and t == a[3]:
@@ -227,7 +230,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                                                                       'load_start_time': load_start_time,
                                                                       'load_end_time': load_end_time,
                                                                       'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
-                                                                      'evacuees': 0}, ignore_index = True)
+                                                                      'evacuees': 0,
+                                                                      'evacuated_location': "None"}, ignore_index = True)
                                 segment_id += 1
 
                 else:
@@ -249,7 +253,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                                                                       'load_start_time': load_start_time,
                                                                       'load_end_time': load_end_time,
                                                                       'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
-                                                                      'evacuees': 0}, ignore_index = True)
+                                                                      'evacuees': round(m.flbc[a].value),
+                                                                      'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[1]].values[0]}, ignore_index = True)
                                 segment_id += 1
                     for a in m.y:
                         if j in a and k in a and t == a[3]:
@@ -269,7 +274,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, runtime_limit = 3600):
                                                                       'load_start_time': load_start_time,
                                                                       'load_end_time': load_end_time,
                                                                       'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
-                                                                      'evacuees': 0}, ignore_index = True)
+                                                                      'evacuees': 0,
+                                                                      'evacuated_location': "None"}, ignore_index = True)
                                 segment_id += 1
 
         route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_' + k.replace('Scenario ', '') + '_GUROBI.csv'))
@@ -312,7 +318,7 @@ def main():
 
     # parse remaining arguments
     penalty = args.penalty
-    print(penalty)
+    # print(penalty)
     route_time_limit = args.route_time_limit
     run_time_limit = args.run_time_limit
     # print(run_time_limit)
@@ -393,7 +399,7 @@ def main():
         alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, 
         lambda_source)
 
-    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, runtime_limit = run_time_limit)
+    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
 
     end_time = time.time()
     total_time = end_time - start_time
