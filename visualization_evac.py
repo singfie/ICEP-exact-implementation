@@ -34,27 +34,25 @@ def add_evacuees_remaining_col(route_plan, scenario_file):
     # first calculate the column for the overall progress
     route_plan = route_plan.sort_values(by="load_end_time", ascending = True)
     route_plan["total_evacuees"] = 0
-    route_plan["location_evacuees"] = 0
     route_plan["total_evacuees"].iloc[0] = total_evacuees
     for i in range(1,len(route_plan)):
         if route_plan["evacuees"].iloc[i] == 0:
             route_plan["total_evacuees"].iloc[i] = route_plan["total_evacuees"].iloc[i-1]
         else:
-            route_plan["total_evacuees"].iloc[i] -= route_plan["evacuees"].iloc[i]
+            route_plan["total_evacuees"].iloc[i] = route_plan["total_evacuees"].iloc[i-1] - route_plan["evacuees"].iloc[i]
 
     # second calculate the column for location wise progress
     new_route_plan = pd.DataFrame()
-    print(np.unique(route_plan["evacuated_location"]))
     for location in np.unique(route_plan["evacuated_location"]):
-        print(location.values)
         sub_route_plan = route_plan[route_plan["evacuated_location"] == location]
         if location != "None":
             # find total evacuations from scenario file
             evacuations_loc = scenario_file_sub["Demand"][scenario_file_sub["Location"] == location] - scenario_file_sub["private_evac"][scenario_file_sub["Location"] == location].values[0]
+            sub_route_plan["location_evacuees"] = evacuations_loc
             sub_route_plan = sub_route_plan.sort_values(by="load_end_time", ascending = True)
-            sub_route_plan["location_evacuees"].iloc[0] = evacuations_loc
-            for j in range(1, len(range(sub_route_plan))):
-                sub_route_plan["location_evacuees"].iloc[j] -= sub_route_plan["location_evacuees"].iloc[j-1]
+            sub_route_plan["location_evacuees"].iloc[0] = evacuations_loc - sub_route_plan["evacuees"].iloc[0]
+            for j in range(1, len(sub_route_plan)):
+                sub_route_plan["location_evacuees"].iloc[j] = sub_route_plan["location_evacuees"].iloc[j-1] - sub_route_plan["evacuees"].iloc[j]
         else:
             pass
         new_route_plan = new_route_plan.append(sub_route_plan, ignore_index = True)
