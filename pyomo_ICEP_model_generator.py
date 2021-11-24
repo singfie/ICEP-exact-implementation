@@ -415,7 +415,7 @@ def main(vessel_source, vessel_pos_source,
     # m.tot_docks.pprint()
 
     # compatibility vessels to vehicles
-    compat_keys = generate_comb_2keys(vessels, is_docks + mn_docks)# + vessel_locs)
+    compat_keys = generate_comb_2keys(vessels, m.tot_docks)# + vessel_locs)
     compat_keys = dict.fromkeys(compat_keys)
     for i in compat_keys:
         # print(compat_source['Compatibility'][(compat_source['Dock'] == i[1]) & (compat_source['Resource'] == i[0])])
@@ -709,7 +709,7 @@ def main(vessel_source, vessel_pos_source,
             Evac_demand[i] = float(scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) & 
                                                         (scenarios_source['Location'] == i[2])])
     m.demand = Param(m.xi, src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
-    m.demand.pprint()
+    # m.demand.pprint()
 
     ############################# REMAINING PARAMETERS ##############################
 
@@ -737,7 +737,7 @@ def main(vessel_source, vessel_pos_source,
     for i in probs:
         probs[i] = float(np.unique(scenarios_source['Probability'].loc[(scenarios_source['Scenario'] == i)])) 
     m.ps = Param(m.xi, initialize = probs)
-    m.ps.pprint()
+    # m.ps.pprint()
 
     # fixed cost per vessel selection
     fixed_cost = dict.fromkeys(vessels)

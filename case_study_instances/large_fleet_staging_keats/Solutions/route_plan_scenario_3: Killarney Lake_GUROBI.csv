@@ -1,0 +1,25 @@
+,segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location
+0,1,Cormorant,1,Snug Cove Marina,Mt Gardner Beach,10.0,25.36,25.36,28.36,25.0,0,None
+1,2,Cormorant,2,Mt Gardner Beach,Keats Island Eastbourne Wharf,28.36,34.66,34.66,37.66,20.0,12,Mt Gardner
+2,3,Cormorant,3,Keats Island Eastbourne Wharf,Mt Gardner Beach,37.66,42.699999999999996,42.699999999999996,45.699999999999996,20.0,0,None
+3,4,Cormorant,4,Mt Gardner Beach,Keats Island Eastbourne Wharf,45.699999999999996,52.0,52.0,55.0,20.0,11,Mt Gardner
+4,1,Bowen Arrow,1,Snug Cove Marina,Mt Gardner Wharf,30.0,45.36,45.36,48.36,25.0,0,None
+5,2,Bowen Arrow,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,48.36,54.66,54.66,57.66,20.0,12,Mt Gardner
+6,1,Apodaca,1,Snug Cove Marina,Mt Gardner Wharf,10.0,25.36,25.36,30.36,25.0,0,None
+7,2,Apodaca,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,30.36,36.66,36.66,41.66,20.0,38,Mt Gardner
+8,1,Mercury 1,1,Horseshoe Bay Terminal,Mt Gardner Beach,20.0,35.36,35.36,38.36,25.0,0,None
+9,2,Mercury 1,2,Mt Gardner Beach,Keats Island Eastbourne Wharf,38.36,44.66,44.66,47.66,20.0,12,Mt Gardner
+10,1,Mercury 3,1,Horseshoe Bay Terminal,Mt Gardner Wharf,20.0,35.36,35.36,40.36,25.0,0,None
+11,2,Mercury 3,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,40.36,46.66,46.66,51.66,20.0,40,Mt Gardner
+12,1,Sunshine Coast Water Taxi,1,Gibsons Harbor,Mt Gardner Wharf,20.0,32.0,32.0,35.0,25.0,0,None
+13,2,Sunshine Coast Water Taxi,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,35.0,41.3,41.3,44.3,20.0,12,Mt Gardner
+14,1,Kona Winds Charters 1,1,Gibsons Harbor,Mt Gardner Wharf,30.0,42.0,42.0,47.0,25.0,0,None
+15,2,Kona Winds Charters 1,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,47.0,53.3,53.3,58.3,20.0,40,Mt Gardner
+16,1,Stormaway III,1,Gibsons Harbor,Mt Gardner Wharf,30.0,42.0,42.0,47.0,25.0,0,None
+17,2,Stormaway III,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,47.0,53.3,53.3,58.3,20.0,40,Mt Gardner
+18,1,RCM SAR 01,1,Horseshoe Bay Terminal,Mt Gardner Wharf,30.0,42.8,42.8,45.8,30.0,0,None
+19,2,RCM SAR 01,2,Mt Gardner Wharf,Keats Island Eastbourne Wharf,45.8,50.839999999999996,50.839999999999996,53.839999999999996,25.0,12,Mt Gardner
+20,1,RCM SAR 01b,1,Horseshoe Bay Terminal,Mt Gardner Beach,30.0,42.8,42.8,45.8,30.0,0,None
+21,2,RCM SAR 01b,2,Mt Gardner Beach,Keats Island Eastbourne Wharf,45.8,50.839999999999996,50.839999999999996,53.839999999999996,25.0,4,Mt Gardner
+22,1,RCM SAR 14,1,Gibsons Harbor,Mt Gardner Beach,30.0,40.0,40.0,45.0,30.0,0,None
+23,2,RCM SAR 14,2,Mt Gardner Beach,Keats Island Eastbourne Wharf,45.0,50.04,50.04,55.04,25.0,8,Mt Gardner

@@ -43,7 +43,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
     # import pyomo.environ
     opt = SolverFactory('gurobi')
     opt.options['IntFeasTol']= 10e-10
-    opt.options['MIPGap'] = 0.25#1e-4
+    opt.options['MIPGap'] = 0.15 #1e-4
     opt.options['TimeLimit'] = runtime_limit
     results = opt.solve(m, tee=True)
     m.solutions.load_from(results)
