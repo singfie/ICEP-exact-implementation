@@ -1,6 +1,6 @@
 """
 @fiete
-November 22, 2021
+November 23, 2021
 """
 
 import pandas as pd
@@ -12,69 +12,62 @@ import seaborn as sns
 import numpy as np
 
 # auxiliary function for reading and plotting data
-def plot_progress_scenario(route_plan, filepath):
-    """A method that returns a plot of the progress speed in an evacuation."""
 
-    route_plan = route_plan.append({'total_evacuees': max(route_plan['total_evacuees']),
-                                    'load_end_time': 0,
-                                    'load_start_time': 0,
-                                    'scenario': route_plan['scenario'].iloc[0]}, ignore_index = True)
+def plot_scenario_config_variation(route_plan, filepath, scenario_file):
+    """A method to plot the variation across different configurations for a given scenario"""
 
-    route_plan = route_plan.sort_values(by=['total_evacuees','load_end_time'], ascending = [False, True])
+    new_route_plan = pd.DataFrame()
 
-    # for better display
-    for i in range(1,len(route_plan)):
-        if route_plan['load_end_time'].iloc[i] == route_plan['load_end_time'].iloc[i-1]:
-            route_plan['load_end_time'].iloc[i] += 0.01
-    # print(route_plan)
-
-    lm = sns.lineplot(
-        x='load_end_time', y='total_evacuees', data=route_plan, hue='scenario', drawstyle='steps-post',
-        legend = False, markers = True, estimator=None)
-    lm.set_title('Remaining evacuee evolution for Scenario: ' + re.sub("_", " ", route_plan['scenario'].iloc[0]))
-    lm.set(xlabel='time in min', ylabel='remaining evacuees')
-
-    pic = lm.get_figure()
-    pic.savefig(os.path.join(filepath))
-    plt.close()
-
-    return(lm)
-
-def plot_progress_all(route_plan, filepath, scenario_file):
-    """A method that returns a plot of the progress speed in an evacuation for all locations together."""
-
-    scenario_file = scenario_file[scenario_file["Scenario"].str.contains(route_plan['scenario'].iloc[0].split("_")[0])] # subsetting
-
-    for i in np.unique(route_plan['evacuated_location']):
-        if i != "None":
-            evac_no_loc = scenario_file["Demand"][scenario_file["Location"] == i].values[0] - scenario_file["private_evac"][scenario_file["Location"] == i].values[0]
-            route_plan = route_plan.append({'location_evacuees': evac_no_loc,
+    for i in np.unique(route_plan['fleet size']):
+        for j in np.unique(route_plan['staging choice']):
+            sub_route_plan = route_plan[(route_plan['fleet size'] == i) & (route_plan['staging choice'] == j)]
+            for k in np.unique(sub_route_plan['evacuated_location']):
+                if k != "None":
+                    evac_no_loc = scenario_file["Demand"][scenario_file["Location"] == k].values[0] - scenario_file["private_evac"][scenario_file["Location"] == k].values[0]
+                    sub_route_plan = sub_route_plan.append({'location_evacuees': evac_no_loc,
                                             'load_end_time': 0,
                                             'load_start_time': 0,
-                                            'evacuated_location': i,
-                                            'scenario': route_plan['scenario'].iloc[0]}, ignore_index = True)
-    route_plan = route_plan.sort_values(by=['total_evacuees','load_end_time'], ascending = [False, True])
+                                            'evacuated_location': k,
+                                            'scenario': sub_route_plan['scenario'].iloc[0],
+                                            'fleet size': i,
+                                            'staging choice': j}, ignore_index = True)
+            # print(sub_route_plan)
+            new_route_plan = new_route_plan.append(sub_route_plan, ignore_index = True)
+
+    new_route_plan = new_route_plan.sort_values(by=['load_end_time', 'location_evacuees'], ascending = [True, False])
     # print(route_plan)
 
     # for better display
-    for i in range(1,len(route_plan)):
-        if route_plan['load_end_time'].iloc[i] == route_plan['load_end_time'].iloc[i-1]:
-            route_plan['load_end_time'].iloc[i] += 0.01
+    imp_route_plan = pd.DataFrame()
+    for j in np.unique(new_route_plan['evacuated_location']):
+        for k in np.unique(new_route_plan['staging choice']):
+            for l in np.unique(new_route_plan['fleet size']):
+                sub_route_plan = new_route_plan[(new_route_plan['evacuated_location'] == j) &
+                                                (new_route_plan['staging choice'] == k) &
+                                                (new_route_plan['fleet size'] == l)]
+                for i in range(1,len(sub_route_plan)):
+                    if sub_route_plan['load_end_time'].iloc[i] == sub_route_plan['load_end_time'].iloc[i-1]:
+                        sub_route_plan['load_end_time'].iloc[i] += 0.01
+                imp_route_plan = imp_route_plan.append(sub_route_plan, ignore_index = True)
 
-    route_plan = route_plan[route_plan["evacuated_location"] != "None"]
+    imp_route_plan = imp_route_plan[imp_route_plan["evacuated_location"] != "None"]
 
-    lm = sns.lineplot(x='load_end_time', y='location_evacuees', data=route_plan, hue='evacuated_location', drawstyle='steps-post',
-                      legend = True, markers = True, estimator=None
-                      )
-    lm.set_title('Remaining evacuee evolution per location for Scenario: ' + re.sub("_", " ", route_plan['scenario'].iloc[-1]))
-    lm.set(xlabel='time in min', ylabel='remaining evacuees')
-    plt.legend(title='Affected location')
+    imp_route_plan = imp_route_plan.sort_values(by=['location_evacuees','load_end_time'], ascending = [False, True])
 
-    pic = lm.get_figure()
-    pic.savefig(os.path.join(filepath))
-    plt.close()
+    for t in np.unique(imp_route_plan['evacuated_location']):
+        rp = imp_route_plan[imp_route_plan['evacuated_location'] == t]
+        lm = sns.lineplot(x='load_end_time', y='location_evacuees', data=rp,
+                          hue='staging choice', style = 'fleet size', #'staging_choice',
+                          drawstyle='steps-post', legend = True, markers = True, estimator=None
+                          )
+        lm.set_title('Evacuation progress for ' + str(t) + ' in scenario ' + re.sub("_", " ", route_plan['scenario'].iloc[-1]))
+        lm.set(xlabel='time in min', ylabel='remaining evacuees')
+        plt.legend(title='Affected location')
 
-    return(lm)
+        pic = lm.get_figure()
+        pic.savefig(filepath + '_' + str(t) + '.jpg')
+        plt.close()
+
 
 def add_evacuees_remaining_col(route_plan, scenario_file):
     """A method that adds columns that track the remaining evacuees at every time step"""
@@ -130,48 +123,37 @@ def main():
     dirname = os.getcwd()
 
     rel_path = args.path
-    path = os.path.join(dirname, rel_path)
+    kn_path = os.path.join(dirname, rel_path)
 
-    # solutions = os.path.join(path, 'Solutions/')
+    scenario_file = pd.read_csv(os.path.join(kn_path, 'small_fleet_default', 'input', 'scenarios.csv'))
 
-    scenario_file = pd.read_csv(os.path.join(path, 'small_fleet_default', 'input', 'scenarios.csv'))
-
-    # check if a solution directory exists
-    # if not os.path.exists(os.path.join(path, 'Solutions')):
-        # print("No solution directory exists yet, run experiment first")
-
-    # else:
     for scenario in np.unique(scenario_file['Scenario']):
         print(re.sub("Scenario ", "_", scenario))
         config_plans = pd.DataFrame()
-        for file in os.listdir(path):
+        for file in os.listdir(kn_path):
             # print(file)
-            if not file.startswith('.'):
-                route_plan = pd.read_csv(os.path.join(path, file, 'Solutions', 'route_plan_scenario' + re.sub("Scenario ", "_", scenario) + '_GUROBI.csv'))
+            if (not file.startswith('.')) and (not file.startswith('Scenario')):
+                route_plan = pd.read_csv(os.path.join(kn_path, file, 'Solutions', 'route_plan_scenario' + re.sub("Scenario ", "_", scenario) + '_GUROBI.csv'))
+                route_plan["scenario"] = scenario
                 if file.startswith('large'):
-                    route_plan["fleet_size"] = 'entire fleet'
+                    route_plan["fleet size"] = 'entire fleet'
                 if file.startswith('small'):
-                    route_plan["fleet_size"] = 'primary fleet'
+                    route_plan["fleet size"] = 'primary fleet'
                 if file.endswith('default'):
-                    route_plan["staging_choice"] = 'nominal'
+                    route_plan["staging choice"] = 'nominal'
                 if file.endswith('staging'):
-                    route_plan["staging_choice"] = 'staging on Keats and Pasley Island'
+                    route_plan["staging choice"] = 'staging on Keats and Pasley Island'
                 if file.endswith('keats'):
-                    route_plan["staging_choice"] = 'staging on Keats Island'
+                    route_plan["staging choice"] = 'staging on Keats Island'
+                # print(route_plan)
                 route_plan = add_evacuees_remaining_col(route_plan, scenario_file)
                 config_plans = config_plans.append(route_plan, ignore_index = True)
         config_plans['scenario'] = scenario
         # plotting
+        plot_scenario_config_variation(config_plans,
+                                       os.path.join(kn_path, scenario + '_progress_comparison'),
+                                       scenario_file)
 
-
-        #     if (os.path.isfile(os.path.join(solutions, file))) and ("route_plan" in file):
-        #         scenario_name = re.sub(" ", "_", file).split(":_")[1].split("_GUROBI")[0]
-        #         route_plan_sc = pd.read_csv(os.path.join(solutions, file))
-        #         route_plan_sc["scenario"] = scenario_name
-        #         route_plan_sc = add_evacuees_remaining_col(route_plan_sc, scenario_file)
-        #         plot_progress_scenario(route_plan_sc, os.path.join(solutions, scenario_name + '_progress.jpg'))
-        #         plot_progress_all(route_plan_sc, os.path.join(solutions, scenario_name + '_progress_all.jpg'), scenario_file)
-        #         route_plans = route_plans.append(route_plan_sc.iloc[:,1:], ignore_index = True)
 
 if __name__ == "__main__":
     main()
