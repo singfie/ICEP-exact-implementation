@@ -32,7 +32,7 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_function, runtime_limit = 3600):
+def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
 
     import gurobipy
 
@@ -139,7 +139,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
     # change working directory and set seed
     os.chdir(SOL_DIR)
 
-    with open(os.path.join(SOL_DIR, str(objective_function) + '_performance_statistics_Gurobi.txt'), 'w') as f:
+    with open(os.path.join(SOL_DIR, 'performance_statistics_Gurobi.txt'), 'w') as f:
         f.write("\n\nInstance,NumScenarios,NumResources,NumMaxTrips,TotalIterations,TotalTime,Cost")
         f.write(f"{basename(str(dirname))},"
           f"{len(m.xi)},{len(m.i)},{len(m.k)},{run_time},"
@@ -278,7 +278,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
                                                                       'evacuated_location': "None"}, ignore_index = True)
                                 segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, str(objective_function) + '_route_plan_scenario_' + k.replace('Scenario ', '') + '_GUROBI.csv'))
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_' + k.replace('Scenario ', '') + '_GUROBI.csv'))
         
 
     #### END ROUTE DETAILS
@@ -300,7 +300,6 @@ def main():
     parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
     parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
-    parser.add_argument("-objective", type = str, help="choose one out of: conservative1, conservative2, balanced1, balanced2, balanced3, balanced4, economic1, economic2")
 
     args = parser.parse_args()
 
@@ -324,125 +323,118 @@ def main():
     run_time_limit = args.run_time_limit
     # print(run_time_limit)
 
-    # read in objective
-    objective = args.objective
-    if objective in (['conservative1', 'conservative2', 'balanced1', 'balanced2',
-                          'balanced3', 'balanced4', 'economic1', 'economic2']):
-
-        # read in data source files for nodes
-        vessel_source = pd.read_csv(source + 'vessels.csv', index_col=False,
-                                    header=0, delimiter = ',', skipinitialspace=True)
-        #print(vessel_source)
-        trips_source = pd.read_csv(source + 'roundtrips.csv', index_col=False,
-                                   header=0, delimiter = ',', skipinitialspace=True)
-        #print(trips_source)
-        scenarios_source = pd.read_csv(source + 'scenarios.csv', index_col = False,
-                                      header=0, delimiter = ',', skipinitialspace=True)
-        #print(scenarios_src)
-        vessel_pos_source = pd.read_csv(source + 'initial vessel docks.csv', index_col = False,
-                                      header=0, delimiter = ',', skipinitialspace=True)
-        #print(vessel_pos_source)
-        src_node_source = pd.read_csv(source + 'island source.csv', index_col=False,
-                                     header=0, delimiter = ',', skipinitialspace=True)
-        #print(src_node_source)
-        is_locs_source = pd.read_csv(source + 'island locations.csv', index_col=False,
-                                     header=0, delimiter = ',', skipinitialspace=True)
-        #print(is_locs_source)
-        is_docks_source = pd.read_csv(source + 'island docks.csv', index_col=False,
-                                      header=0, delimiter = ',', skipinitialspace=True)
-        #print(is_docks_source)
-        mn_locs_source = pd.read_csv(source + 'mainland locations.csv', index_col=False,
-                                     header=0, delimiter = ',', skipinitialspace=True)
-        #print(mn_locs_source)
-        mn_docks_source = pd.read_csv(source + 'mainland docks.csv', index_col=False,
-                                      header=0, delimiter = ',', skipinitialspace=True)
-        #print(mn_docks_source)
-        # vessel compatibility
-        compat_source = pd.read_csv(source + 'vessel compatibility.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(compat_source)
-
-        # check the forma tof the compat_source. If it is wrong, change the format:
-        if compat_source.shape[1] > 3:
-            compat_source = reformat_compatibility(compat_source)
-        else:
-            pass
-
-        alpha_source = pd.read_csv(inc_source + 'alpha.csv', index_col=False,
+    # read in data source files for nodes
+    vessel_source = pd.read_csv(source + 'vessels.csv', index_col=False, 
+                                header=0, delimiter = ',', skipinitialspace=True)
+    #print(vessel_source)
+    trips_source = pd.read_csv(source + 'roundtrips.csv', index_col=False, 
+                               header=0, delimiter = ',', skipinitialspace=True)
+    #print(trips_source)
+    scenarios_source = pd.read_csv(source + 'scenarios.csv', index_col = False,
+                                  header=0, delimiter = ',', skipinitialspace=True)
+    #print(scenarios_src)
+    vessel_pos_source = pd.read_csv(source + 'initial vessel docks.csv', index_col = False,
+                                  header=0, delimiter = ',', skipinitialspace=True)
+    #print(vessel_pos_source)
+    src_node_source = pd.read_csv(source + 'island source.csv', index_col=False, 
+                                 header=0, delimiter = ',', skipinitialspace=True)
+    #print(src_node_source)
+    is_locs_source = pd.read_csv(source + 'island locations.csv', index_col=False, 
+                                 header=0, delimiter = ',', skipinitialspace=True)
+    #print(is_locs_source)
+    is_docks_source = pd.read_csv(source + 'island docks.csv', index_col=False, 
+                                  header=0, delimiter = ',', skipinitialspace=True)
+    #print(is_docks_source)
+    mn_locs_source = pd.read_csv(source + 'mainland locations.csv', index_col=False, 
+                                 header=0, delimiter = ',', skipinitialspace=True)
+    #print(mn_locs_source)
+    mn_docks_source = pd.read_csv(source + 'mainland docks.csv', index_col=False, 
+                                  header=0, delimiter = ',', skipinitialspace=True)
+    #print(mn_docks_source)
+    # vessel compatibility
+    compat_source = pd.read_csv(source + 'vessel compatibility.csv', index_col=False, 
                         header=0, delimiter = ',', skipinitialspace=True)
-        #print(beta_source)
-        beta_source = pd.read_csv(inc_source + 'beta.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(beta_source)
-        gamma_source = pd.read_csv(inc_source + 'gamma.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(gamma_source)
-        delta_source = pd.read_csv(inc_source + 'delta.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(delta_source)
-        epsilon_source = pd.read_csv(inc_source + 'epsilon.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(epsilon_source)
-        zeta_source = pd.read_csv(inc_source + 'zeta.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(zeta_source)
-        lambda_source = pd.read_csv(inc_source + 'lambda.csv', index_col=False,
-                            header=0, delimiter = ',', skipinitialspace=True)
+    #print(compat_source)
 
-        # distances and compatibility
-        distance_data = pd.read_csv(inc_source + 'distance matrix.csv', index_col=0,
-                            header=0, delimiter = ',', skipinitialspace=True)
-        #print(distance_source)
-
-        print("Starting GUROBI solver to S-ICEP...")
-        print("")
-
-        start_time = time.time()
-
-        m = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
-            is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
-            distance_data, route_time_limit, penalty, trips_source, scenarios_source, src_node_source,
-            alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
-            lambda_source, objective)
-
-        optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, objective, runtime_limit = run_time_limit)
-
-        end_time = time.time()
-        total_time = end_time - start_time
-
-        print('Time to solution:', total_time)
-
-        # print("************************************")
-        # print("The best objective value obtained:", best_cost[0])
-        # print("The best set of route plans obtained:")
-        # for i in range(len(best_route_set)):
-        #     print("Scenario", i+1, ":")
-        #     print("Population not evacuated:")
-        #     print(not_evacuated[i])
-        #     print("Evacuation time:")
-        #     print(best_evacuation_times[i])
-        #     print(best_route_set[i])
-        #     best_route_set[i].to_csv(os.path.join(path, 'solution/Greedy_S_ICEP_best_route_plan_scenario_') + str(i+1) + ".csv")
-
-        # # write a performance file
-        # performance_metrics = open(os.path.join(path, "solution/Greedy_S_ICEP_solution_metrics.txt"),"w+")
-        # for i in range(len(best_route_set)):
-        #     performance_metrics.write("Input parameters:\n")
-        #     performance_metrics.write("Penalty: " + str(penalty) + "\n")
-        #     performance_metrics.write("Upper time limit: " + str(time_limit) + "\n")
-        #     performance_metrics.write("")
-        #     performance_metrics.write("Results: \n")
-        #     performance_metrics.write("Scenario " + str(i+1) + ": \n")
-        #     performance_metrics.write("Population not evacuated: " + str(not_evacuated[i][0]) + "\n")
-        #     performance_metrics.write("Evacuation time: " + str(best_evacuation_times[i]) + "\n")
-        #     performance_metrics.write("Algorithm run time: " + str(run_time))
-        # performance_metrics.close()
-
-        # generate the evolution plots
-        # create_best_cost_plot(best_cost_evo, path)
-        # create_total_cost_plot(all_cost_evo, path)
+    # check the forma tof the compat_source. If it is wrong, change the format:
+    if compat_source.shape[1] > 3:
+        compat_source = reformat_compatibility(compat_source)
     else:
-        print("Objective function does not exist.")
+        pass
+
+    alpha_source = pd.read_csv(inc_source + 'alpha.csv', index_col=False, 
+                    header=0, delimiter = ',', skipinitialspace=True)
+    #print(beta_source)
+    beta_source = pd.read_csv(inc_source + 'beta.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(beta_source)
+    gamma_source = pd.read_csv(inc_source + 'gamma.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(gamma_source)
+    delta_source = pd.read_csv(inc_source + 'delta.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(delta_source)
+    epsilon_source = pd.read_csv(inc_source + 'epsilon.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(epsilon_source)
+    zeta_source = pd.read_csv(inc_source + 'zeta.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(zeta_source)
+    lambda_source = pd.read_csv(inc_source + 'lambda.csv', index_col=False, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+
+    # distances and compatibility
+    distance_data = pd.read_csv(inc_source + 'distance matrix.csv', index_col=0, 
+                        header=0, delimiter = ',', skipinitialspace=True)
+    #print(distance_source) 
+
+    print("Starting GUROBI solver to S-ICEP...")
+    print("")
+
+    start_time = time.time()
+
+    m = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source, 
+        is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source, 
+        distance_data, route_time_limit, penalty, trips_source, scenarios_source, src_node_source,
+        alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, 
+        lambda_source)
+
+    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
+
+    end_time = time.time()
+    total_time = end_time - start_time
+
+    print('Time to solution:', total_time)
+
+    # print("************************************")
+    # print("The best objective value obtained:", best_cost[0])
+    # print("The best set of route plans obtained:")
+    # for i in range(len(best_route_set)):
+    #     print("Scenario", i+1, ":")
+    #     print("Population not evacuated:")
+    #     print(not_evacuated[i])
+    #     print("Evacuation time:")
+    #     print(best_evacuation_times[i])
+    #     print(best_route_set[i])
+    #     best_route_set[i].to_csv(os.path.join(path, 'solution/Greedy_S_ICEP_best_route_plan_scenario_') + str(i+1) + ".csv")
+
+    # # write a performance file
+    # performance_metrics = open(os.path.join(path, "solution/Greedy_S_ICEP_solution_metrics.txt"),"w+")
+    # for i in range(len(best_route_set)):
+    #     performance_metrics.write("Input parameters:\n")
+    #     performance_metrics.write("Penalty: " + str(penalty) + "\n")
+    #     performance_metrics.write("Upper time limit: " + str(time_limit) + "\n")
+    #     performance_metrics.write("")
+    #     performance_metrics.write("Results: \n")
+    #     performance_metrics.write("Scenario " + str(i+1) + ": \n")
+    #     performance_metrics.write("Population not evacuated: " + str(not_evacuated[i][0]) + "\n")
+    #     performance_metrics.write("Evacuation time: " + str(best_evacuation_times[i]) + "\n")
+    #     performance_metrics.write("Algorithm run time: " + str(run_time))
+    # performance_metrics.close()
+
+    # generate the evolution plots
+    # create_best_cost_plot(best_cost_evo, path)
+    # create_total_cost_plot(all_cost_evo, path)
 
 if __name__ == "__main__":
     main()

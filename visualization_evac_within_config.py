@@ -154,7 +154,7 @@ def main():
     else:
         route_plans = pd.DataFrame()
         for file in os.listdir(solutions):
-            if (os.path.isfile(os.path.join(solutions, file))) and ("route_plan" in file):
+            if (os.path.isfile(os.path.join(solutions, file))) and ("route_plan" in file) and ("balanced" not in file):
                 scenario_name = re.sub(" ", "_", file).split(":_")[1].split("_GUROBI")[0]
                 route_plan_sc = pd.read_csv(os.path.join(solutions, file))
                 route_plan_sc["scenario"] = scenario_name

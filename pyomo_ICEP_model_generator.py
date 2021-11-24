@@ -375,7 +375,7 @@ def old_objective_rule(m):
 def main(vessel_source, vessel_pos_source,
     is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
     compat_source, distance_data, time_limit, penalty, trips_source, scenarios_source, src_node_source,
-    alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source):
+    alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source, objective_name):
     """
     A function that returns a pyomo model implementation of the S-ICEP model.
     """
@@ -834,7 +834,7 @@ def main(vessel_source, vessel_pos_source,
     m.ad_c = Constraint(m.c, rule = adj_c)
     # m.ad_c.pprint()
 
-    # m.sum_time = Constraint(m.xi, rule = tsum_calc)
+    m.sum_time = Constraint(m.xi, rule = tsum_calc)
     # m.sum_time.pprint()
 
     # Variable Cost high enough
@@ -847,8 +847,32 @@ def main(vessel_source, vessel_pos_source,
 
     # Objective function definitions
 
-    m.objective = Objective(rule=balanced3, sense=minimize, doc='Define stochastic objective function')
-    # m.objective.pprint()
+    if objective_name == 'conservative1':
+        m.objective = Objective(rule=conservative1, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'conservative2':
+        m.objective = Objective(rule=conservative2, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'balanced1':
+        m.objective = Objective(rule=balanced1, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'balanced2':
+        m.objective = Objective(rule=balanced2, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'balanced3':
+        m.objective = Objective(rule=balanced3, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'balanced4':
+        m.objective = Objective(rule=balanced4, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'economic1':
+        m.objective = Objective(rule=economic1, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    elif objective_name == 'economic2':
+        m.objective = Objective(rule=economic2, sense=minimize, doc='Define stochastic objective function')
+        # m.objective.pprint()
+    else:
+        print('Passed objective function does not exist.')
 
     return(m)
 
