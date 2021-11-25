@@ -43,7 +43,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
     # import pyomo.environ
     opt = SolverFactory('gurobi')
     opt.options['IntFeasTol']= 10e-10
-    opt.options['MIPGap'] = 0.15 #1e-4
+    opt.options['MIPGap'] = 0.1 #1e-4
     opt.options['TimeLimit'] = runtime_limit
     results = opt.solve(m, tee=True)
     m.solutions.load_from(results)
@@ -278,7 +278,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
                                                                       'evacuated_location': "None"}, ignore_index = True)
                                 segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, str(objective_function) + '_route_plan_scenario_' + k.replace('Scenario ', '') + '_GUROBI.csv'))
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_' + k.replace('Scenario ', '') + '_GUROBI.csv'))
         
 
     #### END ROUTE DETAILS

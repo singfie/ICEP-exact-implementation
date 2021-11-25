@@ -23,7 +23,10 @@ def plot_scenario_config_variation(route_plan, filepath, scenario_file):
             sub_route_plan = route_plan[(route_plan['fleet size'] == i) & (route_plan['staging choice'] == j)]
             for k in np.unique(sub_route_plan['evacuated_location']):
                 if k != "None":
-                    evac_no_loc = scenario_file["Demand"][scenario_file["Location"] == k].values[0] - scenario_file["private_evac"][scenario_file["Location"] == k].values[0]
+                    evac_no_loc = scenario_file["Demand"][(scenario_file["Location"] == k) & (scenario_file["Scenario"] == route_plan['scenario'].iloc[0])].values[0] - \
+                                  scenario_file["private_evac"][(scenario_file["Location"] == k) & (scenario_file["Scenario"] == route_plan['scenario'].iloc[0])].values[0]
+                    # print(k)
+                    # print(evac_no_loc)
                     sub_route_plan = sub_route_plan.append({'location_evacuees': evac_no_loc,
                                             'load_end_time': 0,
                                             'load_start_time': 0,
@@ -60,7 +63,7 @@ def plot_scenario_config_variation(route_plan, filepath, scenario_file):
                           hue='staging choice', style = 'fleet size', #'staging_choice',
                           drawstyle='steps-post', legend = True, markers = True, estimator=None
                           )
-        lm.set_title('Evacuation progress for ' + str(t) + ' in scenario ' + re.sub("_", " ", route_plan['scenario'].iloc[-1]))
+        lm.set_title('Evacuation progress for ' + str(t) + ' in ' + re.sub("_", " ", route_plan['scenario'].iloc[-1]))
         lm.set(xlabel='time in min', ylabel='remaining evacuees')
         plt.legend(title='Affected location')
 

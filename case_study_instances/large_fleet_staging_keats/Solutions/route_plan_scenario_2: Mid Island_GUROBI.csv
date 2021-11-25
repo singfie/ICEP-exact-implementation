@@ -1,26 +1,26 @@
 ,segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location
 0,1,Cormorant,1,Snug Cove Marina,Tunstall Bay Dock,10.0,29.92,29.92,32.92,25.0,0,None
 1,2,Cormorant,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,32.92,41.620000000000005,41.620000000000005,44.620000000000005,20.0,12,Tunstall Bay
-2,3,Cormorant,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,44.620000000000005,50.14,50.14,53.14,20.0,0,None
-3,4,Cormorant,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,53.14,60.04,60.04,63.04,20.0,12,Bowen Bay
-4,5,Cormorant,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,63.04,68.56,68.56,71.56,20.0,0,None
-5,6,Cormorant,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,71.56,78.46000000000001,78.46000000000001,81.46000000000001,20.0,12,Bowen Bay
-6,7,Cormorant,7,Keats Island Eastbourne Wharf,Bowen Bay Beach,81.46000000000001,86.98,86.98,89.98,20.0,0,None
-7,8,Cormorant,8,Bowen Bay Beach,Keats Island Eastbourne Wharf,89.98,96.88000000000001,96.88000000000001,99.88000000000001,20.0,12,Bowen Bay
-8,9,Cormorant,9,Keats Island Eastbourne Wharf,Bowen Bay Marina,99.88000000000001,105.4,105.4,108.4,20.0,0,None
-9,10,Cormorant,10,Bowen Bay Marina,Keats Island Eastbourne Wharf,108.4,115.30000000000001,115.30000000000001,118.30000000000001,20.0,12,Bowen Bay
-10,11,Cormorant,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,118.30000000000001,123.82000000000001,123.82000000000001,126.82000000000001,20.0,0,None
-11,12,Cormorant,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,126.82000000000001,133.72,133.72,136.72,20.0,12,Bowen Bay
+2,3,Cormorant,3,Keats Island Eastbourne Wharf,Bowen Bay Marina,44.620000000000005,50.14,50.14,53.14,20.0,0,None
+3,4,Cormorant,4,Bowen Bay Marina,Keats Island Eastbourne Wharf,53.14,60.04,60.04,63.04,20.0,12,Bowen Bay
+4,5,Cormorant,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,63.04,68.56,68.56,71.56,20.0,0,None
+5,6,Cormorant,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,71.56,78.46000000000001,78.46000000000001,81.46000000000001,20.0,12,Bowen Bay
+6,7,Cormorant,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,81.46000000000001,86.98,86.98,89.98,20.0,0,None
+7,8,Cormorant,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,89.98,96.88000000000001,96.88000000000001,99.88000000000001,20.0,12,Bowen Bay
+8,9,Cormorant,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,99.88000000000001,105.4,105.4,108.4,20.0,0,None
+9,10,Cormorant,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,108.4,115.30000000000001,115.30000000000001,118.30000000000001,20.0,12,Bowen Bay
+10,11,Cormorant,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,118.30000000000001,123.82000000000001,123.82000000000001,126.82000000000001,20.0,0,None
+11,12,Cormorant,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,126.82000000000001,133.72,133.72,136.72,20.0,12,Bowen Bay
 12,13,Cormorant,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,136.72,142.24,142.24,145.24,20.0,0,None
 13,14,Cormorant,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,145.24,152.14000000000001,152.14000000000001,155.14000000000001,20.0,12,Bowen Bay
-14,15,Cormorant,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,155.14000000000001,160.66000000000003,160.66000000000003,163.66000000000003,20.0,0,None
-15,16,Cormorant,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,163.66000000000003,170.56000000000003,170.56000000000003,173.56000000000003,20.0,12,Bowen Bay
+14,15,Cormorant,15,Keats Island Eastbourne Wharf,Bowen Bay Marina,155.14000000000001,160.66000000000003,160.66000000000003,163.66000000000003,20.0,0,None
+15,16,Cormorant,16,Bowen Bay Marina,Keats Island Eastbourne Wharf,163.66000000000003,170.56000000000003,170.56000000000003,173.56000000000003,20.0,12,Bowen Bay
 16,17,Cormorant,17,Keats Island Eastbourne Wharf,Bowen Bay Marina,173.56000000000003,179.08000000000004,179.08000000000004,182.08000000000004,20.0,0,None
 17,18,Cormorant,18,Bowen Bay Marina,Keats Island Eastbourne Wharf,182.08000000000004,188.98000000000005,188.98000000000005,191.98000000000005,20.0,12,Bowen Bay
 18,19,Cormorant,19,Keats Island Eastbourne Wharf,Bowen Bay Marina,191.98000000000005,197.50000000000006,197.50000000000006,200.50000000000006,20.0,0,None
 19,20,Cormorant,20,Bowen Bay Marina,Keats Island Eastbourne Wharf,200.50000000000006,207.40000000000006,207.40000000000006,210.40000000000006,20.0,12,Bowen Bay
-20,1,Bowen Arrow,1,Snug Cove Marina,Tunstall Bay Beach,30.0,49.92,49.92,52.92,25.0,0,None
-21,2,Bowen Arrow,2,Tunstall Bay Beach,Keats Island Eastbourne Wharf,52.92,61.620000000000005,61.620000000000005,64.62,20.0,12,Tunstall Bay
+20,1,Bowen Arrow,1,Snug Cove Marina,Tunstall Bay Dock,30.0,49.92,49.92,52.92,25.0,0,None
+21,2,Bowen Arrow,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,52.92,61.620000000000005,61.620000000000005,64.62,20.0,12,Tunstall Bay
 22,3,Bowen Arrow,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,64.62,70.14,70.14,73.14,20.0,0,None
 23,4,Bowen Arrow,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,73.14,80.04,80.04,83.04,20.0,12,Bowen Bay
 24,5,Bowen Arrow,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,83.04,88.56,88.56,91.56,20.0,0,None
@@ -29,12 +29,12 @@
 27,8,Bowen Arrow,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,109.98,116.88000000000001,116.88000000000001,119.88000000000001,20.0,12,Bowen Bay
 28,9,Bowen Arrow,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,119.88000000000001,125.4,125.4,128.4,20.0,0,None
 29,10,Bowen Arrow,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,128.4,135.3,135.3,138.3,20.0,12,Bowen Bay
-30,11,Bowen Arrow,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,138.3,143.82000000000002,143.82000000000002,146.82000000000002,20.0,0,None
-31,12,Bowen Arrow,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,146.82000000000002,153.72000000000003,153.72000000000003,156.72000000000003,20.0,12,Bowen Bay
+30,11,Bowen Arrow,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,138.3,143.82000000000002,143.82000000000002,146.82000000000002,20.0,0,None
+31,12,Bowen Arrow,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,146.82000000000002,153.72000000000003,153.72000000000003,156.72000000000003,20.0,12,Bowen Bay
 32,13,Bowen Arrow,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,156.72000000000003,162.24000000000004,162.24000000000004,165.24000000000004,20.0,0,None
 33,14,Bowen Arrow,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,165.24000000000004,172.14000000000004,172.14000000000004,175.14000000000004,20.0,12,Bowen Bay
-34,15,Bowen Arrow,15,Keats Island Eastbourne Wharf,Bowen Bay Marina,175.14000000000004,180.66000000000005,180.66000000000005,183.66000000000005,20.0,0,None
-35,16,Bowen Arrow,16,Bowen Bay Marina,Keats Island Eastbourne Wharf,183.66000000000005,190.56000000000006,190.56000000000006,193.56000000000006,20.0,12,Bowen Bay
+34,15,Bowen Arrow,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,175.14000000000004,180.66000000000005,180.66000000000005,183.66000000000005,20.0,0,None
+35,16,Bowen Arrow,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,183.66000000000005,190.56000000000006,190.56000000000006,193.56000000000006,20.0,12,Bowen Bay
 36,17,Bowen Arrow,17,Keats Island Eastbourne Wharf,Bowen Bay Marina,193.56000000000006,199.08000000000007,199.08000000000007,202.08000000000007,20.0,0,None
 37,18,Bowen Arrow,18,Bowen Bay Marina,Keats Island Eastbourne Wharf,202.08000000000007,208.98000000000008,208.98000000000008,211.98000000000008,20.0,12,Bowen Bay
 38,1,Apodaca,1,Snug Cove Marina,Tunstall Bay Dock,10.0,29.92,29.92,34.92,25.0,0,None
@@ -53,48 +53,48 @@
 51,14,Apodaca,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,174.48000000000002,181.38000000000002,181.38000000000002,186.38000000000002,20.0,38,Bowen Bay
 52,15,Apodaca,15,Keats Island Eastbourne Wharf,Tunstall Bay Dock,186.38000000000002,193.34000000000003,193.34000000000003,198.34000000000003,20.0,0,None
 53,16,Apodaca,16,Tunstall Bay Dock,Keats Island Eastbourne Wharf,198.34000000000003,207.04000000000002,207.04000000000002,212.04000000000002,20.0,38,Tunstall Bay
-54,1,Kinbasket Queen,1,Snug Cove Marina,Bowen Bay Marina,30.0,60.705882352941174,60.705882352941174,65.70588235294117,17.0,0,None
-55,2,Kinbasket Queen,2,Bowen Bay Marina,Keats Island Eastbourne Wharf,65.70588235294117,74.90588235294118,74.90588235294118,79.90588235294118,15.0,40,Bowen Bay
-56,3,Kinbasket Queen,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,79.90588235294118,90.14117647058823,90.14117647058823,95.14117647058823,15.0,0,None
-57,4,Kinbasket Queen,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,95.14117647058823,106.74117647058823,106.74117647058823,111.74117647058823,15.0,40,Tunstall Bay
-58,5,Kinbasket Queen,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,111.74117647058823,121.97647058823529,121.97647058823529,126.97647058823529,15.0,0,None
-59,6,Kinbasket Queen,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,126.97647058823529,138.57647058823528,138.57647058823528,143.57647058823528,15.0,40,Tunstall Bay
-60,7,Kinbasket Queen,7,Keats Island Eastbourne Wharf,Tunstall Bay Dock,143.57647058823528,153.81176470588235,153.81176470588235,158.81176470588235,15.0,0,None
-61,8,Kinbasket Queen,8,Tunstall Bay Dock,Keats Island Eastbourne Wharf,158.81176470588235,170.41176470588235,170.41176470588235,175.41176470588235,15.0,40,Tunstall Bay
-62,9,Kinbasket Queen,9,Keats Island Eastbourne Wharf,Tunstall Bay Dock,175.41176470588235,185.64705882352942,185.64705882352942,190.64705882352942,15.0,0,None
-63,10,Kinbasket Queen,10,Tunstall Bay Dock,Keats Island Eastbourne Wharf,190.64705882352942,202.24705882352941,202.24705882352941,207.24705882352941,15.0,40,Tunstall Bay
+54,1,Kinbasket Queen,1,Snug Cove Marina,Tunstall Bay Dock,30.0,59.294117647058826,59.294117647058826,64.29411764705883,17.0,0,None
+55,2,Kinbasket Queen,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,64.29411764705883,75.89411764705882,75.89411764705882,80.89411764705882,15.0,40,Tunstall Bay
+56,3,Kinbasket Queen,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,80.89411764705882,91.12941176470588,91.12941176470588,96.12941176470588,15.0,0,None
+57,4,Kinbasket Queen,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,96.12941176470588,107.72941176470587,107.72941176470587,112.72941176470587,15.0,40,Tunstall Bay
+58,5,Kinbasket Queen,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,112.72941176470587,122.96470588235293,122.96470588235293,127.96470588235293,15.0,0,None
+59,6,Kinbasket Queen,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,127.96470588235293,139.56470588235294,139.56470588235294,144.56470588235294,15.0,40,Tunstall Bay
+60,7,Kinbasket Queen,7,Keats Island Eastbourne Wharf,Tunstall Bay Dock,144.56470588235294,154.8,154.8,159.8,15.0,0,None
+61,8,Kinbasket Queen,8,Tunstall Bay Dock,Keats Island Eastbourne Wharf,159.8,171.4,171.4,176.4,15.0,40,Tunstall Bay
+62,9,Kinbasket Queen,9,Keats Island Eastbourne Wharf,Bowen Bay Marina,176.4,184.51764705882354,184.51764705882354,189.51764705882354,15.0,0,None
+63,10,Kinbasket Queen,10,Bowen Bay Marina,Keats Island Eastbourne Wharf,189.51764705882354,198.71764705882353,198.71764705882353,203.71764705882353,15.0,40,Bowen Bay
 64,1,Mercury 1,1,Horseshoe Bay Terminal,Tunstall Bay Dock,20.0,42.8,42.8,45.8,25.0,0,None
 65,2,Mercury 1,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,45.8,54.5,54.5,57.5,20.0,12,Tunstall Bay
-66,3,Mercury 1,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,57.5,64.46,64.46,67.46,20.0,0,None
-67,4,Mercury 1,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,67.46,76.16,76.16,79.16,20.0,12,Tunstall Bay
-68,5,Mercury 1,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,79.16,84.67999999999999,84.67999999999999,87.67999999999999,20.0,0,None
-69,6,Mercury 1,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,87.67999999999999,94.58,94.58,97.58,20.0,12,Bowen Bay
-70,7,Mercury 1,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,97.58,103.1,103.1,106.1,20.0,0,None
-71,8,Mercury 1,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,106.1,113.0,113.0,116.0,20.0,12,Bowen Bay
-72,9,Mercury 1,9,Keats Island Eastbourne Wharf,Tunstall Bay Beach,116.0,122.96,122.96,125.96,20.0,0,None
-73,10,Mercury 1,10,Tunstall Bay Beach,Keats Island Eastbourne Wharf,125.96,134.66,134.66,137.66,20.0,12,Tunstall Bay
-74,11,Mercury 1,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,137.66,143.18,143.18,146.18,20.0,0,None
-75,12,Mercury 1,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,146.18,153.08,153.08,156.08,20.0,12,Bowen Bay
-76,13,Mercury 1,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,156.08,161.60000000000002,161.60000000000002,164.60000000000002,20.0,0,None
-77,14,Mercury 1,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,164.60000000000002,171.50000000000003,171.50000000000003,174.50000000000003,20.0,12,Bowen Bay
-78,15,Mercury 1,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,174.50000000000003,180.02000000000004,180.02000000000004,183.02000000000004,20.0,0,None
-79,16,Mercury 1,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,183.02000000000004,189.92000000000004,189.92000000000004,192.92000000000004,20.0,12,Bowen Bay
-80,17,Mercury 1,17,Keats Island Eastbourne Wharf,Bowen Bay Marina,192.92000000000004,198.44000000000005,198.44000000000005,201.44000000000005,20.0,0,None
-81,18,Mercury 1,18,Bowen Bay Marina,Keats Island Eastbourne Wharf,201.44000000000005,208.34000000000006,208.34000000000006,211.34000000000006,20.0,12,Bowen Bay
-82,1,Mercury 2,1,Horseshoe Bay Terminal,Tunstall Bay Beach,30.0,52.8,52.8,55.8,25.0,0,None
-83,2,Mercury 2,2,Tunstall Bay Beach,Keats Island Eastbourne Wharf,55.8,64.5,64.5,67.5,20.0,12,Tunstall Bay
+66,3,Mercury 1,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,57.5,63.019999999999996,63.019999999999996,66.02,20.0,0,None
+67,4,Mercury 1,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,66.02,72.92,72.92,75.92,20.0,12,Bowen Bay
+68,5,Mercury 1,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,75.92,81.44,81.44,84.44,20.0,0,None
+69,6,Mercury 1,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,84.44,91.34,91.34,94.34,20.0,12,Bowen Bay
+70,7,Mercury 1,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,94.34,99.86,99.86,102.86,20.0,0,None
+71,8,Mercury 1,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,102.86,109.76,109.76,112.76,20.0,12,Bowen Bay
+72,9,Mercury 1,9,Keats Island Eastbourne Wharf,Tunstall Bay Beach,112.76,119.72,119.72,122.72,20.0,0,None
+73,10,Mercury 1,10,Tunstall Bay Beach,Keats Island Eastbourne Wharf,122.72,131.42,131.42,134.42,20.0,12,Tunstall Bay
+74,11,Mercury 1,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,134.42,139.94,139.94,142.94,20.0,0,None
+75,12,Mercury 1,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,142.94,149.84,149.84,152.84,20.0,12,Bowen Bay
+76,13,Mercury 1,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,152.84,158.36,158.36,161.36,20.0,0,None
+77,14,Mercury 1,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,161.36,168.26000000000002,168.26000000000002,171.26000000000002,20.0,12,Bowen Bay
+78,15,Mercury 1,15,Keats Island Eastbourne Wharf,Tunstall Bay Beach,171.26000000000002,178.22000000000003,178.22000000000003,181.22000000000003,20.0,0,None
+79,16,Mercury 1,16,Tunstall Bay Beach,Keats Island Eastbourne Wharf,181.22000000000003,189.92000000000002,189.92000000000002,192.92000000000002,20.0,12,Tunstall Bay
+80,17,Mercury 1,17,Keats Island Eastbourne Wharf,Tunstall Bay Beach,192.92000000000002,199.88000000000002,199.88000000000002,202.88000000000002,20.0,0,None
+81,18,Mercury 1,18,Tunstall Bay Beach,Keats Island Eastbourne Wharf,202.88000000000002,211.58,211.58,214.58,20.0,12,Tunstall Bay
+82,1,Mercury 2,1,Horseshoe Bay Terminal,Tunstall Bay Dock,30.0,52.8,52.8,55.8,25.0,0,None
+83,2,Mercury 2,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,55.8,64.5,64.5,67.5,20.0,12,Tunstall Bay
 84,3,Mercury 2,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,67.5,73.02,73.02,76.02,20.0,0,None
 85,4,Mercury 2,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,76.02,82.92,82.92,85.92,20.0,12,Bowen Bay
 86,5,Mercury 2,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,85.92,91.44,91.44,94.44,20.0,0,None
 87,6,Mercury 2,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,94.44,101.34,101.34,104.34,20.0,12,Bowen Bay
 88,7,Mercury 2,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,104.34,109.86,109.86,112.86,20.0,0,None
 89,8,Mercury 2,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,112.86,119.76,119.76,122.76,20.0,12,Bowen Bay
-90,9,Mercury 2,9,Keats Island Eastbourne Wharf,Bowen Bay Marina,122.76,128.28,128.28,131.28,20.0,0,None
-91,10,Mercury 2,10,Bowen Bay Marina,Keats Island Eastbourne Wharf,131.28,138.18,138.18,141.18,20.0,12,Bowen Bay
+90,9,Mercury 2,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,122.76,128.28,128.28,131.28,20.0,0,None
+91,10,Mercury 2,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,131.28,138.18,138.18,141.18,20.0,12,Bowen Bay
 92,11,Mercury 2,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,141.18,146.70000000000002,146.70000000000002,149.70000000000002,20.0,0,None
 93,12,Mercury 2,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,149.70000000000002,156.60000000000002,156.60000000000002,159.60000000000002,20.0,12,Bowen Bay
-94,13,Mercury 2,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,159.60000000000002,165.12000000000003,165.12000000000003,168.12000000000003,20.0,0,None
-95,14,Mercury 2,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,168.12000000000003,175.02000000000004,175.02000000000004,178.02000000000004,20.0,12,Bowen Bay
+94,13,Mercury 2,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,159.60000000000002,165.12000000000003,165.12000000000003,168.12000000000003,20.0,0,None
+95,14,Mercury 2,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,168.12000000000003,175.02000000000004,175.02000000000004,178.02000000000004,20.0,12,Bowen Bay
 96,15,Mercury 2,15,Keats Island Eastbourne Wharf,Bowen Bay Marina,178.02000000000004,183.54000000000005,183.54000000000005,186.54000000000005,20.0,0,None
 97,16,Mercury 2,16,Bowen Bay Marina,Keats Island Eastbourne Wharf,186.54000000000005,193.44000000000005,193.44000000000005,196.44000000000005,20.0,12,Bowen Bay
 98,17,Mercury 2,17,Keats Island Eastbourne Wharf,Bowen Bay Beach,196.44000000000005,201.96000000000006,201.96000000000006,204.96000000000006,20.0,0,None
@@ -117,12 +117,12 @@
 115,2,Sunshine Coast Water Taxi,2,Bowen Bay Marina,Keats Island Eastbourne Wharf,34.04,40.94,40.94,43.94,20.0,12,Bowen Bay
 116,3,Sunshine Coast Water Taxi,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,43.94,49.459999999999994,49.459999999999994,52.459999999999994,20.0,0,None
 117,4,Sunshine Coast Water Taxi,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,52.459999999999994,59.35999999999999,59.35999999999999,62.35999999999999,20.0,12,Bowen Bay
-118,5,Sunshine Coast Water Taxi,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,62.35999999999999,67.88,67.88,70.88,20.0,0,None
-119,6,Sunshine Coast Water Taxi,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,70.88,77.78,77.78,80.78,20.0,12,Bowen Bay
+118,5,Sunshine Coast Water Taxi,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,62.35999999999999,67.88,67.88,70.88,20.0,0,None
+119,6,Sunshine Coast Water Taxi,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,70.88,77.78,77.78,80.78,20.0,12,Bowen Bay
 120,7,Sunshine Coast Water Taxi,7,Keats Island Eastbourne Wharf,Bowen Bay Beach,80.78,86.3,86.3,89.3,20.0,0,None
 121,8,Sunshine Coast Water Taxi,8,Bowen Bay Beach,Keats Island Eastbourne Wharf,89.3,96.2,96.2,99.2,20.0,12,Bowen Bay
-122,9,Sunshine Coast Water Taxi,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,99.2,104.72,104.72,107.72,20.0,0,None
-123,10,Sunshine Coast Water Taxi,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,107.72,114.62,114.62,117.62,20.0,12,Bowen Bay
+122,9,Sunshine Coast Water Taxi,9,Keats Island Eastbourne Wharf,Bowen Bay Marina,99.2,104.72,104.72,107.72,20.0,0,None
+123,10,Sunshine Coast Water Taxi,10,Bowen Bay Marina,Keats Island Eastbourne Wharf,107.72,114.62,114.62,117.62,20.0,12,Bowen Bay
 124,11,Sunshine Coast Water Taxi,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,117.62,123.14,123.14,126.14,20.0,0,None
 125,12,Sunshine Coast Water Taxi,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,126.14,133.04,133.04,136.04,20.0,12,Bowen Bay
 126,13,Sunshine Coast Water Taxi,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,136.04,141.56,141.56,144.56,20.0,0,None
@@ -134,13 +134,13 @@
 132,19,Sunshine Coast Water Taxi,19,Keats Island Eastbourne Wharf,Tunstall Bay Beach,191.30000000000004,198.26000000000005,198.26000000000005,201.26000000000005,20.0,0,None
 133,20,Sunshine Coast Water Taxi,20,Tunstall Bay Beach,Keats Island Eastbourne Wharf,201.26000000000005,209.96000000000004,209.96000000000004,212.96000000000004,20.0,12,Tunstall Bay
 134,1,Harbour Ferry Bertram,1,Gibsons Harbor,Bowen Bay Beach,20.0,33.8,33.8,36.8,20.0,0,None
-135,2,Harbour Ferry Bertram,2,Bowen Bay Beach,Keats Island Eastbourne Wharf,36.8,44.917647058823526,44.917647058823526,47.917647058823526,17.0,6,Bowen Bay
+135,2,Harbour Ferry Bertram,2,Bowen Bay Beach,Keats Island Eastbourne Wharf,36.8,44.917647058823526,44.917647058823526,47.917647058823526,17.0,1,Bowen Bay
 136,3,Harbour Ferry Bertram,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,47.917647058823526,54.817647058823525,54.817647058823525,57.817647058823525,17.0,0,None
 137,4,Harbour Ferry Bertram,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,57.817647058823525,65.93529411764706,65.93529411764706,68.93529411764706,17.0,6,Bowen Bay
 138,5,Harbour Ferry Bertram,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,68.93529411764706,75.83529411764707,75.83529411764707,78.83529411764707,17.0,0,None
 139,6,Harbour Ferry Bertram,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,78.83529411764707,86.9529411764706,86.9529411764706,89.9529411764706,17.0,6,Bowen Bay
-140,7,Harbour Ferry Bertram,7,Keats Island Eastbourne Wharf,Bowen Bay Beach,89.9529411764706,96.85294117647061,96.85294117647061,99.85294117647061,17.0,0,None
-141,8,Harbour Ferry Bertram,8,Bowen Bay Beach,Keats Island Eastbourne Wharf,99.85294117647061,107.97058823529414,107.97058823529414,110.97058823529414,17.0,6,Bowen Bay
+140,7,Harbour Ferry Bertram,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,89.9529411764706,96.85294117647061,96.85294117647061,99.85294117647061,17.0,0,None
+141,8,Harbour Ferry Bertram,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,99.85294117647061,107.97058823529414,107.97058823529414,110.97058823529414,17.0,6,Bowen Bay
 142,9,Harbour Ferry Bertram,9,Keats Island Eastbourne Wharf,Bowen Bay Marina,110.97058823529414,117.87058823529415,117.87058823529415,120.87058823529415,17.0,0,None
 143,10,Harbour Ferry Bertram,10,Bowen Bay Marina,Keats Island Eastbourne Wharf,120.87058823529415,128.9882352941177,128.9882352941177,131.9882352941177,17.0,6,Bowen Bay
 144,11,Harbour Ferry Bertram,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,131.9882352941177,138.8882352941177,138.8882352941177,141.8882352941177,17.0,0,None
@@ -160,7 +160,7 @@
 158,13,Kona Winds Charters 1,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,170.04000000000002,175.56000000000003,175.56000000000003,180.56000000000003,20.0,0,None
 159,14,Kona Winds Charters 1,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,180.56000000000003,187.46000000000004,187.46000000000004,192.46000000000004,20.0,40,Bowen Bay
 160,15,Kona Winds Charters 1,15,Keats Island Eastbourne Wharf,Bowen Bay Marina,192.46000000000004,197.98000000000005,197.98000000000005,202.98000000000005,20.0,0,None
-161,16,Kona Winds Charters 1,16,Bowen Bay Marina,Keats Island Eastbourne Wharf,202.98000000000005,209.88000000000005,209.88000000000005,214.88000000000005,20.0,39,Bowen Bay
+161,16,Kona Winds Charters 1,16,Bowen Bay Marina,Keats Island Eastbourne Wharf,202.98000000000005,209.88000000000005,209.88000000000005,214.88000000000005,20.0,40,Bowen Bay
 162,1,Stormaway III,1,Gibsons Harbor,Bowen Bay Marina,30.0,41.04,41.04,46.04,25.0,0,None
 163,2,Stormaway III,2,Bowen Bay Marina,Keats Island Eastbourne Wharf,46.04,52.94,52.94,57.94,20.0,40,Bowen Bay
 164,3,Stormaway III,3,Keats Island Eastbourne Wharf,Bowen Bay Marina,57.94,63.459999999999994,63.459999999999994,68.46,20.0,0,None
@@ -181,44 +181,46 @@
 179,2,RCM SAR 01,2,Tunstall Bay Beach,Keats Island Eastbourne Wharf,52.0,58.96,58.96,61.96,25.0,12,Tunstall Bay
 180,3,RCM SAR 01,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,61.96,66.56,66.56,69.56,25.0,0,None
 181,4,RCM SAR 01,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,69.56,75.08,75.08,78.08,25.0,12,Bowen Bay
-182,5,RCM SAR 01,5,Keats Island Eastbourne Wharf,Tunstall Bay Beach,78.08,83.88,83.88,86.88,25.0,0,None
-183,6,RCM SAR 01,6,Tunstall Bay Beach,Keats Island Eastbourne Wharf,86.88,93.83999999999999,93.83999999999999,96.83999999999999,25.0,12,Tunstall Bay
+182,5,RCM SAR 01,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,78.08,83.88,83.88,86.88,25.0,0,None
+183,6,RCM SAR 01,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,86.88,93.83999999999999,93.83999999999999,96.83999999999999,25.0,12,Tunstall Bay
 184,7,RCM SAR 01,7,Keats Island Eastbourne Wharf,Bowen Bay Beach,96.83999999999999,101.43999999999998,101.43999999999998,104.43999999999998,25.0,0,None
 185,8,RCM SAR 01,8,Bowen Bay Beach,Keats Island Eastbourne Wharf,104.43999999999998,109.95999999999998,109.95999999999998,112.95999999999998,25.0,12,Bowen Bay
 186,9,RCM SAR 01,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,112.95999999999998,117.55999999999997,117.55999999999997,120.55999999999997,25.0,0,None
 187,10,RCM SAR 01,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,120.55999999999997,126.07999999999997,126.07999999999997,129.07999999999998,25.0,12,Bowen Bay
-188,11,RCM SAR 01,11,Keats Island Eastbourne Wharf,Tunstall Bay Dock,129.07999999999998,134.88,134.88,137.88,25.0,0,None
-189,12,RCM SAR 01,12,Tunstall Bay Dock,Keats Island Eastbourne Wharf,137.88,144.84,144.84,147.84,25.0,12,Tunstall Bay
-190,13,RCM SAR 01,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,147.84,152.44,152.44,155.44,25.0,0,None
-191,14,RCM SAR 01,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,155.44,160.96,160.96,163.96,25.0,12,Bowen Bay
+188,11,RCM SAR 01,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,129.07999999999998,133.67999999999998,133.67999999999998,136.67999999999998,25.0,0,None
+189,12,RCM SAR 01,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,136.67999999999998,142.2,142.2,145.2,25.0,12,Bowen Bay
+190,13,RCM SAR 01,13,Keats Island Eastbourne Wharf,Tunstall Bay Beach,145.2,151.0,151.0,154.0,25.0,0,None
+191,14,RCM SAR 01,14,Tunstall Bay Beach,Keats Island Eastbourne Wharf,154.0,160.96,160.96,163.96,25.0,12,Tunstall Bay
 192,15,RCM SAR 01,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,163.96,168.56,168.56,171.56,25.0,0,None
 193,16,RCM SAR 01,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,171.56,177.08,177.08,180.08,25.0,12,Bowen Bay
-194,17,RCM SAR 01,17,Keats Island Eastbourne Wharf,Bowen Bay Marina,180.08,184.68,184.68,187.68,25.0,0,None
-195,18,RCM SAR 01,18,Bowen Bay Marina,Keats Island Eastbourne Wharf,187.68,193.20000000000002,193.20000000000002,196.20000000000002,25.0,12,Bowen Bay
+194,17,RCM SAR 01,17,Keats Island Eastbourne Wharf,Bowen Bay Beach,180.08,184.68,184.68,187.68,25.0,0,None
+195,18,RCM SAR 01,18,Bowen Bay Beach,Keats Island Eastbourne Wharf,187.68,193.20000000000002,193.20000000000002,196.20000000000002,25.0,12,Bowen Bay
 196,19,RCM SAR 01,19,Keats Island Eastbourne Wharf,Bowen Bay Marina,196.20000000000002,200.8,200.8,203.8,25.0,0,None
 197,20,RCM SAR 01,20,Bowen Bay Marina,Keats Island Eastbourne Wharf,203.8,209.32000000000002,209.32000000000002,212.32000000000002,25.0,12,Bowen Bay
-200,3,RCM SAR 01b,3,Keats Island Eastbourne Wharf,Tunstall Bay Beach,53.839999999999996,59.63999999999999,59.63999999999999,62.63999999999999,25.0,0,None
-201,4,RCM SAR 01b,4,Tunstall Bay Beach,Keats Island Eastbourne Wharf,62.63999999999999,69.6,69.6,72.6,25.0,4,Tunstall Bay
-202,5,RCM SAR 01b,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,72.6,77.19999999999999,77.19999999999999,80.19999999999999,25.0,0,None
-203,6,RCM SAR 01b,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,80.19999999999999,85.71999999999998,85.71999999999998,88.71999999999998,25.0,4,Bowen Bay
-204,7,RCM SAR 01b,7,Keats Island Eastbourne Wharf,Tunstall Bay Beach,88.71999999999998,94.51999999999998,94.51999999999998,97.51999999999998,25.0,0,None
-205,8,RCM SAR 01b,8,Tunstall Bay Beach,Keats Island Eastbourne Wharf,97.51999999999998,104.47999999999998,104.47999999999998,107.47999999999998,25.0,4,Tunstall Bay
-206,9,RCM SAR 01b,9,Keats Island Eastbourne Wharf,Tunstall Bay Beach,107.47999999999998,113.27999999999997,113.27999999999997,116.27999999999997,25.0,0,None
-207,10,RCM SAR 01b,10,Tunstall Bay Beach,Keats Island Eastbourne Wharf,116.27999999999997,123.23999999999997,123.23999999999997,126.23999999999997,25.0,4,Tunstall Bay
-208,11,RCM SAR 01b,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,126.23999999999997,130.83999999999997,130.83999999999997,133.83999999999997,25.0,0,None
-209,12,RCM SAR 01b,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,133.83999999999997,139.35999999999999,139.35999999999999,142.35999999999999,25.0,4,Bowen Bay
-210,13,RCM SAR 01b,13,Keats Island Eastbourne Wharf,Tunstall Bay Beach,142.35999999999999,148.16,148.16,151.16,25.0,0,None
-211,14,RCM SAR 01b,14,Tunstall Bay Beach,Keats Island Eastbourne Wharf,151.16,158.12,158.12,161.12,25.0,4,Tunstall Bay
-212,15,RCM SAR 01b,15,Keats Island Eastbourne Wharf,Tunstall Bay Beach,161.12,166.92000000000002,166.92000000000002,169.92000000000002,25.0,0,None
-213,16,RCM SAR 01b,16,Tunstall Bay Beach,Keats Island Eastbourne Wharf,169.92000000000002,176.88000000000002,176.88000000000002,179.88000000000002,25.0,4,Tunstall Bay
-214,17,RCM SAR 01b,17,Keats Island Eastbourne Wharf,Tunstall Bay Dock,179.88000000000002,185.68000000000004,185.68000000000004,188.68000000000004,25.0,0,None
-215,18,RCM SAR 01b,18,Tunstall Bay Dock,Keats Island Eastbourne Wharf,188.68000000000004,195.64000000000004,195.64000000000004,198.64000000000004,25.0,4,Tunstall Bay
-216,19,RCM SAR 01b,19,Keats Island Eastbourne Wharf,Bowen Bay Beach,198.64000000000004,203.24000000000004,203.24000000000004,206.24000000000004,25.0,0,None
-217,20,RCM SAR 01b,20,Bowen Bay Beach,Keats Island Eastbourne Wharf,206.24000000000004,211.76000000000005,211.76000000000005,214.76000000000005,25.0,4,Bowen Bay
+198,1,RCM SAR 01b,1,Horseshoe Bay Terminal,Tunstall Bay Dock,30.0,49.0,49.0,52.0,30.0,0,None
+199,2,RCM SAR 01b,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,52.0,58.96,58.96,61.96,25.0,4,Tunstall Bay
+200,3,RCM SAR 01b,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,61.96,66.56,66.56,69.56,25.0,0,None
+201,4,RCM SAR 01b,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,69.56,75.08,75.08,78.08,25.0,4,Bowen Bay
+202,5,RCM SAR 01b,5,Keats Island Eastbourne Wharf,Bowen Bay Beach,78.08,82.67999999999999,82.67999999999999,85.67999999999999,25.0,0,None
+203,6,RCM SAR 01b,6,Bowen Bay Beach,Keats Island Eastbourne Wharf,85.67999999999999,91.19999999999999,91.19999999999999,94.19999999999999,25.0,4,Bowen Bay
+204,7,RCM SAR 01b,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,94.19999999999999,98.79999999999998,98.79999999999998,101.79999999999998,25.0,0,None
+205,8,RCM SAR 01b,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,101.79999999999998,107.31999999999998,107.31999999999998,110.31999999999998,25.0,4,Bowen Bay
+206,9,RCM SAR 01b,9,Keats Island Eastbourne Wharf,Tunstall Bay Beach,110.31999999999998,116.11999999999998,116.11999999999998,119.11999999999998,25.0,0,None
+207,10,RCM SAR 01b,10,Tunstall Bay Beach,Keats Island Eastbourne Wharf,119.11999999999998,126.07999999999997,126.07999999999997,129.07999999999998,25.0,4,Tunstall Bay
+208,11,RCM SAR 01b,11,Keats Island Eastbourne Wharf,Tunstall Bay Dock,129.07999999999998,134.88,134.88,137.88,25.0,0,None
+209,12,RCM SAR 01b,12,Tunstall Bay Dock,Keats Island Eastbourne Wharf,137.88,144.84,144.84,147.84,25.0,4,Tunstall Bay
+210,13,RCM SAR 01b,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,147.84,152.44,152.44,155.44,25.0,0,None
+211,14,RCM SAR 01b,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,155.44,160.96,160.96,163.96,25.0,4,Bowen Bay
+212,15,RCM SAR 01b,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,163.96,168.56,168.56,171.56,25.0,0,None
+213,16,RCM SAR 01b,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,171.56,177.08,177.08,180.08,25.0,4,Bowen Bay
+214,17,RCM SAR 01b,17,Keats Island Eastbourne Wharf,Bowen Bay Beach,180.08,184.68,184.68,187.68,25.0,0,None
+215,18,RCM SAR 01b,18,Bowen Bay Beach,Keats Island Eastbourne Wharf,187.68,193.20000000000002,193.20000000000002,196.20000000000002,25.0,4,Bowen Bay
+216,19,RCM SAR 01b,19,Keats Island Eastbourne Wharf,Bowen Bay Beach,196.20000000000002,200.8,200.8,203.8,25.0,0,None
+217,20,RCM SAR 01b,20,Bowen Bay Beach,Keats Island Eastbourne Wharf,203.8,209.32000000000002,209.32000000000002,212.32000000000002,25.0,4,Bowen Bay
 218,1,RCM SAR 14,1,Gibsons Harbor,Tunstall Bay Dock,30.0,40.0,40.0,45.0,30.0,0,None
 219,2,RCM SAR 14,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,45.0,51.96,51.96,56.96,25.0,8,Tunstall Bay
-220,3,RCM SAR 14,3,Keats Island Eastbourne Wharf,Bowen Bay Marina,56.96,61.56,61.56,66.56,25.0,0,None
-221,4,RCM SAR 14,4,Bowen Bay Marina,Keats Island Eastbourne Wharf,66.56,72.08,72.08,77.08,25.0,8,Bowen Bay
+220,3,RCM SAR 14,3,Keats Island Eastbourne Wharf,Bowen Bay Beach,56.96,61.56,61.56,66.56,25.0,0,None
+221,4,RCM SAR 14,4,Bowen Bay Beach,Keats Island Eastbourne Wharf,66.56,72.08,72.08,77.08,25.0,8,Bowen Bay
 222,5,RCM SAR 14,5,Keats Island Eastbourne Wharf,Tunstall Bay Beach,77.08,82.88,82.88,87.88,25.0,0,None
 223,6,RCM SAR 14,6,Tunstall Bay Beach,Keats Island Eastbourne Wharf,87.88,94.83999999999999,94.83999999999999,99.83999999999999,25.0,8,Tunstall Bay
 224,7,RCM SAR 14,7,Keats Island Eastbourne Wharf,Tunstall Bay Beach,99.83999999999999,105.63999999999999,105.63999999999999,110.63999999999999,25.0,0,None
@@ -227,8 +229,8 @@
 227,10,RCM SAR 14,10,Tunstall Bay Beach,Keats Island Eastbourne Wharf,133.39999999999998,140.35999999999999,140.35999999999999,145.35999999999999,25.0,8,Tunstall Bay
 228,11,RCM SAR 14,11,Keats Island Eastbourne Wharf,Tunstall Bay Dock,145.35999999999999,151.16,151.16,156.16,25.0,0,None
 229,12,RCM SAR 14,12,Tunstall Bay Dock,Keats Island Eastbourne Wharf,156.16,163.12,163.12,168.12,25.0,8,Tunstall Bay
-230,13,RCM SAR 14,13,Keats Island Eastbourne Wharf,Tunstall Bay Beach,168.12,173.92000000000002,173.92000000000002,178.92000000000002,25.0,0,None
-231,14,RCM SAR 14,14,Tunstall Bay Beach,Keats Island Eastbourne Wharf,178.92000000000002,185.88000000000002,185.88000000000002,190.88000000000002,25.0,8,Tunstall Bay
+230,13,RCM SAR 14,13,Keats Island Eastbourne Wharf,Tunstall Bay Dock,168.12,173.92000000000002,173.92000000000002,178.92000000000002,25.0,0,None
+231,14,RCM SAR 14,14,Tunstall Bay Dock,Keats Island Eastbourne Wharf,178.92000000000002,185.88000000000002,185.88000000000002,190.88000000000002,25.0,8,Tunstall Bay
 232,15,RCM SAR 14,15,Keats Island Eastbourne Wharf,Tunstall Bay Beach,190.88000000000002,196.68000000000004,196.68000000000004,201.68000000000004,25.0,0,None
 233,16,RCM SAR 14,16,Tunstall Bay Beach,Keats Island Eastbourne Wharf,201.68000000000004,208.64000000000004,208.64000000000004,213.64000000000004,25.0,8,Tunstall Bay
 234,1,RCM SAR 02,1,Lynwood Marina,Tunstall Bay Beach,30.0,66.2,66.2,69.2,30.0,0,None
@@ -237,14 +239,14 @@
 237,4,RCM SAR 02,4,Bowen Bay Marina,Keats Island Eastbourne Wharf,86.75999999999999,92.27999999999999,92.27999999999999,95.27999999999999,25.0,12,Bowen Bay
 238,5,RCM SAR 02,5,Keats Island Eastbourne Wharf,Tunstall Bay Beach,95.27999999999999,101.07999999999998,101.07999999999998,104.07999999999998,25.0,0,None
 239,6,RCM SAR 02,6,Tunstall Bay Beach,Keats Island Eastbourne Wharf,104.07999999999998,111.03999999999998,111.03999999999998,114.03999999999998,25.0,12,Tunstall Bay
-240,7,RCM SAR 02,7,Keats Island Eastbourne Wharf,Bowen Bay Beach,114.03999999999998,118.63999999999997,118.63999999999997,121.63999999999997,25.0,0,None
-241,8,RCM SAR 02,8,Bowen Bay Beach,Keats Island Eastbourne Wharf,121.63999999999997,127.15999999999997,127.15999999999997,130.15999999999997,25.0,12,Bowen Bay
+240,7,RCM SAR 02,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,114.03999999999998,118.63999999999997,118.63999999999997,121.63999999999997,25.0,0,None
+241,8,RCM SAR 02,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,121.63999999999997,127.15999999999997,127.15999999999997,130.15999999999997,25.0,12,Bowen Bay
 242,9,RCM SAR 02,9,Keats Island Eastbourne Wharf,Bowen Bay Beach,130.15999999999997,134.75999999999996,134.75999999999996,137.75999999999996,25.0,0,None
 243,10,RCM SAR 02,10,Bowen Bay Beach,Keats Island Eastbourne Wharf,137.75999999999996,143.27999999999997,143.27999999999997,146.27999999999997,25.0,12,Bowen Bay
-244,11,RCM SAR 02,11,Keats Island Eastbourne Wharf,Bowen Bay Beach,146.27999999999997,150.87999999999997,150.87999999999997,153.87999999999997,25.0,0,None
-245,12,RCM SAR 02,12,Bowen Bay Beach,Keats Island Eastbourne Wharf,153.87999999999997,159.39999999999998,159.39999999999998,162.39999999999998,25.0,12,Bowen Bay
-246,13,RCM SAR 02,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,162.39999999999998,166.99999999999997,166.99999999999997,169.99999999999997,25.0,0,None
-247,14,RCM SAR 02,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,169.99999999999997,175.51999999999998,175.51999999999998,178.51999999999998,25.0,12,Bowen Bay
+244,11,RCM SAR 02,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,146.27999999999997,150.87999999999997,150.87999999999997,153.87999999999997,25.0,0,None
+245,12,RCM SAR 02,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,153.87999999999997,159.39999999999998,159.39999999999998,162.39999999999998,25.0,12,Bowen Bay
+246,13,RCM SAR 02,13,Keats Island Eastbourne Wharf,Bowen Bay Beach,162.39999999999998,166.99999999999997,166.99999999999997,169.99999999999997,25.0,0,None
+247,14,RCM SAR 02,14,Bowen Bay Beach,Keats Island Eastbourne Wharf,169.99999999999997,175.51999999999998,175.51999999999998,178.51999999999998,25.0,12,Bowen Bay
 248,15,RCM SAR 02,15,Keats Island Eastbourne Wharf,Bowen Bay Beach,178.51999999999998,183.11999999999998,183.11999999999998,186.11999999999998,25.0,0,None
 249,16,RCM SAR 02,16,Bowen Bay Beach,Keats Island Eastbourne Wharf,186.11999999999998,191.64,191.64,194.64,25.0,12,Bowen Bay
 250,17,RCM SAR 02,17,Keats Island Eastbourne Wharf,Tunstall Bay Beach,194.64,200.44,200.44,203.44,25.0,0,None
@@ -253,10 +255,10 @@
 253,2,CCG response 1,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,67.4,74.36,74.36,79.36,25.0,15,Tunstall Bay
 254,3,CCG response 1,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,79.36,86.32,86.32,91.32,25.0,0,None
 255,4,CCG response 1,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,91.32,98.27999999999999,98.27999999999999,103.27999999999999,25.0,15,Tunstall Bay
-256,5,CCG response 1,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,103.27999999999999,110.23999999999998,110.23999999999998,115.23999999999998,25.0,0,None
-257,6,CCG response 1,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,115.23999999999998,122.19999999999997,122.19999999999997,127.19999999999997,25.0,15,Tunstall Bay
-258,7,CCG response 1,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,127.19999999999997,132.71999999999997,132.71999999999997,137.71999999999997,25.0,0,None
-259,8,CCG response 1,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,137.71999999999997,143.23999999999998,143.23999999999998,148.23999999999998,25.0,15,Bowen Bay
+256,5,CCG response 1,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,103.27999999999999,108.79999999999998,108.79999999999998,113.79999999999998,25.0,0,None
+257,6,CCG response 1,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,113.79999999999998,119.31999999999998,119.31999999999998,124.31999999999998,25.0,15,Bowen Bay
+258,7,CCG response 1,7,Keats Island Eastbourne Wharf,Tunstall Bay Dock,124.31999999999998,131.27999999999997,131.27999999999997,136.27999999999997,25.0,0,None
+259,8,CCG response 1,8,Tunstall Bay Dock,Keats Island Eastbourne Wharf,136.27999999999997,143.23999999999998,143.23999999999998,148.23999999999998,25.0,15,Tunstall Bay
 260,9,CCG response 1,9,Keats Island Eastbourne Wharf,Tunstall Bay Dock,148.23999999999998,155.2,155.2,160.2,25.0,0,None
 261,10,CCG response 1,10,Tunstall Bay Dock,Keats Island Eastbourne Wharf,160.2,167.16,167.16,172.16,25.0,15,Tunstall Bay
 262,11,CCG response 1,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,172.16,177.68,177.68,182.68,25.0,0,None
@@ -265,22 +267,22 @@
 265,14,CCG response 1,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,203.72000000000003,209.24000000000004,209.24000000000004,214.24000000000004,25.0,15,Bowen Bay
 266,1,CCG response 2,1,Kitsilano CCG,Tunstall Bay Dock,30.0,62.400000000000006,62.400000000000006,67.4,25.0,0,None
 267,2,CCG response 2,2,Tunstall Bay Dock,Keats Island Eastbourne Wharf,67.4,74.36,74.36,79.36,25.0,15,Tunstall Bay
-268,3,CCG response 2,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,79.36,86.32,86.32,91.32,25.0,0,None
-269,4,CCG response 2,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,91.32,98.27999999999999,98.27999999999999,103.27999999999999,25.0,15,Tunstall Bay
-270,5,CCG response 2,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,103.27999999999999,110.23999999999998,110.23999999999998,115.23999999999998,25.0,0,None
-271,6,CCG response 2,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,115.23999999999998,122.19999999999997,122.19999999999997,127.19999999999997,25.0,15,Tunstall Bay
-272,7,CCG response 2,7,Keats Island Eastbourne Wharf,Bowen Bay Marina,127.19999999999997,132.71999999999997,132.71999999999997,137.71999999999997,25.0,0,None
-273,8,CCG response 2,8,Bowen Bay Marina,Keats Island Eastbourne Wharf,137.71999999999997,143.23999999999998,143.23999999999998,148.23999999999998,25.0,15,Bowen Bay
-274,9,CCG response 2,9,Keats Island Eastbourne Wharf,Tunstall Bay Dock,148.23999999999998,155.2,155.2,160.2,25.0,0,None
-275,10,CCG response 2,10,Tunstall Bay Dock,Keats Island Eastbourne Wharf,160.2,167.16,167.16,172.16,25.0,15,Tunstall Bay
-276,11,CCG response 2,11,Keats Island Eastbourne Wharf,Bowen Bay Marina,172.16,177.68,177.68,182.68,25.0,0,None
-277,12,CCG response 2,12,Bowen Bay Marina,Keats Island Eastbourne Wharf,182.68,188.20000000000002,188.20000000000002,193.20000000000002,25.0,15,Bowen Bay
+268,3,CCG response 2,3,Keats Island Eastbourne Wharf,Bowen Bay Marina,79.36,84.88,84.88,89.88,25.0,0,None
+269,4,CCG response 2,4,Bowen Bay Marina,Keats Island Eastbourne Wharf,89.88,95.39999999999999,95.39999999999999,100.39999999999999,25.0,15,Bowen Bay
+270,5,CCG response 2,5,Keats Island Eastbourne Wharf,Bowen Bay Marina,100.39999999999999,105.91999999999999,105.91999999999999,110.91999999999999,25.0,0,None
+271,6,CCG response 2,6,Bowen Bay Marina,Keats Island Eastbourne Wharf,110.91999999999999,116.43999999999998,116.43999999999998,121.43999999999998,25.0,15,Bowen Bay
+272,7,CCG response 2,7,Keats Island Eastbourne Wharf,Tunstall Bay Dock,121.43999999999998,128.39999999999998,128.39999999999998,133.39999999999998,25.0,0,None
+273,8,CCG response 2,8,Tunstall Bay Dock,Keats Island Eastbourne Wharf,133.39999999999998,140.35999999999999,140.35999999999999,145.35999999999999,25.0,15,Tunstall Bay
+274,9,CCG response 2,9,Keats Island Eastbourne Wharf,Tunstall Bay Dock,145.35999999999999,152.32,152.32,157.32,25.0,0,None
+275,10,CCG response 2,10,Tunstall Bay Dock,Keats Island Eastbourne Wharf,157.32,164.28,164.28,169.28,25.0,15,Tunstall Bay
+276,11,CCG response 2,11,Keats Island Eastbourne Wharf,Tunstall Bay Dock,169.28,176.24,176.24,181.24,25.0,0,None
+277,12,CCG response 2,12,Tunstall Bay Dock,Keats Island Eastbourne Wharf,181.24,188.20000000000002,188.20000000000002,193.20000000000002,25.0,15,Tunstall Bay
 278,13,CCG response 2,13,Keats Island Eastbourne Wharf,Bowen Bay Marina,193.20000000000002,198.72000000000003,198.72000000000003,203.72000000000003,25.0,0,None
 279,14,CCG response 2,14,Bowen Bay Marina,Keats Island Eastbourne Wharf,203.72000000000003,209.24000000000004,209.24000000000004,214.24000000000004,25.0,15,Bowen Bay
 280,1,CCG landing vessel,1,Kitsilano CCG,Tunstall Bay Beach,30.0,75.0,75.0,83.0,18.0,0,None
 281,2,CCG landing vessel,2,Tunstall Bay Beach,Keats Island Eastbourne Wharf,83.0,92.66666666666667,92.66666666666667,100.66666666666667,18.0,60,Tunstall Bay
-282,3,CCG landing vessel,3,Keats Island Eastbourne Wharf,Tunstall Bay Beach,100.66666666666667,110.33333333333334,110.33333333333334,118.33333333333334,18.0,0,None
-283,4,CCG landing vessel,4,Tunstall Bay Beach,Keats Island Eastbourne Wharf,118.33333333333334,128.0,128.0,136.0,18.0,60,Tunstall Bay
+282,3,CCG landing vessel,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,100.66666666666667,110.33333333333334,110.33333333333334,118.33333333333334,18.0,0,None
+283,4,CCG landing vessel,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,118.33333333333334,128.0,128.0,136.0,18.0,60,Tunstall Bay
 284,5,CCG landing vessel,5,Keats Island Eastbourne Wharf,Tunstall Bay Beach,136.0,145.66666666666666,145.66666666666666,153.66666666666666,18.0,0,None
 285,6,CCG landing vessel,6,Tunstall Bay Beach,Keats Island Eastbourne Wharf,153.66666666666666,163.33333333333331,163.33333333333331,171.33333333333331,18.0,60,Tunstall Bay
 286,7,CCG landing vessel,7,Keats Island Eastbourne Wharf,Tunstall Bay Beach,171.33333333333331,180.99999999999997,180.99999999999997,188.99999999999997,18.0,0,None
@@ -299,8 +301,8 @@
 299,12,CCG Siyay,12,Tunstall Bay Beach,Keats Island Eastbourne Wharf,199.33333333333334,203.20000000000002,203.20000000000002,213.20000000000002,45.0,50,Tunstall Bay
 300,1,CCG Moytel,1,Richmond Hovercraft Base,Tunstall Bay Beach,30.0,48.6,48.6,58.6,50.0,0,None
 301,2,CCG Moytel,2,Tunstall Bay Beach,Keats Island Eastbourne Wharf,58.6,62.08,62.08,72.08,50.0,50,Tunstall Bay
-302,3,CCG Moytel,3,Keats Island Eastbourne Wharf,Tunstall Bay Beach,72.08,75.56,75.56,85.56,50.0,0,None
-303,4,CCG Moytel,4,Tunstall Bay Beach,Keats Island Eastbourne Wharf,85.56,89.04,89.04,99.04,50.0,50,Tunstall Bay
+302,3,CCG Moytel,3,Keats Island Eastbourne Wharf,Tunstall Bay Dock,72.08,75.56,75.56,85.56,50.0,0,None
+303,4,CCG Moytel,4,Tunstall Bay Dock,Keats Island Eastbourne Wharf,85.56,89.04,89.04,99.04,50.0,50,Tunstall Bay
 304,5,CCG Moytel,5,Keats Island Eastbourne Wharf,Tunstall Bay Dock,99.04,102.52000000000001,102.52000000000001,112.52000000000001,50.0,0,None
 305,6,CCG Moytel,6,Tunstall Bay Dock,Keats Island Eastbourne Wharf,112.52000000000001,116.00000000000001,116.00000000000001,126.00000000000001,50.0,50,Tunstall Bay
 306,7,CCG Moytel,7,Keats Island Eastbourne Wharf,Tunstall Bay Beach,126.00000000000001,129.48000000000002,129.48000000000002,139.48000000000002,50.0,0,None
