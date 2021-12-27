@@ -470,7 +470,9 @@ def main():
                 current_non_evacuated[xi] = scenario_value
                 # current_non_evacuated[xi] = sum(m.flan[a,xi].value for a,xi in m.a)
             # current_step_sizes = [0.1 * i for i in current_evacuation_times]
+            print("Current evacuation times per scenario:")
             print(current_evacuation_times)
+            print("Current non-evacuated evacuees per scenario:")
             print(current_non_evacuated)
 
             for xi in m.xi:
