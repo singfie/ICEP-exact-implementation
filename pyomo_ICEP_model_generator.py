@@ -68,7 +68,7 @@ def times(m, ves, xi):
 
 # a constraint to deliver an upper bound to the time
 def max_time(m, xi):
-    return(m.comp[xi] <= m.T)
+    return(m.comp[xi] <= m.T[xi])
 
 ## Support constraint to save time consumption of every resource
 def times_vess(m, ves, xi):
@@ -186,7 +186,7 @@ def flow_a(m, a, x):
     for xi, a1, i, k1, b, k2 in m.beta:
         if a == a1 and x == xi:
             m.sub_beta.add((xi, a1, i, k1, b, k2))
-    constr = (sum(m.flab[x,a,i,k1,b,k2] for x,a,i,k1,b,k2 in m.sub_beta) + m.flat[x,a,'Mainland'] == m.demand[x,'Island',a]) #+ m.flan[a,x]
+    constr = (sum(m.flab[x,a,i,k1,b,k2] for x,a,i,k1,b,k2 in m.sub_beta) + m.flat[x,a,'Mainland'] + m.flan[a,x] == m.demand[x,'Island',a])
     m.del_component(m.sub_beta)
     return(constr)
 
@@ -322,6 +322,9 @@ def adj_c(m, mn_dock, ves, trip, s):
 def tsum_calc(m, xi):
     return(sum(m.u[ves, xi] for ves in m.i) == m.tsums[xi])
 
+# def tsum_control(m, xi):
+#     return(max(m.u[ves, xi] for ves in m.i) == m.tsums_control[xi])
+
 ######## OBJECTIVE FUNCTION GENERATORS ########
 
 def conservative1(m):
@@ -335,26 +338,26 @@ def conservative2(m):
 def balanced1(m):
     return(sum(m.cfix[i] * m.z[i] for i in m.i) + 
            sum(m.ps[xi] * m.comp[xi] for xi in m.xi) +
-           sum(m.ps[xi] * 1/m.K * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) + 
+           sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) +
            m.P * sum(m.ps[xi] * m.flan[a,xi] for a,xi in m.a))
 
 def balanced2(m):
     return(sum(m.cfix[i] * m.z[i] for i in m.i) + 
            sum(m.ps[xi] * m.tsums[xi] for xi in m.xi) +
-           sum(m.ps[xi] * 1/m.K * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) + 
+           sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) +
            m.P * sum(m.ps[xi] * m.flan[a,xi] for a,xi in m.a))
 
 def balanced3(m):
-    return(sum(m.cfix[i] * 1/m.K * m.z[i] for i in m.i) + 
+    return(sum(m.cfix[i] * sum(1/m.K[xi] for xi in m.xi) * m.z[i] for i in m.i) +
            sum(m.ps[xi] * m.comp[xi] for xi in m.xi) +
-           sum(m.ps[xi] * 1/m.K * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) + 
+           sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) +
            m.P * sum(m.ps[xi] * m.flan[a,xi] for a,xi in m.a))
 
 def balanced4(m):
-    return(sum(m.cfix[i] * 1/m.K * m.z[i] for i in m.i) + 
+    return(sum(m.cfix[i] * sum(1/m.K[xi] for xi in m.xi) * m.z[i] for i in m.i) +
            sum(m.ps[xi] * m.tsums[xi] for xi in m.xi) +
-           sum(m.ps[xi] * 1/m.K * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) + 
-           m.P * sum(m.ps[xi] * m.flan[a,xi] for a,xi in m.a))
+           sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi] for i in m.i) for xi in m.xi) +
+           m.P * sum(m.ps[xi] * m.flan[a,xi] for a,xi in m.a) + 0.000001 * sum(m.comp[xi] for xi in m.xi))
 
 def economic1(m):
     return(sum(m.cfix[i] * m.z[i] for i in m.i) + 
@@ -593,7 +596,6 @@ def main(vessel_source, vessel_pos_source,
         zeta_caps[i] = 0
     m.zeta_cap = Param(m.zeta, initialize = zeta_caps)
     #m.zeta_cap.pprint()
-
            
     lambda_caps = dict.fromkeys(lambdas)
     for i in lambda_caps:
@@ -724,7 +726,13 @@ def main(vessel_source, vessel_pos_source,
     m.cvar = Param(initialize = 10) # cost per minute elapsed
 
     # max time of evacuation
-    m.T = Param(initialize = time_limit)
+    time_limits = dict.fromkeys(scenarios)
+    # i = 0
+    for xi in time_limits:
+        time_limits[xi] = int(time_limit[xi])
+        # i += 1
+    print(time_limits)
+    m.T = Param(m.xi, initialize = time_limits)
     # m.T.pprint()
 
     # Penalty cost for leaving a person behind
@@ -751,6 +759,7 @@ def main(vessel_source, vessel_pos_source,
     ## Define completion variables
     m.comp = Var(m.xi, within = NonNegativeReals, bounds = (0, None), initialize = 0)
     m.tsums = Var(m.xi, within = NonNegativeReals, bounds = (0, None), initialize = 0)
+    m.tsums_control = Var(m.xi, within = NonNegativeReals, bounds = (0, None), initialize = 0)
 
     ## Define vessel selection variable
     m.z = Var(m.i, within = Binary, initialize = 0)
@@ -837,9 +846,17 @@ def main(vessel_source, vessel_pos_source,
     m.sum_time = Constraint(m.xi, rule = tsum_calc)
     # m.sum_time.pprint()
 
+    # m.control_time = Constraint(m.xi, rule = tsum_control)
+    # m.control_time.pprint()
+
     # Variable Cost high enough
-    m.K = Param(initialize = (sum(m.cfix[i] for i in m.i) + sum(m.var_cost[i] * m.T for i in m.i))) #len(vessel_source) * time_limit)/10)
-    #m.K.pprint()
+
+    cost_relativizers = dict.fromkeys(scenarios)
+    print(cost_relativizers)
+    for xi in cost_relativizers:
+        cost_relativizers[xi] = sum(m.cfix[i] for i in m.i) + sum(m.var_cost[i] * m.T[xi] for i in m.i)
+    m.K = Param(m.xi, initialize = cost_relativizers) #len(vessel_source) * time_limit)/10)
+    # m.K.pprint()
 
     # fixed cost high enough
     # m.J = Param(initialize = sum(m.cfix[i] for i in m.i)) # DELETE THIS

@@ -45,81 +45,80 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
     opt.options['IntFeasTol']= 10e-10
     opt.options['MIPGap'] = 0.1 #1e-4
     opt.options['TimeLimit'] = runtime_limit
-    results = opt.solve(m, tee=True)
+    results = opt.solve(m, tee=False)
     m.solutions.load_from(results)
-        
+
     end_time = time.time()
     run_time = end_time - start_time
-    print ('Time to optimal solution:'+ str(run_time))
 
-    print('Optimal solution for selected input data')
-    print('')
-    print('Optimal vessel fleet:')
-    for l in m.z:#vessels:
-        if value(m.z[l]) == 1:
-            print(l)
-    print('')
-    print('Optimal objective value:')
-    print(round(value(m.objective),2))
-    print('')
-    # print('Optimal evacuation time')
-    # for r in m.xi:
-    #     print(r)
-    #     for q in m.i:
-    #         print(m.u[q,r].value)
-    print('')
+    # print('Optimal solution for selected input data')
+    # print('')
+    # print('Optimal vessel fleet:')
+    # for l in m.z:#vessels:
+    #     if value(m.z[l]) == 1:
+    #         print(l)
+    # print('')
+    # print('Optimal objective value:')
+    # print(round(value(m.objective),2))
+    # print('')
+    # # print('Optimal evacuation time')
+    # # for r in m.xi:
+    # #     print(r)
+    # #     for q in m.i:
+    # #         print(m.u[q,r].value)
+    # print('')
     totcost = sum(value(m.cfix[i]) * value(m.z[i]) for i in m.i) + sum(value(m.ps[xi]) * sum(value(m.var_cost[i]) * value(m.u[i, xi]) for i in m.i) for xi in m.xi)
     best_cost = value(m.objective)
-    print('Optimal cost:')
-    print(round(totcost,2))
-    print('')
-    print('Optimal shipment plans per scenario')
-    for k in m.xi:#scenarios:
-        print(k)
-        print('    ','Total evacuation time with selected vessel fleet:', value(m.comp[k]), 'minutes')
-        print('    ','Private evacuations:')
-        for a in m.flat:
-            if k in a:
-                print('        ', 'From ', a[1], ':', int(m.flat[a].value), 'people')
-        print('    ','Evacuees left behind:')
-        for n in m.flan:
-            if k in n:
-                print('        ', n[0], ':', int(m.flan[n].value), 'people')
-        for j in m.z:#vessels:
-            print('    ',j, 'completion time:', value(m.time_record[j,k]))
-            print('    ',j, 'routing plan/shipping plan:')
-            for t in m.k:#round_trips:
-                if t == min(m.k):#min(round_trips):
-                    for a in m.w:
-                        if j in a and k in a and t in a:
-                            if np.round(m.w[a].value) == 1:
-                                print('            ', '(', a[1],')','(A) from', a[2], 'to',a[3], 'on trip', a[1])
-                    for a in m.x:#m.flab:
-                        if j in a and k in a and t in a:
-                            if np.round(m.x[a].value) == 1:
-                            #if m.flbc[a].value != 0:
-                                print('            ', '(', a[3],')','(T) from', a[1].replace('load', ''), 'to',a[4].replace('dock', ''), 'on trip', a[3],':', round(m.flbc[a].value), 'passengers')
-                    for a in m.y:
-                        if j in a and k in a and t == a[3]:
-                            if np.round(m.y[a].value) == 1:
-                                print('            ', '(', a[3],')','(R) from', a[1], 'to',a[4], 'on trip', a[3])
-                else:
-                    for a in m.x:#m.flab:
-                        if j in a and k in a and t in a:
-                            if np.round(m.x[a].value) == 1:
-                            #if m.flbc[a].value != 0:
-                                print('            ', '(', a[3],')','(T) from', a[1].replace('load', ''), 'to',a[4].replace('dock', ''), 'on trip', a[3],':', round(m.flbc[a].value), 'passengers')
-                    for a in m.y:
-                        if j in a and k in a and t == a[3]:
-                            if np.round(m.y[a].value) == 1:
-                                print('            ', '(', a[3],')','(R) from', a[1], 'to',a[4], 'on trip', a[3])
-
-    print('')     
-    print('Vessels should follow this shipment plan given their initial locations as per input data.')
-    print('This schedule respects distances in between different locations, vessel capabilities')
-    print('inital vessel locations and compatibility between vessels and docks and local demand patterns')
-    print('as per input data.')
-    print('This model does not consider the constraints of on-land transportation.')
+    # print('Optimal cost:')
+    # print(round(totcost,2))
+    # print('')
+    # print('Optimal shipment plans per scenario')
+    # for k in m.xi:#scenarios:
+    #     print(k)
+    #     print('    ','Total evacuation time with selected vessel fleet:', value(m.comp[k]), 'minutes')
+    #     print('    ','Private evacuations:')
+    #     for a in m.flat:
+    #         if k in a:
+    #             print('        ', 'From ', a[1], ':', int(m.flat[a].value), 'people')
+    #     print('    ','Evacuees left behind:')
+    #     for n in m.flan:
+    #         if k in n:
+    #             print('        ', n[0], ':', int(m.flan[n].value), 'people')
+    #     for j in m.z:#vessels:
+    #         print('    ',j, 'completion time:', value(m.time_record[j,k]))
+    #         print('    ',j, 'routing plan/shipping plan:')
+    #         for t in m.k:#round_trips:
+    #             if t == min(m.k):#min(round_trips):
+    #                 for a in m.w:
+    #                     if j in a and k in a and t in a:
+    #                         if np.round(m.w[a].value) == 1:
+    #                             print('            ', '(', a[1],')','(A) from', a[2], 'to',a[3], 'on trip', a[1])
+    #                 for a in m.x:#m.flab:
+    #                     if j in a and k in a and t in a:
+    #                         if np.round(m.x[a].value) == 1:
+    #                         #if m.flbc[a].value != 0:
+    #                             print('            ', '(', a[3],')','(T) from', a[1].replace('load', ''), 'to',a[4].replace('dock', ''), 'on trip', a[3],':', round(m.flbc[a].value), 'passengers')
+    #                 for a in m.y:
+    #                     if j in a and k in a and t == a[3]:
+    #                         if np.round(m.y[a].value) == 1:
+    #                             print('            ', '(', a[3],')','(R) from', a[1], 'to',a[4], 'on trip', a[3])
+    #             else:
+    #                 for a in m.x:#m.flab:
+    #                     if j in a and k in a and t in a:
+    #                         if np.round(m.x[a].value) == 1:
+    #                         #if m.flbc[a].value != 0:
+    #                             print('            ', '(', a[3],')','(T) from', a[1].replace('load', ''), 'to',a[4].replace('dock', ''), 'on trip', a[3],':', round(m.flbc[a].value), 'passengers')
+    #                 for a in m.y:
+    #                     if j in a and k in a and t == a[3]:
+    #                         if np.round(m.y[a].value) == 1:
+    #                             print('            ', '(', a[3],')','(R) from', a[1], 'to',a[4], 'on trip', a[3])
+    #
+    # print('')
+    # print('Vessels should follow this shipment plan given their initial locations as per input data.')
+    # print('This schedule respects distances in between different locations, vessel capabilities')
+    # print('inital vessel locations and compatibility between vessels and docks and local demand patterns')
+    # print('as per input data.')
+    # print('This model does not consider the constraints of on-land transportation.')
 
     # create target directories
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -286,9 +285,12 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, objective_funct
     # calculate total expected cost 
     # totcost = sum(value(m.cfix[i]) * value(m.z[i]) for i in m.i) + sum(value(m.ps[xi]) * sum(value(m.var_cost[i]) * value(m.u[i, xi]) for i in m.i) for xi in m.xi)
 
-    print(totcost)
+    # print(totcost)
 
     print(best_cost)
+
+    # for i in m.xi:
+    #     print("Scenario", i, ":", m.comp[i].value)
 
     return(best_cost, run_time)
 
@@ -298,9 +300,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-path", help="the path of the ICEP instance files")
     parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
-    parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
+    parser.add_argument("-route_time_limits", type = int, nargs="*", help="the upper time limits for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
-    parser.add_argument("-objective", type = str, help="choose one out of: conservative1, conservative2, balanced1, balanced2, balanced3, balanced4, economic1, economic2")
+    parser.add_argument("-max_iterations", type = int, help="maximum number of iterations in approximation")
+    parser.add_argument("-objective", type = str, default="balanced4", help="maximum number of iterations in approximation")
 
     args = parser.parse_args()
 
@@ -308,7 +311,7 @@ def main():
     dirname = os.getcwd()
 
     rel_path = args.path
-    path = os.path.join(dirname, 'case_study_instances', rel_path)
+    path = os.path.join(dirname, 'test_instances', rel_path)
 
     source = os.path.join(path, 'input/')
     inc_source = os.path.join(path, 'incidences/')
@@ -320,9 +323,12 @@ def main():
     # parse remaining arguments
     penalty = args.penalty
     # print(penalty)
-    route_time_limit = args.route_time_limit
+    tls = args.route_time_limits
+
     run_time_limit = args.run_time_limit
     # print(run_time_limit)
+
+    max_iterations = args.max_iterations
 
     # read in objective
     objective = args.objective
@@ -338,6 +344,10 @@ def main():
         #print(trips_source)
         scenarios_source = pd.read_csv(source + 'scenarios.csv', index_col = False,
                                       header=0, delimiter = ',', skipinitialspace=True)
+
+        if len(tls) != len(np.unique(scenarios_source["Scenario"])):
+            raise Exception("Number of max route times provided does not match number of scenarios provided.")
+
         #print(scenarios_src)
         vessel_pos_source = pd.read_csv(source + 'initial vessel docks.csv', index_col = False,
                                       header=0, delimiter = ',', skipinitialspace=True)
@@ -394,21 +404,152 @@ def main():
                             header=0, delimiter = ',', skipinitialspace=True)
         #print(distance_source)
 
+        route_time_limits = dict.fromkeys(np.unique(scenarios_source["Scenario"]))
+        i = 0
+        for p in route_time_limits:
+            route_time_limits[p] = int(tls[i])
+            i += 1
+        # print(route_time_limits)
+
         print("Starting GUROBI solver to S-ICEP...")
         print("")
 
-        start_time = time.time()
+        print("Building model...")
 
         m = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
             is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
-            distance_data, route_time_limit, penalty, trips_source, scenarios_source, src_node_source,
+            distance_data, route_time_limits, penalty, trips_source, scenarios_source, src_node_source,
             alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
-            lambda_source, objective)
+            lambda_source, 'balanced4')
 
-        optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, objective, runtime_limit = run_time_limit)
+        print("Solving model...")
+
+        start_time = time.time()
+
+        current_optimal_solution = 999999999
+
+        iteration = 0
+        # previous_evacuation_times =
+        reduce = True
+
+        current_evacuation_times = dict.fromkeys(np.unique(scenarios_source["Scenario"]))
+        current_step_sizes = dict.fromkeys(np.unique(scenarios_source["Scenario"]))
+        current_non_evacuated = dict.fromkeys(np.unique(scenarios_source["Scenario"]))
+
+        for xi in current_evacuation_times:
+            current_evacuation_times[xi] = m.T[xi]
+            current_step_sizes[xi] = 0.1 * m.T[xi]
+
+        while iteration < max_iterations:
+
+            start_iter_time = time.time()
+
+            print("###############################")
+            print("running iteration:", iteration)
+
+            current_optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, objective, runtime_limit = run_time_limit)
+            print("Current best solution for tsums:", current_optimal_solution)
+
+            # calculate comp-based objective function
+            current_best_solution_comp = (sum(m.cfix[i] * sum(1/m.K[xi] for xi in m.xi) * m.z[i].value for i in m.i) +
+                                          sum(m.ps[xi] * m.comp[xi].value for xi in m.xi) +
+                                          sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi].value for i in m.i) for xi in m.xi) +
+                                          m.P * sum(m.ps[xi] * m.flan[a,xi].value for a,xi in m.a))
+            print("Current best solution for comp:", current_best_solution_comp)
+
+            # current_evacuation_times = [m.comp[i].value for i in m.comp]
+            for xi in current_evacuation_times:
+                current_evacuation_times[xi] = m.comp[xi].value
+            for xi in current_step_sizes:
+                current_step_sizes[xi] = 0.5 * current_evacuation_times[xi]
+            for xi in current_non_evacuated:
+                scenario_value = 0
+                for a,x in m.a:
+                    if xi == x:
+                        scenario_value += m.flan[a,xi].value
+                current_non_evacuated[xi] = scenario_value
+                # current_non_evacuated[xi] = sum(m.flan[a,xi].value for a,xi in m.a)
+            # current_step_sizes = [0.1 * i for i in current_evacuation_times]
+            print(current_evacuation_times)
+            print(current_non_evacuated)
+
+            for xi in m.xi:
+                # reduce the route time limit if the current solution has shorter completion than imposed by limits
+                # print("achieved longest route time:", m.comp[xi].value)
+                # print(m.tsum_control[xi].value)
+                # print("limit route time:", m.T[xi])
+                if m.comp[xi].value < m.T[xi]:
+                    route_time_limits[xi] = m.comp[xi].value
+                # count the number of people not evacuated
+                number_not_evacuated = 0
+                for n in m.flan:
+                    if xi in n:
+                        # print('        ', n[0], ':', int(m.flan[n].value), 'people')
+                        number_not_evacuated += int(m.flan[n].value)
+                # if someone is not evacuated, increase route time limit
+                if number_not_evacuated > 0:
+                    # if the last step has increased the route time, decrease step size and increase the route time by that
+                    if reduce == True:
+                        current_step_sizes[xi] = 0.5 * current_step_sizes[xi]
+                    else:
+                        pass
+                    route_time_limits[xi] += current_step_sizes[xi]
+                    route_time_limits[xi] = max(0,route_time_limits[xi])
+                    reduce = False # indicate that this iteration did not reduce the route time
+                # if everyone is evacuated, decrease route time limit
+                else:
+                    if reduce == False:
+                        current_step_sizes[xi] = 0.5 * current_step_sizes[xi]
+                    else:
+                        pass
+                    route_time_limits[xi] -= current_step_sizes[xi]
+                    route_time_limits[xi] = max(0,route_time_limits[xi])
+                    reduce = True
+
+            iteration += 1
+
+            m.del_component(m.T)
+            m.T = Param(m.xi, initialize = route_time_limits)
+
+            cost_relativizers = dict.fromkeys(np.unique(scenarios_source["Scenario"]))
+            for xi in cost_relativizers:
+                cost_relativizers[xi] = sum(m.cfix[i] for i in m.i) + sum(m.var_cost[i] * m.T[xi] for i in m.i)
+            m.del_component(m.K)
+            m.K = Param(m.xi, initialize = cost_relativizers)
+            m.K.pprint()
+            # m.K = Param(initialize = (sum(m.cfix[i] for i in m.i) + sum(m.var_cost[i] * m.T[xi] for i in m.i))) #len(vessel_source) * time_limit)/10)
+            m.del_component(m.max_time)
+            m.max_time = Constraint(m.xi, rule = pyomo_ICEP_model_generator.max_time)
+
+            end_iter_time = time.time()
+            total_iter_time = end_iter_time - start_iter_time
+
+            print('Time for iteration', iteration-1, ':', total_iter_time)
+
+        current_optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, objective, runtime_limit = run_time_limit)
 
         end_time = time.time()
         total_time = end_time - start_time
+
+        print('Best solution found for tsums:', current_optimal_solution)
+
+        # calculate comp-based objective function
+        current_best_solution_comp = (sum(m.cfix[i] * sum(1/m.K[xi] for xi in m.xi) * m.z[i].value for i in m.i) +
+                                      sum(m.ps[xi] * m.comp[xi].value for xi in m.xi) +
+                                      sum(m.ps[xi] * 1/m.K[xi] * sum(m.var_cost[i] * m.u[i, xi].value for i in m.i) for xi in m.xi) +
+                                      m.P * sum(m.ps[xi] * m.flan[a,xi].value for a,xi in m.a))
+        print("Current best solution for comp:", current_best_solution_comp)
+
+        # current_evacuation_times = [m.comp[i].value for i in m.comp]
+        for xi in current_evacuation_times:
+            current_evacuation_times[xi] = m.comp[xi].value
+        for xi in current_step_sizes:
+            current_step_sizes[xi] = 0.8 * current_evacuation_times[xi]
+        for xi in current_non_evacuated:
+            current_non_evacuated[xi] = sum(m.flan[a,xi].value for a,xi in m.a)
+        # current_step_sizes = [0.1 * i for i in current_evacuation_times]
+        print(current_evacuation_times)
+        print(current_non_evacuated)
 
         print('Time to solution:', total_time)
 
