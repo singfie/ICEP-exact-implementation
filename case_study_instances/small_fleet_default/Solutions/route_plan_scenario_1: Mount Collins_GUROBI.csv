@@ -1,135 +1,35 @@
 ,segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location
-0,1,Queen of Capilano,1,Horseshoe Bay Terminal,Snug Cove Ferry Terminal,10.0,24.0,24.0,34.0,12.0,0,None
-1,2,Queen of Capilano,2,Snug Cove Ferry Terminal,Horseshoe Bay Terminal,34.0,48.0,48.0,58.0,12.0,457,Snug Cove
-2,3,Queen of Capilano,3,Horseshoe Bay Terminal,Snug Cove Ferry Terminal,58.0,72.0,72.0,82.0,12.0,0,None
-3,4,Queen of Capilano,4,Snug Cove Ferry Terminal,Horseshoe Bay Terminal,82.0,96.0,96.0,106.0,12.0,457,Snug Cove
-4,5,Queen of Capilano,5,Horseshoe Bay Terminal,Snug Cove Ferry Terminal,106.0,120.0,120.0,130.0,12.0,0,None
-5,6,Queen of Capilano,6,Snug Cove Ferry Terminal,Horseshoe Bay Terminal,130.0,144.0,144.0,154.0,12.0,457,Snug Cove
-6,1,Cormorant,1,Snug Cove Marina,Snug Cove Marina,10.0,10.0,10.0,13.0,25.0,0,None
-7,2,Cormorant,2,Snug Cove Marina,Horseshoe Bay Terminal,13.0,21.4,21.4,24.4,20.0,12,Snug Cove
-8,3,Cormorant,3,Horseshoe Bay Terminal,Mannion Bay Wharf,24.4,30.64,30.64,33.64,20.0,0,None
-9,4,Cormorant,4,Mannion Bay Wharf,Horseshoe Bay Terminal,33.64,41.44,41.44,44.44,20.0,12,Snug Cove
-10,5,Cormorant,5,Horseshoe Bay Terminal,Mannion Bay Wharf,44.44,50.68,50.68,53.68,20.0,0,None
-11,6,Cormorant,6,Mannion Bay Wharf,Horseshoe Bay Terminal,53.68,61.480000000000004,61.480000000000004,64.48,20.0,12,Snug Cove
-12,7,Cormorant,7,Horseshoe Bay Terminal,Mannion Bay Beach,64.48,70.72,70.72,73.72,20.0,0,None
-13,8,Cormorant,8,Mannion Bay Beach,Horseshoe Bay Terminal,73.72,81.52,81.52,84.52,20.0,12,Snug Cove
-14,9,Cormorant,9,Horseshoe Bay Terminal,Mannion Bay Wharf,84.52,90.75999999999999,90.75999999999999,93.75999999999999,20.0,0,None
-15,10,Cormorant,10,Mannion Bay Wharf,Horseshoe Bay Terminal,93.75999999999999,101.55999999999999,101.55999999999999,104.55999999999999,20.0,12,Snug Cove
-16,11,Cormorant,11,Horseshoe Bay Terminal,Mannion Bay Wharf,104.55999999999999,110.79999999999998,110.79999999999998,113.79999999999998,20.0,0,None
-17,12,Cormorant,12,Mannion Bay Wharf,Horseshoe Bay Terminal,113.79999999999998,121.59999999999998,121.59999999999998,124.59999999999998,20.0,12,Snug Cove
-18,13,Cormorant,13,Horseshoe Bay Terminal,Mannion Bay Wharf,124.59999999999998,130.83999999999997,130.83999999999997,133.83999999999997,20.0,0,None
-19,14,Cormorant,14,Mannion Bay Wharf,Horseshoe Bay Terminal,133.83999999999997,141.64,141.64,144.64,20.0,12,Snug Cove
-20,1,Bowen Arrow,1,Snug Cove Marina,Snug Cove Marina,30.0,30.0,30.0,33.0,25.0,0,None
-21,2,Bowen Arrow,2,Snug Cove Marina,Horseshoe Bay Terminal,33.0,41.4,41.4,44.4,20.0,12,Snug Cove
-22,3,Bowen Arrow,3,Horseshoe Bay Terminal,Mannion Bay Wharf,44.4,50.64,50.64,53.64,20.0,0,None
-23,4,Bowen Arrow,4,Mannion Bay Wharf,Horseshoe Bay Terminal,53.64,61.44,61.44,64.44,20.0,12,Snug Cove
-24,5,Bowen Arrow,5,Horseshoe Bay Terminal,Mannion Bay Wharf,64.44,70.67999999999999,70.67999999999999,73.67999999999999,20.0,0,None
-25,6,Bowen Arrow,6,Mannion Bay Wharf,Horseshoe Bay Terminal,73.67999999999999,81.47999999999999,81.47999999999999,84.47999999999999,20.0,12,Snug Cove
-26,7,Bowen Arrow,7,Horseshoe Bay Terminal,Mannion Bay Beach,84.47999999999999,90.71999999999998,90.71999999999998,93.71999999999998,20.0,0,None
-27,8,Bowen Arrow,8,Mannion Bay Beach,Horseshoe Bay Terminal,93.71999999999998,101.51999999999998,101.51999999999998,104.51999999999998,20.0,12,Snug Cove
-28,9,Bowen Arrow,9,Horseshoe Bay Terminal,Mannion Bay Beach,104.51999999999998,110.75999999999998,110.75999999999998,113.75999999999998,20.0,0,None
-29,10,Bowen Arrow,10,Mannion Bay Beach,Horseshoe Bay Terminal,113.75999999999998,121.55999999999997,121.55999999999997,124.55999999999997,20.0,12,Snug Cove
-30,11,Bowen Arrow,11,Horseshoe Bay Terminal,Cates Bay Beach,124.55999999999997,131.51999999999998,131.51999999999998,134.51999999999998,20.0,0,None
-31,12,Bowen Arrow,12,Cates Bay Beach,Horseshoe Bay Terminal,134.51999999999998,143.21999999999997,143.21999999999997,146.21999999999997,20.0,12,Hood Point
-32,13,Bowen Arrow,13,Horseshoe Bay Terminal,Mannion Bay Beach,146.21999999999997,152.45999999999998,152.45999999999998,155.45999999999998,20.0,0,None
-33,14,Bowen Arrow,14,Mannion Bay Beach,Horseshoe Bay Terminal,155.45999999999998,163.26,163.26,166.26,20.0,12,Snug Cove
-34,1,Apodaca,1,Snug Cove Marina,Snug Cove Marina,10.0,10.0,10.0,15.0,25.0,0,None
-35,2,Apodaca,2,Snug Cove Marina,Horseshoe Bay Terminal,15.0,23.4,23.4,28.4,20.0,38,Snug Cove
-36,3,Apodaca,3,Horseshoe Bay Terminal,Cates Bay Dock,28.4,35.36,35.36,40.36,20.0,0,None
-37,4,Apodaca,4,Cates Bay Dock,Horseshoe Bay Terminal,40.36,49.06,49.06,54.06,20.0,38,Hood Point
-38,5,Apodaca,5,Horseshoe Bay Terminal,Mannion Bay Wharf,54.06,60.300000000000004,60.300000000000004,65.30000000000001,20.0,0,None
-39,6,Apodaca,6,Mannion Bay Wharf,Horseshoe Bay Terminal,65.30000000000001,73.10000000000001,73.10000000000001,78.10000000000001,20.0,38,Snug Cove
-40,7,Apodaca,7,Horseshoe Bay Terminal,Mannion Bay Wharf,78.10000000000001,84.34,84.34,89.34,20.0,0,None
-41,8,Apodaca,8,Mannion Bay Wharf,Horseshoe Bay Terminal,89.34,97.14,97.14,102.14,20.0,38,Snug Cove
-42,9,Apodaca,9,Horseshoe Bay Terminal,Mannion Bay Wharf,102.14,108.38,108.38,113.38,20.0,0,None
-43,10,Apodaca,10,Mannion Bay Wharf,Horseshoe Bay Terminal,113.38,121.17999999999999,121.17999999999999,126.17999999999999,20.0,38,Snug Cove
-44,11,Apodaca,11,Horseshoe Bay Terminal,Mannion Bay Wharf,126.17999999999999,132.42,132.42,137.42,20.0,0,None
-45,12,Apodaca,12,Mannion Bay Wharf,Horseshoe Bay Terminal,137.42,145.22,145.22,150.22,20.0,38,Snug Cove
-46,13,Apodaca,13,Horseshoe Bay Terminal,Cates Bay Dock,150.22,157.18,157.18,162.18,20.0,0,None
-47,14,Apodaca,14,Cates Bay Dock,Horseshoe Bay Terminal,162.18,170.88,170.88,175.88,20.0,31,Hood Point
-48,1,Kinbasket Queen,1,Snug Cove Marina,Snug Cove Marina,30.0,30.0,30.0,35.0,17.0,0,None
-49,2,Kinbasket Queen,2,Snug Cove Marina,Horseshoe Bay Terminal,35.0,46.2,46.2,51.2,15.0,40,Snug Cove
-50,3,Kinbasket Queen,3,Horseshoe Bay Terminal,Cates Bay Dock,51.2,61.43529411764706,61.43529411764706,66.43529411764706,15.0,0,None
-51,4,Kinbasket Queen,4,Cates Bay Dock,Horseshoe Bay Terminal,66.43529411764706,78.03529411764706,78.03529411764706,83.03529411764706,15.0,40,Hood Point
-52,5,Kinbasket Queen,5,Horseshoe Bay Terminal,Cates Bay Dock,83.03529411764706,93.27058823529411,93.27058823529411,98.27058823529411,15.0,0,None
-53,6,Kinbasket Queen,6,Cates Bay Dock,Horseshoe Bay Terminal,98.27058823529411,109.87058823529411,109.87058823529411,114.87058823529411,15.0,40,Hood Point
-54,7,Kinbasket Queen,7,Horseshoe Bay Terminal,Mannion Bay Wharf,114.87058823529411,124.0470588235294,124.0470588235294,129.0470588235294,15.0,0,None
-55,8,Kinbasket Queen,8,Mannion Bay Wharf,Horseshoe Bay Terminal,129.0470588235294,139.4470588235294,139.4470588235294,144.4470588235294,15.0,40,Snug Cove
-56,9,Kinbasket Queen,9,Horseshoe Bay Terminal,Cates Bay Dock,144.4470588235294,154.68235294117648,154.68235294117648,159.68235294117648,15.0,0,None
-57,10,Kinbasket Queen,10,Cates Bay Dock,Horseshoe Bay Terminal,159.68235294117648,171.28235294117647,171.28235294117647,176.28235294117647,15.0,40,Hood Point
-58,1,Mercury 1,1,Horseshoe Bay Terminal,Mannion Bay Wharf,20.0,26.240000000000002,26.240000000000002,29.240000000000002,25.0,0,None
-59,2,Mercury 1,2,Mannion Bay Wharf,Horseshoe Bay Terminal,29.240000000000002,37.040000000000006,37.040000000000006,40.040000000000006,20.0,12,Snug Cove
-60,3,Mercury 1,3,Horseshoe Bay Terminal,Mannion Bay Wharf,40.040000000000006,46.28000000000001,46.28000000000001,49.28000000000001,20.0,0,None
-61,4,Mercury 1,4,Mannion Bay Wharf,Horseshoe Bay Terminal,49.28000000000001,57.08000000000001,57.08000000000001,60.08000000000001,20.0,12,Snug Cove
-62,5,Mercury 1,5,Horseshoe Bay Terminal,Mannion Bay Wharf,60.08000000000001,66.32000000000001,66.32000000000001,69.32000000000001,20.0,0,None
-63,6,Mercury 1,6,Mannion Bay Wharf,Horseshoe Bay Terminal,69.32000000000001,77.12,77.12,80.12,20.0,12,Snug Cove
-64,7,Mercury 1,7,Horseshoe Bay Terminal,Mannion Bay Wharf,80.12,86.36,86.36,89.36,20.0,0,None
-65,8,Mercury 1,8,Mannion Bay Wharf,Horseshoe Bay Terminal,89.36,97.16,97.16,100.16,20.0,12,Snug Cove
-66,9,Mercury 1,9,Horseshoe Bay Terminal,Mannion Bay Wharf,100.16,106.39999999999999,106.39999999999999,109.39999999999999,20.0,0,None
-67,10,Mercury 1,10,Mannion Bay Wharf,Horseshoe Bay Terminal,109.39999999999999,117.19999999999999,117.19999999999999,120.19999999999999,20.0,12,Snug Cove
-68,11,Mercury 1,11,Horseshoe Bay Terminal,Mannion Bay Wharf,120.19999999999999,126.43999999999998,126.43999999999998,129.44,20.0,0,None
-69,12,Mercury 1,12,Mannion Bay Wharf,Horseshoe Bay Terminal,129.44,137.24,137.24,140.24,20.0,12,Snug Cove
-70,13,Mercury 1,13,Horseshoe Bay Terminal,Mannion Bay Beach,140.24,146.48000000000002,146.48000000000002,149.48000000000002,20.0,0,None
-71,14,Mercury 1,14,Mannion Bay Beach,Horseshoe Bay Terminal,149.48000000000002,157.28000000000003,157.28000000000003,160.28000000000003,20.0,12,Snug Cove
-72,1,Mercury 2,1,Horseshoe Bay Terminal,Mannion Bay Wharf,30.0,36.24,36.24,39.24,25.0,0,None
-73,2,Mercury 2,2,Mannion Bay Wharf,Horseshoe Bay Terminal,39.24,47.040000000000006,47.040000000000006,50.040000000000006,20.0,12,Snug Cove
-74,3,Mercury 2,3,Horseshoe Bay Terminal,Mannion Bay Wharf,50.040000000000006,56.28000000000001,56.28000000000001,59.28000000000001,20.0,0,None
-75,4,Mercury 2,4,Mannion Bay Wharf,Horseshoe Bay Terminal,59.28000000000001,67.08000000000001,67.08000000000001,70.08000000000001,20.0,12,Snug Cove
-76,5,Mercury 2,5,Horseshoe Bay Terminal,Mannion Bay Beach,70.08000000000001,76.32000000000001,76.32000000000001,79.32000000000001,20.0,0,None
-77,6,Mercury 2,6,Mannion Bay Beach,Horseshoe Bay Terminal,79.32000000000001,87.12,87.12,90.12,20.0,12,Snug Cove
-78,7,Mercury 2,7,Horseshoe Bay Terminal,Mannion Bay Wharf,90.12,96.36,96.36,99.36,20.0,0,None
-79,8,Mercury 2,8,Mannion Bay Wharf,Horseshoe Bay Terminal,99.36,107.16,107.16,110.16,20.0,12,Snug Cove
-80,9,Mercury 2,9,Horseshoe Bay Terminal,Mannion Bay Wharf,110.16,116.39999999999999,116.39999999999999,119.39999999999999,20.0,0,None
-81,10,Mercury 2,10,Mannion Bay Wharf,Horseshoe Bay Terminal,119.39999999999999,127.19999999999999,127.19999999999999,130.2,20.0,12,Snug Cove
-82,11,Mercury 2,11,Horseshoe Bay Terminal,Mannion Bay Wharf,130.2,136.44,136.44,139.44,20.0,0,None
-83,12,Mercury 2,12,Mannion Bay Wharf,Horseshoe Bay Terminal,139.44,147.24,147.24,150.24,20.0,12,Snug Cove
-84,13,Mercury 2,13,Horseshoe Bay Terminal,Mannion Bay Wharf,150.24,156.48000000000002,156.48000000000002,159.48000000000002,20.0,0,None
-85,14,Mercury 2,14,Mannion Bay Wharf,Horseshoe Bay Terminal,159.48000000000002,167.28000000000003,167.28000000000003,170.28000000000003,20.0,12,Snug Cove
-86,1,Mercury 3,1,Horseshoe Bay Terminal,Cates Bay Dock,20.0,26.96,26.96,31.96,25.0,0,None
-87,2,Mercury 3,2,Cates Bay Dock,Horseshoe Bay Terminal,31.96,40.66,40.66,45.66,20.0,40,Hood Point
-88,3,Mercury 3,3,Horseshoe Bay Terminal,Cates Bay Dock,45.66,52.62,52.62,57.62,20.0,0,None
-89,4,Mercury 3,4,Cates Bay Dock,Horseshoe Bay Terminal,57.62,66.32,66.32,71.32,20.0,40,Hood Point
-90,5,Mercury 3,5,Horseshoe Bay Terminal,Cates Bay Dock,71.32,78.27999999999999,78.27999999999999,83.27999999999999,20.0,0,None
-91,6,Mercury 3,6,Cates Bay Dock,Horseshoe Bay Terminal,83.27999999999999,91.97999999999999,91.97999999999999,96.97999999999999,20.0,40,Hood Point
-92,7,Mercury 3,7,Horseshoe Bay Terminal,Cates Bay Dock,96.97999999999999,103.93999999999998,103.93999999999998,108.93999999999998,20.0,0,None
-93,8,Mercury 3,8,Cates Bay Dock,Horseshoe Bay Terminal,108.93999999999998,117.63999999999999,117.63999999999999,122.63999999999999,20.0,40,Hood Point
-94,9,Mercury 3,9,Horseshoe Bay Terminal,Cates Bay Dock,122.63999999999999,129.6,129.6,134.6,20.0,0,None
-95,10,Mercury 3,10,Cates Bay Dock,Horseshoe Bay Terminal,134.6,143.29999999999998,143.29999999999998,148.29999999999998,20.0,40,Hood Point
-96,11,Mercury 3,11,Horseshoe Bay Terminal,Cates Bay Dock,148.29999999999998,155.26,155.26,160.26,20.0,0,None
-97,12,Mercury 3,12,Cates Bay Dock,Horseshoe Bay Terminal,160.26,168.95999999999998,168.95999999999998,173.95999999999998,20.0,40,Hood Point
-98,1,Kona Winds Charters 1,1,Gibsons Harbor,Hood Point Dock,30.0,48.239999999999995,48.239999999999995,53.239999999999995,25.0,0,None
-99,2,Kona Winds Charters 1,2,Hood Point Dock,Horseshoe Bay Terminal,53.239999999999995,64.33999999999999,64.33999999999999,69.33999999999999,20.0,40,Hood Point
-100,3,Kona Winds Charters 1,3,Horseshoe Bay Terminal,Cates Bay Dock,69.33999999999999,76.29999999999998,76.29999999999998,81.29999999999998,20.0,0,None
-101,4,Kona Winds Charters 1,4,Cates Bay Dock,Horseshoe Bay Terminal,81.29999999999998,89.99999999999999,89.99999999999999,94.99999999999999,20.0,40,Hood Point
-102,5,Kona Winds Charters 1,5,Horseshoe Bay Terminal,Cates Bay Dock,94.99999999999999,101.95999999999998,101.95999999999998,106.95999999999998,20.0,0,None
-103,6,Kona Winds Charters 1,6,Cates Bay Dock,Horseshoe Bay Terminal,106.95999999999998,115.65999999999998,115.65999999999998,120.65999999999998,20.0,40,Hood Point
-104,7,Kona Winds Charters 1,7,Horseshoe Bay Terminal,Cates Bay Dock,120.65999999999998,127.61999999999998,127.61999999999998,132.61999999999998,20.0,0,None
-105,8,Kona Winds Charters 1,8,Cates Bay Dock,Horseshoe Bay Terminal,132.61999999999998,141.31999999999996,141.31999999999996,146.31999999999996,20.0,40,Hood Point
-106,9,Kona Winds Charters 1,9,Horseshoe Bay Terminal,Cates Bay Dock,146.31999999999996,153.27999999999997,153.27999999999997,158.27999999999997,20.0,0,None
-107,10,Kona Winds Charters 1,10,Cates Bay Dock,Horseshoe Bay Terminal,158.27999999999997,166.97999999999996,166.97999999999996,171.97999999999996,20.0,40,Hood Point
-108,1,Stormaway III,1,Gibsons Harbor,Cates Bay Dock,30.0,50.64,50.64,55.64,25.0,0,None
-109,2,Stormaway III,2,Cates Bay Dock,Horseshoe Bay Terminal,55.64,64.34,64.34,69.34,20.0,40,Hood Point
-110,3,Stormaway III,3,Horseshoe Bay Terminal,Cates Bay Dock,69.34,76.3,76.3,81.3,20.0,0,None
-111,4,Stormaway III,4,Cates Bay Dock,Horseshoe Bay Terminal,81.3,90.0,90.0,95.0,20.0,40,Hood Point
-112,5,Stormaway III,5,Horseshoe Bay Terminal,Cates Bay Dock,95.0,101.96,101.96,106.96,20.0,0,None
-113,6,Stormaway III,6,Cates Bay Dock,Horseshoe Bay Terminal,106.96,115.66,115.66,120.66,20.0,40,Hood Point
-114,7,Stormaway III,7,Horseshoe Bay Terminal,Cates Bay Dock,120.66,127.61999999999999,127.61999999999999,132.62,20.0,0,None
-115,8,Stormaway III,8,Cates Bay Dock,Horseshoe Bay Terminal,132.62,141.32,141.32,146.32,20.0,40,Hood Point
-116,9,Stormaway III,9,Horseshoe Bay Terminal,Cates Bay Dock,146.32,153.28,153.28,158.28,20.0,0,None
-117,10,Stormaway III,10,Cates Bay Dock,Horseshoe Bay Terminal,158.28,166.98,166.98,171.98,20.0,40,Hood Point
-118,1,RCM SAR 01,1,Horseshoe Bay Terminal,Mannion Bay Beach,30.0,35.2,35.2,38.2,30.0,0,None
-119,2,RCM SAR 01,2,Mannion Bay Beach,Horseshoe Bay Terminal,38.2,44.440000000000005,44.440000000000005,47.440000000000005,25.0,12,Snug Cove
-120,3,RCM SAR 01,3,Horseshoe Bay Terminal,Mannion Bay Beach,47.440000000000005,52.64000000000001,52.64000000000001,55.64000000000001,25.0,0,None
-121,4,RCM SAR 01,4,Mannion Bay Beach,Horseshoe Bay Terminal,55.64000000000001,61.88000000000001,61.88000000000001,64.88000000000001,25.0,12,Snug Cove
-122,5,RCM SAR 01,5,Horseshoe Bay Terminal,Cates Bay Dock,64.88000000000001,70.68,70.68,73.68,25.0,0,None
-123,6,RCM SAR 01,6,Cates Bay Dock,Horseshoe Bay Terminal,73.68,80.64,80.64,83.64,25.0,12,Hood Point
-124,7,RCM SAR 01,7,Horseshoe Bay Terminal,Cates Bay Dock,83.64,89.44,89.44,92.44,25.0,0,None
-125,8,RCM SAR 01,8,Cates Bay Dock,Horseshoe Bay Terminal,92.44,99.39999999999999,99.39999999999999,102.39999999999999,25.0,12,Hood Point
-126,9,RCM SAR 01,9,Horseshoe Bay Terminal,Cates Bay Dock,102.39999999999999,108.19999999999999,108.19999999999999,111.19999999999999,25.0,0,None
-127,10,RCM SAR 01,10,Cates Bay Dock,Horseshoe Bay Terminal,111.19999999999999,118.15999999999998,118.15999999999998,121.15999999999998,25.0,12,Hood Point
-128,11,RCM SAR 01,11,Horseshoe Bay Terminal,Mannion Bay Wharf,121.15999999999998,126.35999999999999,126.35999999999999,129.35999999999999,25.0,0,None
-129,12,RCM SAR 01,12,Mannion Bay Wharf,Horseshoe Bay Terminal,129.35999999999999,135.6,135.6,138.6,25.0,12,Snug Cove
-130,13,RCM SAR 01,13,Horseshoe Bay Terminal,Cates Bay Beach,138.6,144.4,144.4,147.4,25.0,0,None
-131,14,RCM SAR 01,14,Cates Bay Beach,Horseshoe Bay Terminal,147.4,154.36,154.36,157.36,25.0,12,Hood Point
-132,15,RCM SAR 01,15,Horseshoe Bay Terminal,Mannion Bay Beach,157.36,162.56,162.56,165.56,25.0,0,None
-133,16,RCM SAR 01,16,Mannion Bay Beach,Horseshoe Bay Terminal,165.56,171.8,171.8,174.8,25.0,10,Snug Cove
+0,1,Cormorant,1,Snug Cove Marina,Snug Cove Marina,10.0,10.0,10.0,13.0,25.0,0,None
+1,2,Cormorant,2,Snug Cove Marina,Horseshoe Bay Terminal,13.0,21.4,21.4,24.4,20.0,9,Snug Cove
+2,3,Cormorant,3,Horseshoe Bay Terminal,Mannion Bay Beach,24.4,30.64,30.64,33.64,20.0,0,None
+3,4,Cormorant,4,Mannion Bay Beach,Horseshoe Bay Terminal,33.64,41.44,41.44,44.44,20.0,9,Snug Cove
+4,5,Cormorant,5,Horseshoe Bay Terminal,Mannion Bay Wharf,44.44,50.68,50.68,53.68,20.0,0,None
+5,6,Cormorant,6,Mannion Bay Wharf,Horseshoe Bay Terminal,53.68,61.480000000000004,61.480000000000004,64.48,20.0,9,Snug Cove
+6,7,Cormorant,7,Horseshoe Bay Terminal,Mannion Bay Wharf,64.48,70.72,70.72,73.72,20.0,0,None
+7,8,Cormorant,8,Mannion Bay Wharf,Horseshoe Bay Terminal,73.72,81.52,81.52,84.52,20.0,9,Snug Cove
+8,9,Cormorant,9,Horseshoe Bay Terminal,Mannion Bay Wharf,84.52,90.75999999999999,90.75999999999999,93.75999999999999,20.0,0,None
+9,10,Cormorant,10,Mannion Bay Wharf,Horseshoe Bay Terminal,93.75999999999999,101.55999999999999,101.55999999999999,104.55999999999999,20.0,9,Snug Cove
+10,11,Cormorant,11,Horseshoe Bay Terminal,Mannion Bay Wharf,104.55999999999999,110.79999999999998,110.79999999999998,113.79999999999998,20.0,0,None
+11,12,Cormorant,12,Mannion Bay Wharf,Horseshoe Bay Terminal,113.79999999999998,121.59999999999998,121.59999999999998,124.59999999999998,20.0,9,Snug Cove
+12,13,Cormorant,13,Horseshoe Bay Terminal,Mannion Bay Wharf,124.59999999999998,130.83999999999997,130.83999999999997,133.83999999999997,20.0,0,None
+13,14,Cormorant,14,Mannion Bay Wharf,Horseshoe Bay Terminal,133.83999999999997,141.64,141.64,144.64,20.0,9,Snug Cove
+14,15,Cormorant,15,Horseshoe Bay Terminal,Mannion Bay Beach,144.64,150.88,150.88,153.88,20.0,0,None
+15,16,Cormorant,16,Mannion Bay Beach,Horseshoe Bay Terminal,153.88,161.68,161.68,164.68,20.0,9,Snug Cove
+16,17,Cormorant,17,Horseshoe Bay Terminal,Mannion Bay Wharf,164.68,170.92000000000002,170.92000000000002,173.92000000000002,20.0,0,None
+17,18,Cormorant,18,Mannion Bay Wharf,Horseshoe Bay Terminal,173.92000000000002,181.72000000000003,181.72000000000003,184.72000000000003,20.0,9,Snug Cove
+18,1,Apodaca,1,Snug Cove Marina,Snug Cove Marina,10.0,10.0,10.0,15.0,25.0,0,None
+19,2,Apodaca,2,Snug Cove Marina,Horseshoe Bay Terminal,15.0,23.4,23.4,28.4,20.0,27,Snug Cove
+20,3,Apodaca,3,Horseshoe Bay Terminal,Cates Bay Dock,28.4,35.36,35.36,40.36,20.0,0,None
+21,4,Apodaca,4,Cates Bay Dock,Horseshoe Bay Terminal,40.36,49.06,49.06,54.06,20.0,27,Hood Point
+22,5,Apodaca,5,Horseshoe Bay Terminal,Cates Bay Dock,54.06,61.02,61.02,66.02000000000001,20.0,0,None
+23,6,Apodaca,6,Cates Bay Dock,Horseshoe Bay Terminal,66.02000000000001,74.72000000000001,74.72000000000001,79.72000000000001,20.0,27,Hood Point
+24,7,Apodaca,7,Horseshoe Bay Terminal,Cates Bay Dock,79.72000000000001,86.68,86.68,91.68,20.0,0,None
+25,8,Apodaca,8,Cates Bay Dock,Horseshoe Bay Terminal,91.68,100.38000000000001,100.38000000000001,105.38000000000001,20.0,27,Hood Point
+26,9,Apodaca,9,Horseshoe Bay Terminal,Cates Bay Dock,105.38000000000001,112.34,112.34,117.34,20.0,0,None
+27,10,Apodaca,10,Cates Bay Dock,Horseshoe Bay Terminal,117.34,126.04,126.04,131.04000000000002,20.0,27,Hood Point
+28,11,Apodaca,11,Horseshoe Bay Terminal,Cates Bay Dock,131.04000000000002,138.00000000000003,138.00000000000003,143.00000000000003,20.0,0,None
+29,12,Apodaca,12,Cates Bay Dock,Horseshoe Bay Terminal,143.00000000000003,151.70000000000002,151.70000000000002,156.70000000000002,20.0,27,Hood Point
+30,13,Apodaca,13,Horseshoe Bay Terminal,Cates Bay Dock,156.70000000000002,163.66000000000003,163.66000000000003,168.66000000000003,20.0,0,None
+31,14,Apodaca,14,Cates Bay Dock,Horseshoe Bay Terminal,168.66000000000003,177.36,177.36,182.36,20.0,27,Hood Point
+32,15,Apodaca,15,Horseshoe Bay Terminal,Cates Bay Dock,182.36,189.32000000000002,189.32000000000002,194.32000000000002,20.0,0,None
+33,16,Apodaca,16,Cates Bay Dock,Horseshoe Bay Terminal,194.32000000000002,203.02,203.02,208.02,20.0,27,Hood Point

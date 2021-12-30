@@ -528,6 +528,16 @@ def main():
 
             print('Time for iteration', iteration-1, ':', total_iter_time)
 
+        # m.del_component(m.w)
+        # m.del_component(m.x)
+        # m.del_component(m.y)
+        # m.del_component(m.z)
+
+        # m.w = Var(m.zeta, within = Binary, initialize = 0)
+        # m.x = Var(m.gamma, within = Binary, initialize = 0)
+        # m.y = Var(m.delta, within = Binary, initialize = 0)
+        # m.z = Var(m.i, within = Binary, initialize = 0)
+
         current_optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, objective, runtime_limit = run_time_limit)
 
         end_time = time.time()

@@ -763,6 +763,7 @@ def main(vessel_source, vessel_pos_source,
 
     ## Define vessel selection variable
     m.z = Var(m.i, within = Binary, initialize = 0)
+    # m.z = Var(m.i, within = NonNegativeReals, bounds = (0, 1), initialize = 0)
 
     ## Define the flow variables
     m.flab = Var(m.beta, within =  NonNegativeReals, bounds = (0, None), initialize = 0)
@@ -772,6 +773,10 @@ def main(vessel_source, vessel_pos_source,
     m.flct = Var(m.epsilon, within =  NonNegativeReals, bounds = (0, None), initialize = 0)
 
     # Define binary variables
+
+    # m.w = Var(m.zeta, within = NonNegativeReals, bounds = (0, 1), initialize = 0)
+    # m.x = Var(m.gamma, within = NonNegativeReals, bounds = (0, 1), initialize = 0)
+    # m.y = Var(m.delta, within = NonNegativeReals, bounds = (0, 1), initialize = 0)
     m.w = Var(m.zeta, within = Binary, initialize = 0)
     m.x = Var(m.gamma, within = Binary, initialize = 0)
     m.y = Var(m.delta, within = Binary, initialize = 0)
