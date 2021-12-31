@@ -1,3 +1,3 @@
 
 
-Instance,NumScenarios,NumResources,NumMaxTrips,TotalIterations,TotalTime,Cost,4,15,26,291.0037829875946,291.0037829875946,149
+Instance,NumScenarios,NumResources,NumMaxTrips,TotalIterations,TotalTime,Costsmall_fleet_default,4,15,26,224.81678795814514,224.81678795814514,148
