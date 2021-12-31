@@ -375,6 +375,10 @@ def old_objective_rule(m):
 
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
+if __name__ == "__main__":
+    main()
+
+
 def main(vessel_source, vessel_pos_source,
     is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
     compat_source, distance_data, time_limit, penalty, trips_source, scenarios_source, src_node_source,
@@ -510,7 +514,7 @@ def main(vessel_source, vessel_pos_source,
             for j in vessels:
                 for k in round_trips:
                     if m.compat[(j, gamma_source['Origin'].iloc[i])] == 1 and m.compat[(j, gamma_source['Destination'].iloc[i])] == 1:
-                        gamma.append((xi, gamma_source['Origin'].iloc[i], j, k, 
+                        gamma.append((xi, gamma_source['Origin'].iloc[i], j, k,
                                       gamma_source['Destination'].iloc[i], k))
     m.gamma = Set(initialize = gamma, ordered = True)
     # m.gamma.pprint()
@@ -596,7 +600,7 @@ def main(vessel_source, vessel_pos_source,
         zeta_caps[i] = 0
     m.zeta_cap = Param(m.zeta, initialize = zeta_caps)
     #m.zeta_cap.pprint()
-           
+
     lambda_caps = dict.fromkeys(lambdas)
     for i in lambda_caps:
         if scenarios_source['private_evac'].loc[(scenarios_source['Location'] == i[1]) &
@@ -628,7 +632,7 @@ def main(vessel_source, vessel_pos_source,
             for j in is_docks:
                 for l in mn_docks:
                     if k in i and j in i and l in i:
-                        gamma_cost[i] = (float(gamma_source['Distance'][(gamma_source['Origin'] == j) 
+                        gamma_cost[i] = (float(gamma_source['Distance'][(gamma_source['Origin'] == j)
                                                                           & (gamma_source['Destination'] == l)])/
                         float(vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == k])) * 60
     m.gamma_c = Param(m.gamma, initialize = gamma_cost)
@@ -682,7 +686,7 @@ def main(vessel_source, vessel_pos_source,
     for i in c_cost:
         for k in vessels:
             if k in i:
-                c_cost[i] = float(vessel_source['loading time'].loc[vessel_source['Vessel_name'] == k]) 
+                c_cost[i] = float(vessel_source['loading time'].loc[vessel_source['Vessel_name'] == k])
     m.c_c = Param(m.c, initialize = c_cost)
     #m.c_c.pprint()
 
@@ -704,11 +708,11 @@ def main(vessel_source, vessel_pos_source,
     Evac_demand = generate_comb_3keys(scenarios, src_node, is_loc)
     Evac_demand = dict.fromkeys(Evac_demand)
     for i in Evac_demand:
-        if scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) & 
+        if scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) &
                                                         (scenarios_source['Location'] == i[2])].empty:
             Evac_demand[i] = 0.0
         else:
-            Evac_demand[i] = float(scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) & 
+            Evac_demand[i] = float(scenarios_source['Demand'].loc[(scenarios_source['Scenario'] == i[0]) &
                                                         (scenarios_source['Location'] == i[2])])
     m.demand = Param(m.xi, src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
     # m.demand.pprint()
@@ -743,7 +747,7 @@ def main(vessel_source, vessel_pos_source,
     # probabilities per scenario
     probs = dict.fromkeys(scenarios)
     for i in probs:
-        probs[i] = float(np.unique(scenarios_source['Probability'].loc[(scenarios_source['Scenario'] == i)])) 
+        probs[i] = float(np.unique(scenarios_source['Probability'].loc[(scenarios_source['Scenario'] == i)]))
     m.ps = Param(m.xi, initialize = probs)
     # m.ps.pprint()
 
@@ -794,7 +798,7 @@ def main(vessel_source, vessel_pos_source,
     ############################# CONSTRAINTS ##############################
 
     # Constraint definition
-               
+
     m.time_const = Constraint(m.i, m.xi, rule = times)
     # m.time_const.pprint()
 
@@ -820,7 +824,7 @@ def main(vessel_source, vessel_pos_source,
 
     ### lambda arcs (island to mainland through private evacuation)
     m.capa_at = Constraint(m.lambdas, rule = cap_at)
-    #m.capa_at.pprint()  
+    #m.capa_at.pprint()
 
     ## Flow conservation constraints
     # flow through island locations
@@ -897,8 +901,4 @@ def main(vessel_source, vessel_pos_source,
         print('Passed objective function does not exist.')
 
     return(m)
-
-
-if __name__ == "__main__":
-    main()
 
