@@ -308,7 +308,7 @@ def main():
     dirname = os.getcwd()
 
     rel_path = args.path
-    path = os.path.join(dirname, 'case_study_instances', rel_path)
+    path = os.path.join(dirname, rel_path)
 
     source = os.path.join(path, 'input/')
     inc_source = os.path.join(path, 'incidences/')
