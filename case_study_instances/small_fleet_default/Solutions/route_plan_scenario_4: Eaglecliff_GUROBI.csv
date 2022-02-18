@@ -1,1 +1,25 @@
 ,segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location
+0,1,Cormorant,1,Snug Cove Marina,Cates Bay Beach,10.0,16.48,16.48,19.48,25.0,0,None
+1,2,Cormorant,2,Cates Bay Beach,Horseshoe Bay Terminal,19.48,28.18,28.18,31.18,20.0,12,Hood Point
+2,3,Cormorant,3,Horseshoe Bay Terminal,Cates Bay Dock,31.18,38.14,38.14,41.14,20.0,0,None
+3,4,Cormorant,4,Cates Bay Dock,Horseshoe Bay Terminal,41.14,49.84,49.84,52.84,20.0,6,Hood Point
+4,1,Apodaca,1,Snug Cove Marina,Cates Bay Dock,10.0,16.48,16.48,21.48,25.0,0,None
+5,2,Apodaca,2,Cates Bay Dock,Horseshoe Bay Terminal,21.48,30.18,30.18,35.18,20.0,38,Hood Point
+6,3,Apodaca,3,Horseshoe Bay Terminal,Cates Bay Dock,35.18,42.14,42.14,47.14,20.0,0,None
+7,4,Apodaca,4,Cates Bay Dock,Horseshoe Bay Terminal,47.14,55.84,55.84,60.84,20.0,38,Hood Point
+8,5,Apodaca,5,Horseshoe Bay Terminal,Cates Bay Dock,60.84,67.8,67.8,72.8,20.0,0,None
+9,6,Apodaca,6,Cates Bay Dock,Horseshoe Bay Terminal,72.8,81.5,81.5,86.5,20.0,38,Hood Point
+10,1,Kinbasket Queen,1,Snug Cove Marina,Cates Bay Dock,30.0,39.529411764705884,39.529411764705884,44.529411764705884,17.0,0,None
+11,2,Kinbasket Queen,2,Cates Bay Dock,Horseshoe Bay Terminal,44.529411764705884,56.129411764705885,56.129411764705885,61.129411764705885,15.0,40,Hood Point
+12,3,Kinbasket Queen,3,Horseshoe Bay Terminal,Cates Bay Dock,61.129411764705885,71.36470588235295,71.36470588235295,76.36470588235295,15.0,0,None
+13,4,Kinbasket Queen,4,Cates Bay Dock,Horseshoe Bay Terminal,76.36470588235295,87.96470588235294,87.96470588235294,92.96470588235294,15.0,40,Hood Point
+14,1,Mercury 3,1,Horseshoe Bay Terminal,Cates Bay Dock,20.0,26.96,26.96,31.96,25.0,0,None
+15,2,Mercury 3,2,Cates Bay Dock,Horseshoe Bay Terminal,31.96,40.66,40.66,45.66,20.0,40,Hood Point
+16,3,Mercury 3,3,Horseshoe Bay Terminal,Cates Bay Dock,45.66,52.62,52.62,57.62,20.0,0,None
+17,4,Mercury 3,4,Cates Bay Dock,Horseshoe Bay Terminal,57.62,66.32,66.32,71.32,20.0,40,Hood Point
+18,5,Mercury 3,5,Horseshoe Bay Terminal,Cates Bay Dock,71.32,78.27999999999999,78.27999999999999,83.27999999999999,20.0,0,None
+19,6,Mercury 3,6,Cates Bay Dock,Horseshoe Bay Terminal,83.27999999999999,91.97999999999999,91.97999999999999,96.97999999999999,20.0,40,Hood Point
+20,1,Stormaway III,1,Gibsons Harbor,Hood Point Dock,30.0,48.239999999999995,48.239999999999995,53.239999999999995,25.0,0,None
+21,2,Stormaway III,2,Hood Point Dock,Horseshoe Bay Terminal,53.239999999999995,64.33999999999999,64.33999999999999,69.33999999999999,20.0,40,Hood Point
+22,3,Stormaway III,3,Horseshoe Bay Terminal,Cates Bay Dock,69.33999999999999,76.29999999999998,76.29999999999998,81.29999999999998,20.0,0,None
+23,4,Stormaway III,4,Cates Bay Dock,Horseshoe Bay Terminal,81.29999999999998,89.99999999999999,89.99999999999999,94.99999999999999,20.0,40,Hood Point
