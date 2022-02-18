@@ -80,7 +80,7 @@ def main():
     end_time = time.time()
     total_time = end_time - start_time
 
-    print('Time to solution:', total_time)
+    # print('Time to solution:', total_time)
 
     return(m)
 

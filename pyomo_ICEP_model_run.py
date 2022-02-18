@@ -13,6 +13,8 @@ from os.path import basename
 
 # import modules
 import pyomo_ICEP_model_generator
+import robust_sub_problem
+import run_robust_sub_problem
 
 def reformat_compatibility(matrix):
     """An auxiliary function to reformat the compatibility file"""
@@ -274,6 +276,7 @@ def main():
     parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
     parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
+    parser.add_argument("-gamma", type = int, help="the parameter determining how many evacuation locations are allowed to go to the highest deviation.")
 
     args = parser.parse_args()
 
@@ -291,6 +294,7 @@ def main():
         os.makedirs(os.path.join(path, "Solutions"))
 
     run_time_limit = args.run_time_limit
+    Gamma_parameter = args.gamma
     # print(run_time_limit)
 
     # read in data source files for nodes
@@ -358,7 +362,24 @@ def main():
                         header=0, delimiter = ',', skipinitialspace=True)
     #print(distance_source)
 
-    print("Starting GUROBI solver to S-ICEP...")
+    print("Pre-solving the R-ICEP sub-problem...")
+
+    m0 = robust_sub_problem.main(is_locs_source, demand_source, Gamma_parameter)
+    m0, optimal_solution_sub, run_time_sub = run_robust_sub_problem.run_R_ICEP_sub_model(m0, runtime_limit = 360)
+
+    print("")
+    print("converting R-ICEP results...")
+    print("")
+
+    sub_problem_decision = pd.DataFrame()
+    for a in m0.l:
+        sub_problem_decision = sub_problem_decision.append({'Location': a,
+                                                            'l_value': value(m0.l[a])}, ignore_index = True)
+
+    print(sub_problem_decision)
+
+    print("")
+    print("Starting GUROBI solver to R-ICEP...")
     print("")
 
     start_time = time.time()
@@ -367,7 +388,7 @@ def main():
         is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
         distance_data, trips_source, demand_source, src_node_source,
         alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
-        lambda_source)
+        lambda_source, sub_problem_decision)
 
     optimal_solution, run_time = run_R_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
 

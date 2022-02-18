@@ -177,7 +177,7 @@ def flow_a(m, a):
     for a1, i, k1, b, k2 in m.beta:
         if a == a1:
             m.sub_beta.add((a1, i, k1, b, k2))
-    constr = (sum(m.flab[a,i,k1,b,k2] for a,i,k1,b,k2 in m.sub_beta) + m.flat[a,'Mainland'] == m.demand['Island',a]) #+ m.flan[a,x]
+    constr = (sum(m.flab[a,i,k1,b,k2] for a,i,k1,b,k2 in m.sub_beta) + m.flat[a,'Mainland'] == m.demand['Island',a] + m.l['Island',a] * m.robust_demand['Island',a]) #+ m.flan[a,x]
     m.del_component(m.sub_beta)
     return(constr)
 
@@ -321,9 +321,10 @@ def conservative(m):
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
 def main(vessel_source, vessel_pos_source,
-    is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
-    compat_source, distance_data, trips_source, demand_source, src_node_source,
-    alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source):
+         is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
+         compat_source, distance_data, trips_source, demand_source, src_node_source,
+         alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source,
+         sub_problem_decision):
     """
     A function that returns a pyomo model implementation of the main part of the R-ICEP model.
     """
@@ -487,10 +488,7 @@ def main(vessel_source, vessel_pos_source,
                                          zeta_source['Destination'].iloc[i],k))
     m.zeta = Set(initialize = zeta, ordered = True)
     #m.zeta.pprint()
-    # for i in m.zeta:
-    #     print(i)
 
-    # .to_string()[5:]
     # lambdas
     lambdas = []
     for i in range(0,len(lambda_source)):
@@ -645,6 +643,10 @@ def main(vessel_source, vessel_pos_source,
     m.robust_demand.pprint()
 
     # inherit robust demand parameter variables from sub problem
+    robust_selector = dict.fromkeys(Evac)
+    for i in robust_selector:
+        robust_selector[i] = int(sub_problem_decision['l_value'].loc[sub_problem_decision['Location'] == i[1]])
+    m.l = Param(src_node, is_loc, initialize = robust_selector)
     # m.l.pprint()
 
     ############################# DECISION VARIABLES ##############################
