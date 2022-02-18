@@ -1,3 +1,0 @@
-
-
-Instance,NumResources,NumMaxTrips,TotalIterations,TotalTime,Costtest_case_small,5,3,1.2836589813232422,1.2836589813232422,217

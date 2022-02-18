@@ -1,3 +1,0 @@
-
-
-Instance,NumScenarios,NumResources,NumMaxTrips,TotalIterations,TotalTime,Cost,4,15,26,96.573401927948,96.573401927948,134
