@@ -4,7 +4,6 @@
 
 from pyomo.environ import *
 import itertools as it
-import numpy as np
 
 # auxiliary functions
 
@@ -326,7 +325,7 @@ def main(vessel_source, vessel_pos_source,
     compat_source, distance_data, trips_source, demand_source, src_node_source,
     alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source):
     """
-    A function that returns a pyomo model implementation of the S-ICEP model.
+    A function that returns a pyomo model implementation of the main part of the R-ICEP model.
     """
 
     # creation of model frame
@@ -625,8 +624,8 @@ def main(vessel_source, vessel_pos_source,
     ############################# DEMAND PARAMETERS ##############################
 
     # demand parameters
-    Evac_demand = generate_comb_2keys(src_node, is_loc)
-    Evac_demand = dict.fromkeys(Evac_demand)
+    Evac = generate_comb_2keys(src_node, is_loc)
+    Evac_demand = dict.fromkeys(Evac)
     for i in Evac_demand:
         if demand_source['Demand'].loc[(demand_source['Location'] == i[1])].empty:
             Evac_demand[i] = 0.0
@@ -634,6 +633,19 @@ def main(vessel_source, vessel_pos_source,
             Evac_demand[i] = float(demand_source['Demand'].loc[(demand_source['Location'] == i[1])])
     m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
     # m.demand.pprint()
+
+    # robust design parameters
+    Robust_demand = dict.fromkeys(Evac)
+    for i in Robust_demand:
+        if demand_source['Robust_demand'].loc[(demand_source['Location'] == i[1])].empty:
+            Robust_demand[i] = 0.0
+        else:
+            Robust_demand[i] = float(demand_source['Robust_demand'].loc[(demand_source['Location'] == i[1])])
+    m.robust_demand = Param(src_node, is_loc, initialize = Robust_demand)
+    m.robust_demand.pprint()
+
+    # inherit robust demand parameter variables from sub problem
+    # m.l.pprint()
 
     ############################# DECISION VARIABLES ##############################
 
@@ -720,7 +732,6 @@ def main(vessel_source, vessel_pos_source,
     # m.objective.pprint()
 
     return(m)
-
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,6 @@
 December 9, 2020
 """
 
-
 from pyomo.environ import *
 import pandas as pd
 import time
@@ -32,7 +31,7 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
+def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
 
     import gurobipy
 
@@ -291,10 +290,6 @@ def main():
     if not os.path.exists(os.path.join(path, 'Solutions')):
         os.makedirs(os.path.join(path, "Solutions"))
 
-    # parse remaining arguments
-    penalty = args.penalty
-    # print(penalty)
-    route_time_limit = args.route_time_limit
     run_time_limit = args.run_time_limit
     # print(run_time_limit)
 
@@ -374,42 +369,13 @@ def main():
         alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
         lambda_source)
 
-    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
+    optimal_solution, run_time = run_R_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
 
     end_time = time.time()
     total_time = end_time - start_time
 
     print('Time to solution:', total_time)
 
-    # print("************************************")
-    # print("The best objective value obtained:", best_cost[0])
-    # print("The best set of route plans obtained:")
-    # for i in range(len(best_route_set)):
-    #     print("Scenario", i+1, ":")
-    #     print("Population not evacuated:")
-    #     print(not_evacuated[i])
-    #     print("Evacuation time:")
-    #     print(best_evacuation_times[i])
-    #     print(best_route_set[i])
-    #     best_route_set[i].to_csv(os.path.join(path, 'solution/Greedy_S_ICEP_best_route_plan_scenario_') + str(i+1) + ".csv")
-
-    # # write a performance file
-    # performance_metrics = open(os.path.join(path, "solution/Greedy_S_ICEP_solution_metrics.txt"),"w+")
-    # for i in range(len(best_route_set)):
-    #     performance_metrics.write("Input parameters:\n")
-    #     performance_metrics.write("Penalty: " + str(penalty) + "\n")
-    #     performance_metrics.write("Upper time limit: " + str(time_limit) + "\n")
-    #     performance_metrics.write("")
-    #     performance_metrics.write("Results: \n")
-    #     performance_metrics.write("Scenario " + str(i+1) + ": \n")
-    #     performance_metrics.write("Population not evacuated: " + str(not_evacuated[i][0]) + "\n")
-    #     performance_metrics.write("Evacuation time: " + str(best_evacuation_times[i]) + "\n")
-    #     performance_metrics.write("Algorithm run time: " + str(run_time))
-    # performance_metrics.close()
-
-    # generate the evolution plots
-    # create_best_cost_plot(best_cost_evo, path)
-    # create_total_cost_plot(all_cost_evo, path)
 
 if __name__ == "__main__":
     main()
