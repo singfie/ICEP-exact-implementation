@@ -255,7 +255,12 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
+    route_details['route_start_time'] += time_passed
+    route_details['route_end_time'] += time_passed
+    route_details['load_start_time'] += time_passed
+    route_details['load_end_time'] += time_passed
+
+    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
         
 
     #### END ROUTE DETAILS
