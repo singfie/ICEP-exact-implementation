@@ -6,6 +6,7 @@ February 25, 2022
 import argparse
 import os
 import envoy
+import subprocess
 
 def main():
 
@@ -19,7 +20,6 @@ def main():
 
     # get directory path
     dirname = os.getcwd()
-
     rel_path = args.path
 
     # parse remaining arguments
@@ -29,14 +29,17 @@ def main():
 
     iters = range(iterations)
 
-    try:
-        executable_frame = list(zip(iters, list_times))
-        # execute all iterations
-        my_path = os.path.join('..', os.path.dirname(os.path.abspath(__file__)))
-        for i,t in executable_frame:
-            envoy.run('python3 pyomo_ICEP_model_run.py -path ' + str(rel_path) + ' -run_time_limit ' + str(run_time_limit) + ' -update_time ' + str(t) + ' -iteration ' + str(i), cwd=my_path)
-    except:
-        print("Number of iterations and number of updates do not match.")
+    # try:
+    executable_frame = list(zip(iters, list_times))
+    print(executable_frame)
+    # execute all iterations
+    my_path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+    print(my_path)
+    for i,t in executable_frame:
+        print("executing for:", rel_path, run_time_limit, t, i)
+        os.system('python3 ./pyomo_ICEP_model_run.py -path ' + str(rel_path) + ' -run_time_limit ' + str(run_time_limit) + ' -update_time ' + str(t) + ' -iteration ' + str(i))
+# except:
+    #     print("Number of iterations and number of updates do not match.")
 
 if __name__ == "__main__":
     main()
