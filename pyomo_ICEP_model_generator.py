@@ -5,6 +5,7 @@
 from pyomo.environ import *
 import itertools as it
 import numpy as np
+import pandas as pd
 
 # auxiliary functions
 
@@ -322,11 +323,12 @@ def conservative(m):
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
 def main(vessel_source, vessel_pos_source,
-    is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
-    compat_source, distance_data, trips_source, demand_source, src_node_source,
-    alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source):
+         is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
+         compat_source, distance_data, trips_source, demand_source, src_node_source,
+         alpha_source, beta_source, gamma_source, delta_source, epsilon_source,
+         zeta_source, lambda_source, iteration, time_passed, previous_route_plan):
     """
-    A function that returns a pyomo model implementation of the S-ICEP model.
+    A function that returns a pyomo model implementation of the RH-ICEP model.
     """
 
     # creation of model frame
@@ -339,6 +341,43 @@ def main(vessel_source, vessel_pos_source,
     # print(vessels)
     m.i = Set(initialize = vessels, ordered = True)
     # m.i.pprint()
+
+    completed_routes = pd.DataFrame()
+
+    # print(completed_routes)
+
+    # make changes to initial data if time passed > 0
+    if time_passed > 0:
+
+        # subtract all to zero
+        previous_route_plan['route_start_time'] -= time_passed
+        previous_route_plan['route_end_time'] -= time_passed
+        previous_route_plan['load_start_time'] -= time_passed
+        previous_route_plan['load_end_time'] -= time_passed
+
+        for v in vessels:
+            relevant_trips = previous_route_plan[previous_route_plan['resource_id'] == v]
+            r = 0
+            while relevant_trips['load_end_time'].iloc[r] < 0:
+                r += 1
+            # make sure that evacuation trips are completed before new dispatch
+            if 'Evac' in relevant_trips['destination'].iloc[r]:
+                r += 1
+                time_to_avail = relevant_trips['load_end_time'].iloc[r]
+            else:
+                time_to_avail = relevant_trips['load_end_time'].iloc[r]
+
+            # assign new time to availability
+            vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
+
+            completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
+
+        for t in np.unique(completed_routes['evacuated_location']):
+            location_routes = completed_routes[completed_routes['evacuated_location'] == t]
+            number_already_evacuated_loc = location_routes['evacuees'].sum()
+            demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
+
+        # print(demand_source)
 
     round_trips = trips_source['Round trip'].tolist()
     # print(round_trips)
@@ -488,10 +527,7 @@ def main(vessel_source, vessel_pos_source,
                                          zeta_source['Destination'].iloc[i],k))
     m.zeta = Set(initialize = zeta, ordered = True)
     #m.zeta.pprint()
-    # for i in m.zeta:
-    #     print(i)
 
-    # .to_string()[5:]
     # lambdas
     lambdas = []
     for i in range(0,len(lambda_source)):
@@ -526,6 +562,8 @@ def main(vessel_source, vessel_pos_source,
     lambda_caps = dict.fromkeys(lambdas)
     for i in lambda_caps:
         if demand_source['private_evac'].loc[demand_source['Location'] == i[0]].empty:
+            lambda_caps[i] = 0.0
+        if iteration > 0:
             lambda_caps[i] = 0.0
         else:
             lambda_caps[i] = float(demand_source['private_evac'].loc[demand_source['Location'] == i[0]])
@@ -628,10 +666,10 @@ def main(vessel_source, vessel_pos_source,
     Evac_demand = generate_comb_2keys(src_node, is_loc)
     Evac_demand = dict.fromkeys(Evac_demand)
     for i in Evac_demand:
-        if demand_source['Demand'].loc[(demand_source['Location'] == i[1])].empty:
+        if demand_source['Demand_' + str(iteration)].loc[(demand_source['Location'] == i[1])].empty:
             Evac_demand[i] = 0.0
         else:
-            Evac_demand[i] = float(demand_source['Demand'].loc[(demand_source['Location'] == i[1])])
+            Evac_demand[i] = float(demand_source['Demand_' + str(iteration)].loc[(demand_source['Location'] == i[1])])
     m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
     # m.demand.pprint()
 
@@ -719,7 +757,7 @@ def main(vessel_source, vessel_pos_source,
     m.objective = Objective(rule=conservative, sense=minimize, doc='Define stochastic objective function')
     # m.objective.pprint()
 
-    return(m)
+    return(m, completed_routes)
 
 
 if __name__ == "__main__":

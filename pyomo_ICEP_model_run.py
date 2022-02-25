@@ -32,15 +32,14 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
+def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
+                     iteration, completed_routes,
+                     time_passed, runtime_limit = 3600):
 
-    import gurobipy
+    print(time_passed)
 
     start_time = time.time()
 
-    # if __name__ == '__main__':
-    # from pyomo.opt import SolverFactory
-    # import pyomo.environ
     opt = SolverFactory('gurobi')
     opt.options['IntFeasTol']= 10e-10
     opt.options['MIPGap'] = 0.1 #1e-4
@@ -108,7 +107,6 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
     SOL_DIR = os.path.join(DATA_DIR, "Solutions")
     # print(SOL_DIR)
 
-
     # create new folders if they do not exist
     if os.path.exists(SOL_DIR):
         pass
@@ -142,6 +140,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
                    'evacuees': pd.Series([], dtype='int'),
                    'evacuated_location': pd.Series([], dtype='str')
     })
+
+    route_details = route_details.append(completed_routes, ignore_index = True)
 
     # assign the data to each entry
     for j in m.i:
@@ -255,7 +255,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI.csv'))
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
         
 
     #### END ROUTE DETAILS
@@ -272,9 +272,9 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-path", help="the path of the ICEP instance files")
-    parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
-    parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
+    parser.add_argument("-update_time", type = float, help="time passed since initial solve")
+    parser.add_argument("-iteration", type = int, help="the update index")
 
     args = parser.parse_args()
 
@@ -292,11 +292,9 @@ def main():
         os.makedirs(os.path.join(path, "Solutions"))
 
     # parse remaining arguments
-    penalty = args.penalty
-    # print(penalty)
-    route_time_limit = args.route_time_limit
     run_time_limit = args.run_time_limit
-    # print(run_time_limit)
+    time_passed = args.update_time
+    iteration = args.iteration
 
     # read in data source files for nodes
     vessel_source = pd.read_csv(source + 'vessels.csv', index_col=False,
@@ -363,53 +361,51 @@ def main():
                         header=0, delimiter = ',', skipinitialspace=True)
     #print(distance_source)
 
+    # load existing solution from previous iteration
+
+    # create target directories
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    DATA_DIR = os.path.join(BASE_DIR, "ICEP-exact-implementation", rel_path)
+    # print(DATA_DIR)
+    SOL_DIR = os.path.join(DATA_DIR, "Solutions")
+
+    if iteration > 0:
+        previous_route_plan = pd.read_csv(os.path.join(SOL_DIR,
+                                                   'route_plan_scenario_GUROBI_iteration_' + str(iteration - 1) + '.csv'))
+
+    else:
+        previous_route_plan = pd.DataFrame()
+
     print("Starting GUROBI solver to S-ICEP...")
     print("")
 
     start_time = time.time()
 
-    m = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
-        is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
-        distance_data, trips_source, demand_source, src_node_source,
-        alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
-        lambda_source)
+    m, completed_routes = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
+                                        is_locs_source, is_docks_source,
+                                        mn_locs_source, mn_docks_source,
+                                        compat_source, distance_data,
+                                        trips_source, demand_source,
+                                        src_node_source, alpha_source,
+                                        beta_source, gamma_source,
+                                        delta_source, epsilon_source,
+                                        zeta_source, lambda_source,
+                                        iteration, time_passed,
+                                        previous_route_plan)
 
-    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
+    optimal_solution, run_time = run_S_ICEP_model(m, rel_path,
+                                                  vessel_source,
+                                                  is_docks_source,
+                                                  iteration,
+                                                  completed_routes,
+                                                  time_passed,
+                                                  runtime_limit = run_time_limit)
 
     end_time = time.time()
     total_time = end_time - start_time
 
     print('Time to solution:', total_time)
-
-    # print("************************************")
-    # print("The best objective value obtained:", best_cost[0])
-    # print("The best set of route plans obtained:")
-    # for i in range(len(best_route_set)):
-    #     print("Scenario", i+1, ":")
-    #     print("Population not evacuated:")
-    #     print(not_evacuated[i])
-    #     print("Evacuation time:")
-    #     print(best_evacuation_times[i])
-    #     print(best_route_set[i])
-    #     best_route_set[i].to_csv(os.path.join(path, 'solution/Greedy_S_ICEP_best_route_plan_scenario_') + str(i+1) + ".csv")
-
-    # # write a performance file
-    # performance_metrics = open(os.path.join(path, "solution/Greedy_S_ICEP_solution_metrics.txt"),"w+")
-    # for i in range(len(best_route_set)):
-    #     performance_metrics.write("Input parameters:\n")
-    #     performance_metrics.write("Penalty: " + str(penalty) + "\n")
-    #     performance_metrics.write("Upper time limit: " + str(time_limit) + "\n")
-    #     performance_metrics.write("")
-    #     performance_metrics.write("Results: \n")
-    #     performance_metrics.write("Scenario " + str(i+1) + ": \n")
-    #     performance_metrics.write("Population not evacuated: " + str(not_evacuated[i][0]) + "\n")
-    #     performance_metrics.write("Evacuation time: " + str(best_evacuation_times[i]) + "\n")
-    #     performance_metrics.write("Algorithm run time: " + str(run_time))
-    # performance_metrics.close()
-
-    # generate the evolution plots
-    # create_best_cost_plot(best_cost_evo, path)
-    # create_total_cost_plot(all_cost_evo, path)
 
 if __name__ == "__main__":
     main()

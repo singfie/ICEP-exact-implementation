@@ -1,4 +1,4 @@
-Scenario,Location,private_evac,Demand,Probability
-Scenario 1,Evac Location 0,17.0,1700,0.3762877106886221
-Scenario 1,Evac Location 1,7.0,750,0.3762877106886221
-Scenario 1,Evac Location 2,3.0,329,0.3762877106886221
+Scenario,Location,private_evac,Demand_0,Demand_1,Demand_2,Demand_3
+Scenario 1,Evac Location 0,0.0,1700,1800,1800,2000
+Scenario 1,Evac Location 1,0.0,750,600,800,700
+Scenario 1,Evac Location 2,0.0,329,265,1000,900
