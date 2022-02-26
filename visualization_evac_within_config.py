@@ -145,7 +145,7 @@ def main():
 
     solutions = os.path.join(path, 'Solutions/')
 
-    scenario_file = pd.read_csv(os.path.join(path, 'input', 'scenarios.csv'))
+    scenario_file = pd.read_csv(os.path.join(path, 'input', 'scenarios_old.csv'))
 
     # check if a solution directory exists
     if not os.path.exists(os.path.join(path, 'Solutions')):

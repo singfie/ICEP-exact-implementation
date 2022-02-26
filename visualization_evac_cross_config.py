@@ -128,7 +128,7 @@ def main():
     rel_path = args.path
     kn_path = os.path.join(dirname, rel_path)
 
-    scenario_file = pd.read_csv(os.path.join(kn_path, 'small_fleet_default', 'input', 'scenarios.csv'))
+    scenario_file = pd.read_csv(os.path.join(kn_path, 'small_fleet_default', 'input', 'scenarios_old.csv'))
 
     for scenario in np.unique(scenario_file['Scenario']):
         print(re.sub("Scenario ", "_", scenario))

@@ -33,7 +33,7 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
+def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, gamma, runtime_limit = 3600):
 
     import gurobipy
 
@@ -256,7 +256,7 @@ def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI.csv'))
+    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_gamma_' + str(gamma) + '.csv'))
         
 
     #### END ROUTE DETAILS
@@ -273,8 +273,6 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-path", help="the path of the ICEP instance files")
-    parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
-    parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
     parser.add_argument("-gamma", type = int, help="the parameter determining how many evacuation locations are allowed to go to the highest deviation.")
 
@@ -390,7 +388,7 @@ def main():
         alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
         lambda_source, sub_problem_decision)
 
-    optimal_solution, run_time = run_R_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
+    optimal_solution, run_time = run_R_ICEP_model(m, rel_path, vessel_source, is_docks_source, Gamma_parameter, runtime_limit = run_time_limit)
 
     end_time = time.time()
     total_time = end_time - start_time
