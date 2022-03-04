@@ -261,7 +261,6 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
     route_details['load_end_time'] += time_passed
 
     route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
-        
 
     #### END ROUTE DETAILS
 
