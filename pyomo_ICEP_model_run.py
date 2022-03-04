@@ -256,7 +256,7 @@ def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, gamma, runtime_
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_gamma_' + str(gamma) + '.csv'))
+    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_gamma_' + str(gamma) + '.csv'), index = False)
         
 
     #### END ROUTE DETAILS
