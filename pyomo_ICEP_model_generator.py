@@ -375,6 +375,9 @@ def main(vessel_source, vessel_pos_source,
 
             # assign new time to availability
             vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
+            # assign new starting dock
+            vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
+            vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
 
             completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
 
