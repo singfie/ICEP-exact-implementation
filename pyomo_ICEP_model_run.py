@@ -255,7 +255,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit =
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI.csv'))
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI.csv'), index = False)
         
 
     #### END ROUTE DETAILS
@@ -272,8 +272,6 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-path", help="the path of the ICEP instance files")
-    parser.add_argument("-penalty", type = int, help="the penalty value applied to every evacuee not evacuated.")
-    parser.add_argument("-route_time_limit", type = float, help="the upper time limit for the evacuation plan.")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
 
     args = parser.parse_args()
@@ -291,10 +289,6 @@ def main():
     if not os.path.exists(os.path.join(path, 'Solutions')):
         os.makedirs(os.path.join(path, "Solutions"))
 
-    # parse remaining arguments
-    penalty = args.penalty
-    # print(penalty)
-    route_time_limit = args.route_time_limit
     run_time_limit = args.run_time_limit
     # print(run_time_limit)
 

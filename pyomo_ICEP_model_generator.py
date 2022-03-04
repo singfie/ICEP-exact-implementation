@@ -628,10 +628,10 @@ def main(vessel_source, vessel_pos_source,
     Evac_demand = generate_comb_2keys(src_node, is_loc)
     Evac_demand = dict.fromkeys(Evac_demand)
     for i in Evac_demand:
-        if demand_source['Demand'].loc[(demand_source['Location'] == i[1])].empty:
+        if demand_source['Demand_0'].loc[(demand_source['Location'] == i[1])].empty:
             Evac_demand[i] = 0.0
         else:
-            Evac_demand[i] = float(demand_source['Demand'].loc[(demand_source['Location'] == i[1])])
+            Evac_demand[i] = float(demand_source['Demand_0'].loc[(demand_source['Location'] == i[1])])
     m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
     # m.demand.pprint()
 
