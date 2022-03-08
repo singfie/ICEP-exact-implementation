@@ -40,7 +40,7 @@ def diversify_uncertain_experiments():
         os.makedirs(os.path.join(dirname, 'experiment_files'))
 
     # make variations
-    for ratio in [2, 5, 7]: # ratio = (total demand)/(total capacity of resources)
+    for ratio in [2, 3, 4]: # ratio = (total demand)/(total capacity of resources)
         for variance_factor in [0.2, 0.4, 0.6]: # variance_factor = (std_deviation over time)/(total demand)
             for time_interval in [15, 30, 60]: # time in between updates
                 for number_updates in [3, 5, 10]: # number of information updates
