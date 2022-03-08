@@ -1,0 +1,3 @@
+
+
+Instance,Seed,NumScenarios,NumResources,NumMaxTrips,TotalIterations,TotalTime,LargeOffset,LastUpdateIteration,LastUpdateTime,Costclass_test_1,100,3,5,19,3,3799.45,1,1,1321.01,299.9854781748852
