@@ -27,10 +27,11 @@ def main():
     list_times = args.update_times
     iterations = args.iterations
 
-    iters = range(iterations)
+    iters = range(iterations + 1)
 
     try:
         executable_frame = list(zip(iters, list_times))
+        print(executable_frame)
         # execute all iterations
         for i,t in executable_frame:
             print("executing for:", rel_path, run_time_limit, t, i)
