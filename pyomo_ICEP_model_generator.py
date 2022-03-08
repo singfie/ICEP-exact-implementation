@@ -388,6 +388,21 @@ def main(vessel_source, vessel_pos_source,
 
         # print(demand_source)
 
+    # update the round trips source
+    # max number of trips is if smallest resource has to do all evacuations
+    total_demand = demand_source['Demand_' + str(iteration)].sum()
+    smallest_capacity = vessel_source['max_cap'].min()
+    max_trips = np.ceil(total_demand/smallest_capacity)
+
+    trips_source = pd.DataFrame()
+    trips_source = trips_source.append({'Round trip': 1.0,
+                                        'Delay cost': 0.01},
+                                       ignore_index = True)
+    while trips_source['Round trip'].iloc[-1] < max_trips:
+        trips_source = trips_source.append({'Round trip': trips_source['Round trip'].iloc[-1] + 1,
+                                            'Delay cost': trips_source['Delay cost'].iloc[-1] + 0.01},
+                                           ignore_index = True)
+
     round_trips = trips_source['Round trip'].tolist()
     # print(round_trips)
     m.k = Set(initialize = round_trips, ordered = True)
