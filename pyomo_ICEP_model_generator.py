@@ -5,6 +5,7 @@
 from pyomo.environ import *
 import itertools as it
 import numpy as np
+import pandas as pd
 
 # auxiliary functions
 
@@ -340,6 +341,21 @@ def main(vessel_source, vessel_pos_source,
     m.i = Set(initialize = vessels, ordered = True)
     # m.i.pprint()
 
+    # update the round trips source
+    # max number of trips is if smallest resource has to do all evacuations
+    total_demand = demand_source['Demand_0'].sum()
+    smallest_capacity = vessel_source['max_cap'].min()
+    max_trips = np.ceil(total_demand/smallest_capacity)
+
+    trips_source = pd.DataFrame()
+    trips_source = trips_source.append({'Round trip': 1.0,
+                                        'Delay cost': 0.01},
+                                       ignore_index = True)
+    while trips_source['Round trip'].iloc[-1] < max_trips:
+        trips_source = trips_source.append({'Round trip': trips_source['Round trip'].iloc[-1] + 1,
+                                            'Delay cost': trips_source['Delay cost'].iloc[-1] + 0.01},
+                                           ignore_index = True)
+
     round_trips = trips_source['Round trip'].tolist()
     # print(round_trips)
     m.k = Set(initialize = round_trips, ordered = True)
@@ -431,8 +447,6 @@ def main(vessel_source, vessel_pos_source,
                                  beta_source['Island dock'].iloc[i], k))
     m.beta = Set(initialize = beta, ordered = True)
     # m.beta.pprint()
-    # for i in m.beta:
-    #     print(i)
 
     # gammas
     gamma = []
@@ -444,8 +458,6 @@ def main(vessel_source, vessel_pos_source,
                                   gamma_source['Destination'].iloc[i], k))
     m.gamma = Set(initialize = gamma, ordered = True)
     # m.gamma.pprint()
-    # for i in m.gamma:
-    #     print(i)
 
     # deltas
     delta = []
@@ -488,10 +500,7 @@ def main(vessel_source, vessel_pos_source,
                                          zeta_source['Destination'].iloc[i],k))
     m.zeta = Set(initialize = zeta, ordered = True)
     #m.zeta.pprint()
-    # for i in m.zeta:
-    #     print(i)
 
-    # .to_string()[5:]
     # lambdas
     lambdas = []
     for i in range(0,len(lambda_source)):
