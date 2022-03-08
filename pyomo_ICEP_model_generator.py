@@ -5,6 +5,7 @@
 from pyomo.environ import *
 import itertools as it
 import numpy as np
+import pandas as pd
 
 # auxiliary functions
 
@@ -341,11 +342,6 @@ def main(vessel_source, vessel_pos_source,
     m.i = Set(initialize = vessels, ordered = True)
     # m.i.pprint()
 
-    round_trips = trips_source['Round trip'].tolist()
-    # print(round_trips)
-    m.k = Set(initialize = round_trips, ordered = True)
-    # m.k.pprint()
-
     # read in lists of real nodes
     src_node = src_node_source['Location'].tolist()
     vessel_locs = vessel_pos_source['Dock'].tolist()
@@ -353,6 +349,57 @@ def main(vessel_source, vessel_pos_source,
     is_docks = is_docks_source['Dock'].tolist()
     mn_docks = mn_docks_source['Dock'].tolist()
     mn_loc = mn_locs_source['Location'].tolist()
+
+    ############################# DEMAND PARAMETERS ##############################
+
+    # demand parameters
+    Evac = generate_comb_2keys(src_node, is_loc)
+    Evac_demand = dict.fromkeys(Evac)
+    for i in Evac_demand:
+        data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
+        Evac_demand[i] = float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
+    m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
+    m.demand.pprint()
+
+    # robust design parameters
+    Robust_demand = dict.fromkeys(Evac)
+    for i in Robust_demand:
+        data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
+        Robust_demand[i] = float(demand_source['Robust_demand'].loc[(demand_source['Location'] == i[1])]) - float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
+    m.robust_demand = Param(src_node, is_loc, initialize = Robust_demand)
+    m.robust_demand.pprint()
+
+    # inherit robust demand parameter variables from sub problem
+    robust_selector = dict.fromkeys(Evac)
+    for i in robust_selector:
+        robust_selector[i] = int(sub_problem_decision['l_value'].loc[sub_problem_decision['Location'] == i[1]])
+    m.l = Param(src_node, is_loc, initialize = robust_selector)
+    # m.l.pprint()
+
+    # update the round trips source
+    # max number of trips is if smallest resource has to do all evacuations
+    total_demand = 0
+    for i in robust_selector:
+        if robust_selector[i] == 1:
+            total_demand += Evac_demand[i] + Robust_demand[i]
+        else:
+            total_demand += Evac_demand[i]
+    smallest_capacity = vessel_source['max_cap'].min()
+    max_trips = np.ceil(total_demand/smallest_capacity)
+
+    trips_source = pd.DataFrame()
+    trips_source = trips_source.append({'Round trip': 1.0,
+                                        'Delay cost': 0.01},
+                                       ignore_index = True)
+    while trips_source['Round trip'].iloc[-1] < max_trips:
+        trips_source = trips_source.append({'Round trip': trips_source['Round trip'].iloc[-1] + 1,
+                                            'Delay cost': trips_source['Delay cost'].iloc[-1] + 0.01},
+                                           ignore_index = True)
+
+    round_trips = trips_source['Round trip'].tolist()
+    # print(round_trips)
+    m.k = Set(initialize = round_trips, ordered = True)
+    # m.k.pprint()
 
     ## total slots
     m.tot_docks = Set(initialize = is_docks + mn_docks + vessel_locs, ordered = True)
@@ -619,32 +666,6 @@ def main(vessel_source, vessel_pos_source,
                 rt_cost[i] = float(trips_source['Delay cost'].loc[trips_source['Round trip'] == i])
     m.rt_c = Param(m.k, initialize = rt_cost)
     #m.rt_c.pprint()
-
-    ############################# DEMAND PARAMETERS ##############################
-
-    # demand parameters
-    Evac = generate_comb_2keys(src_node, is_loc)
-    Evac_demand = dict.fromkeys(Evac)
-    for i in Evac_demand:
-        data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
-        Evac_demand[i] = float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
-    m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
-    # m.demand.pprint()
-
-    # robust design parameters
-    Robust_demand = dict.fromkeys(Evac)
-    for i in Robust_demand:
-        data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
-        Robust_demand[i] = float(demand_source['Robust_demand'].loc[(demand_source['Location'] == i[1])]) - float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
-    m.robust_demand = Param(src_node, is_loc, initialize = Robust_demand)
-    # m.robust_demand.pprint()
-
-    # inherit robust demand parameter variables from sub problem
-    robust_selector = dict.fromkeys(Evac)
-    for i in robust_selector:
-        robust_selector[i] = int(sub_problem_decision['l_value'].loc[sub_problem_decision['Location'] == i[1]])
-    m.l = Param(src_node, is_loc, initialize = robust_selector)
-    # m.l.pprint()
 
     ############################# DECISION VARIABLES ##############################
 
