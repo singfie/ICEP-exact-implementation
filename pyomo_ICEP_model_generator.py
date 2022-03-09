@@ -359,7 +359,7 @@ def main(vessel_source, vessel_pos_source,
         data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
         Evac_demand[i] = float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
     m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
-    m.demand.pprint()
+    # m.demand.pprint()
 
     # robust design parameters
     Robust_demand = dict.fromkeys(Evac)
@@ -367,7 +367,7 @@ def main(vessel_source, vessel_pos_source,
         data_points = demand_source.drop(['Scenario', 'private_evac', 'Robust_demand'], axis = 1, inplace = False)
         Robust_demand[i] = float(demand_source['Robust_demand'].loc[(demand_source['Location'] == i[1])]) - float(np.round(data_points.loc[(data_points['Location'] == i[1])].mean(axis = 1)))
     m.robust_demand = Param(src_node, is_loc, initialize = Robust_demand)
-    m.robust_demand.pprint()
+    # m.robust_demand.pprint()
 
     # inherit robust demand parameter variables from sub problem
     robust_selector = dict.fromkeys(Evac)

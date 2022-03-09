@@ -119,11 +119,11 @@ def run_R_ICEP_model(m, dirname, vessel_source, is_docks_source, gamma, runtime_
     # change working directory and set seed
     os.chdir(SOL_DIR)
 
-    with open(os.path.join(SOL_DIR, 'performance_statistics_Gurobi.txt'), 'w') as f:
-        f.write("\n\nInstance,NumResources,NumMaxTrips,TotalIterations,TotalTime,Cost")
+    with open(os.path.join(SOL_DIR, 'performance_statistics_Gurobi_gamma_' + str(gamma) + '.csv'), 'w') as f:
+        f.write("\n\nInstance,NumResources,NumMaxTrips,TotalTime,Cost\n")
         f.write(f"{basename(str(dirname))},"
-          f"{len(m.i)},{len(m.k)},{run_time},"
-          f"{run_time},{float(value(m.objective)):.0f}")
+                f"{len(m.i)},{len(m.k)},{run_time},"
+                f"{float(value(m.objective)):.0f}")
         f.close()
 
     #### MAKE ROUTE DETAILS
