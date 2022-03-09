@@ -318,7 +318,7 @@ def tsum_calc(m):
 ######## OBJECTIVE FUNCTION GENERATORS ########
 
 def conservative(m):
-    return(m.comp)
+    return(m.comp + sum(m.rt_c[k] * m.x[b, i, k, c, k] for b, i, k, c, k in m.gamma))
 
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
@@ -394,10 +394,11 @@ def main(vessel_source, vessel_pos_source,
             else:
                 pass
 
-        for t in np.unique(completed_routes['evacuated_location']):
-            location_routes = completed_routes[completed_routes['evacuated_location'] == t]
-            number_already_evacuated_loc = location_routes['evacuees'].sum()
-            demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
+        if not completed_routes.empty:
+            for t in np.unique(completed_routes['evacuated_location']):
+                location_routes = completed_routes[completed_routes['evacuated_location'] == t]
+                number_already_evacuated_loc = location_routes['evacuees'].sum()
+                demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
 
         # print(demand_source)
 
@@ -405,7 +406,7 @@ def main(vessel_source, vessel_pos_source,
     # max number of trips is if smallest resource has to do all evacuations
     total_demand = demand_source['Demand_' + str(iteration)].sum()
     smallest_capacity = vessel_source['max_cap'].min()
-    all_needed_trips = np.ceil(total_demand/smallest_capacity)
+    all_needed_trips = max(np.ceil(total_demand/smallest_capacity),2) # require at least two trips
 
     trips_source = pd.DataFrame()
     trips_source = trips_source.append({'Round trip': 1.0,
@@ -533,8 +534,6 @@ def main(vessel_source, vessel_pos_source,
                                   delta_source['Destination'].iloc[i], round_trips[k+1]))
     m.delta = Set(initialize = delta, ordered = True)
     #m.delta.pprint()
-    # for i in m.delta:
-    #     print(i)
 
     # epsilons
     epsilon = []
@@ -651,10 +650,6 @@ def main(vessel_source, vessel_pos_source,
             for j in vessel_locs:
                 for l in is_docks:
                     if k in i and j in i and l in i:
-                        print(k, j, l)
-                        print((float(zeta_source['Distance'][(zeta_source['Origin'] == j)
-                                                             & (zeta_source['Destination'] == l)])/
-                               float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60)
                         zeta_cost[i] = (float(zeta_source['Distance'][(zeta_source['Origin'] == j)
                                                                   & (zeta_source['Destination'] == l)])/
                         float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
