@@ -1,4 +1,4 @@
 Scenario,Location,private_evac,Actual_demand,Demand_0,Demand_1,Demand_2,Demand_3,Demand_4,Robust_demand,Demand_5
-Scenario 1,Evac Location 0,0.0,344,588,387,714,98,335,714,344
-Scenario 1,Evac Location 1,0.0,2407,2094,3215,2396,3731,1157,3731,2407
-Scenario 1,Evac Location 2,0.0,137,108,57,40,163,124,163,137
+Scenario 1,Evac Location 0,0.0,133,50,170,136,269,146,269,133
+Scenario 1,Evac Location 1,0.0,1454,2443,1879,959,2026,761,2443,1454
+Scenario 1,Evac Location 2,0.0,1301,1355,566,1090,1414,1267,1414,1301
