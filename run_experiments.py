@@ -41,9 +41,6 @@ def main():
         for i in updates:
             update_string += " " + str(i)
 
-        # print("python main_rolling_horizon.py -p " + path + '/' + dataset +
-        #       " -r 3600 -u" + update_string + " -i " + str(number_updates))
-
         os.system("python main_rolling_horizon.py -p " + path + '/' + dataset +
                   " -r 3600 -u" + update_string + " -i " + str(number_updates))
 

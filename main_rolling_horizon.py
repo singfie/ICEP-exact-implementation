@@ -31,7 +31,7 @@ def main():
 
     try:
         executable_frame = list(zip(iters, list_times))
-        print(executable_frame)
+        # print(executable_frame)
         # execute all iterations
         for i,t in executable_frame:
             print("executing for:", rel_path, run_time_limit, t, i)
