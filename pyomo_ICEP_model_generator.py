@@ -356,30 +356,43 @@ def main(vessel_source, vessel_pos_source,
         previous_route_plan['load_end_time'] -= time_passed
 
         for v in vessels:
+            not_started = False
             relevant_trips = previous_route_plan[previous_route_plan['resource_id'] == v]
             r = 0
             while relevant_trips['load_end_time'].iloc[r] < 0 and r < len(relevant_trips) - 1:
                 r += 1
 
-            # if no more trips make immediately available
+            # if no more trips make available asap
             if r >= len(relevant_trips):
                 time_to_avail = 0
             # otherwise make available when completed current trip back to safe location
             else:
-                # make sure that evacuation trips are completed before new dispatch
-                if 'Evac' in relevant_trips['destination'].iloc[r]:
-                    r += 1
-                    time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                # if no trip started yet, re-allocate
+                if relevant_trips['route_start_time'].iloc[r] > 0:
+                    time_to_avail = relevant_trips['route_start_time'].iloc[r]
+                    print(v, "not staffed yet.")
+                    not_started = True
                 else:
-                    time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                    # make sure that evacuation trips are completed before new dispatch
+                    if 'Evac' in relevant_trips['destination'].iloc[r]:
+                        r += 1
+                        time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                    else:
+                        time_to_avail = relevant_trips['load_end_time'].iloc[r]
+
+            print("Vessel:", v, "available in:", time_to_avail, "minutes")
 
             # assign new time to availability
             vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
-            # assign new starting dock
-            vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
-            vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
 
-            completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
+            if not_started == False:
+                # assign new starting dock
+                vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
+                vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
+
+                completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
+            else:
+                pass
 
         for t in np.unique(completed_routes['evacuated_location']):
             location_routes = completed_routes[completed_routes['evacuated_location'] == t]
@@ -392,13 +405,13 @@ def main(vessel_source, vessel_pos_source,
     # max number of trips is if smallest resource has to do all evacuations
     total_demand = demand_source['Demand_' + str(iteration)].sum()
     smallest_capacity = vessel_source['max_cap'].min()
-    max_trips = np.ceil(total_demand/smallest_capacity)
+    all_needed_trips = np.ceil(total_demand/smallest_capacity)
 
     trips_source = pd.DataFrame()
     trips_source = trips_source.append({'Round trip': 1.0,
                                         'Delay cost': 0.01},
                                        ignore_index = True)
-    while trips_source['Round trip'].iloc[-1] < max_trips:
+    while trips_source['Round trip'].iloc[-1] < all_needed_trips:
         trips_source = trips_source.append({'Round trip': trips_source['Round trip'].iloc[-1] + 1,
                                             'Delay cost': trips_source['Delay cost'].iloc[-1] + 0.01},
                                            ignore_index = True)
@@ -638,6 +651,10 @@ def main(vessel_source, vessel_pos_source,
             for j in vessel_locs:
                 for l in is_docks:
                     if k in i and j in i and l in i:
+                        print(k, j, l)
+                        print((float(zeta_source['Distance'][(zeta_source['Origin'] == j)
+                                                             & (zeta_source['Destination'] == l)])/
+                               float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60)
                         zeta_cost[i] = (float(zeta_source['Distance'][(zeta_source['Origin'] == j)
                                                                   & (zeta_source['Destination'] == l)])/
                         float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
