@@ -318,7 +318,7 @@ def tsum_calc(m):
 ######## OBJECTIVE FUNCTION GENERATORS ########
 
 def conservative(m):
-    return(m.comp)
+    return(m.comp + sum(m.rt_c[k] * m.x[b, i, k, c, k] for b, i, k, c, k in m.gamma))
 
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
@@ -345,7 +345,7 @@ def main(vessel_source, vessel_pos_source,
     # max number of trips is if smallest resource has to do all evacuations
     total_demand = demand_source['Demand_0'].sum()
     smallest_capacity = vessel_source['max_cap'].min()
-    max_trips = np.ceil(total_demand/smallest_capacity)
+    max_trips = max(np.ceil(total_demand/smallest_capacity),2)
 
     trips_source = pd.DataFrame()
     trips_source = trips_source.append({'Round trip': 1.0,
