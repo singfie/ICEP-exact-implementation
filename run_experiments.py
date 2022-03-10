@@ -6,6 +6,7 @@ March 8, 2022
 import pandas as pd
 import argparse
 import os
+import shutil
 
 def main():
     """
@@ -28,15 +29,23 @@ def main():
 
     for dataset in os.listdir(path):
 
-        # read in number of locations
-        demand = pd.read_csv(os.path.join(path, dataset, 'input', 'scenarios.csv'))
-        for gamma in range(len(demand) + 1):
+        if 'interval_15' in dataset:
 
-            # optimize using D-ICEP
-            os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma))
+            shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
 
-            # update route plan with true information revealed
-            os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset + ' -gamma ' + str(gamma))
+            # read in number of locations
+            demand = pd.read_csv(os.path.join(path, dataset, 'input', 'scenarios.csv'))
+            for gamma in range(len(demand) + 1):
+
+                # optimize using D-ICEP
+                os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma))
+
+                # update route plan with true information revealed
+                os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset + ' -gamma ' + str(gamma))
+
+        else:
+
+            shutil.rmtree(os.path.join(path, dataset))
 
     return(-1)
 
