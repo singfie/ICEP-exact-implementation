@@ -358,41 +358,46 @@ def main(vessel_source, vessel_pos_source,
         for v in vessels:
             not_started = False
             relevant_trips = previous_route_plan[previous_route_plan['resource_id'] == v]
-            r = 0
-            while relevant_trips['load_end_time'].iloc[r] < 0 and r < len(relevant_trips) - 1:
-                r += 1
 
-            # if no more trips make available asap
-            if r >= len(relevant_trips):
-                time_to_avail = 0
-            # otherwise make available when completed current trip back to safe location
-            else:
-                # if no trip started yet, re-allocate
-                if relevant_trips['route_start_time'].iloc[r] > 0:
-                    time_to_avail = relevant_trips['route_start_time'].iloc[r]
-                    print(v, "not staffed yet.")
-                    not_started = True
+            if not relevant_trips.empty:
+                r = 0
+                while relevant_trips['load_end_time'].iloc[r] < 0 and r < len(relevant_trips) - 1:
+                    r += 1
+
+                # if no more trips make available asap
+                if r >= len(relevant_trips):
+                    time_to_avail = 0
+                # otherwise make available when completed current trip back to safe location
                 else:
-                    # make sure that evacuation trips are completed before new dispatch
-                    if 'Evac' in relevant_trips['destination'].iloc[r]:
-                        r += 1
-                        time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                    # if no trip started yet, re-allocate
+                    if relevant_trips['route_start_time'].iloc[r] > 0:
+                        time_to_avail = relevant_trips['route_start_time'].iloc[r]
+                        print(v, "not staffed yet.")
+                        not_started = True
                     else:
-                        time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                        # make sure that evacuation trips are completed before new dispatch
+                        if 'Evac' in relevant_trips['destination'].iloc[r]:
+                            r += 1
+                            time_to_avail = relevant_trips['load_end_time'].iloc[r]
+                        else:
+                            time_to_avail = relevant_trips['load_end_time'].iloc[r]
 
-            print("Vessel:", v, "available in:", time_to_avail, "minutes")
+                print("Vessel:", v, "available in:", time_to_avail, "minutes")
+
+                if not_started == False:
+                    # assign new starting dock
+                    vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
+                    vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
+
+                    completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
+                else:
+                    pass
+
+            else:
+                time_to_avail = vessel_source['time to availability'][vessel_source['Vessel_name'] == v] - time_passed
 
             # assign new time to availability
             vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
-
-            if not_started == False:
-                # assign new starting dock
-                vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
-                vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
-
-                completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
-            else:
-                pass
 
         if not completed_routes.empty:
             for t in np.unique(completed_routes['evacuated_location']):
