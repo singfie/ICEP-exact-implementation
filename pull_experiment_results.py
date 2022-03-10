@@ -27,6 +27,9 @@ def main():
 
     for instance_folder in os.listdir(os.path.join(os.getcwd(), instance)):
 
+        if not any(e.endswith('TRUE_DEMAND_REVEAL.csv') for e in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions'))):
+            print("Files missing in:", instance_folder)
+
         for solutions in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions')):
 
             if 'TRUE_DEMAND_REVEAL' in solutions:

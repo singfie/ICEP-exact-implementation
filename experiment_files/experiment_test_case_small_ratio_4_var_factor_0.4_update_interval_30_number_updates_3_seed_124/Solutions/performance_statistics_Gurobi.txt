@@ -1,4 +1,0 @@
-
-
-Instance,NumResources,NumMaxTrips,TotalTime,Cost
-experiment_test_case_small_ratio_4_var_factor_0.4_update_interval_30_number_updates_3_seed_124,5,21,20.75131607055664,317
