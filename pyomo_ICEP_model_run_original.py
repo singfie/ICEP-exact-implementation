@@ -32,21 +32,22 @@ def reformat_compatibility(matrix):
 
     return newframe
 
-def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
-                     iteration, completed_routes,
-                     time_passed, runtime_limit = 3600):
+def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
 
-    print(time_passed)
+    import gurobipy
 
     start_time = time.time()
 
+    # if __name__ == '__main__':
+    # from pyomo.opt import SolverFactory
+    # import pyomo.environ
     opt = SolverFactory('gurobi')
     opt.options['IntFeasTol']= 10e-10
     opt.options['MIPGap'] = 0.1 #1e-4
     opt.options['TimeLimit'] = runtime_limit
     results = opt.solve(m, tee=True)
     m.solutions.load_from(results)
-
+        
     end_time = time.time()
     run_time = end_time - start_time
     print ('Time to optimal solution:'+ str(run_time))
@@ -75,7 +76,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                 for a in m.x:#m.flab:
                     if j in a and t in a:
                         if np.round(m.x[a].value) == 1:
-                            #if m.flbc[a].value != 0:
+                        #if m.flbc[a].value != 0:
                             print('            ', '(', a[2],')','(T) from', a[0].replace('load', ''), 'to',a[3].replace('dock', ''), 'on trip', a[2],':', round(m.flbc[a].value), 'passengers')
                 for a in m.y:
                     if j in a and t == a[2]:
@@ -85,14 +86,14 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                 for a in m.x:#m.flab:
                     if j in a and t in a:
                         if np.round(m.x[a].value) == 1:
-                            #if m.flbc[a].value != 0:
+                        #if m.flbc[a].value != 0:
                             print('            ', '(', a[2],')','(T) from', a[0].replace('load', ''), 'to',a[3].replace('dock', ''), 'on trip', a[2],':', round(m.flbc[a].value), 'passengers')
                 for a in m.y:
                     if j in a and t == a[2]:
                         if np.round(m.y[a].value) == 1:
                             print('            ', '(', a[2],')','(R) from', a[0], 'to',a[3], 'on trip', a[2])
 
-    print('')
+    print('')     
     print('Vessels should follow this shipment plan given their initial locations as per input data.')
     print('This schedule respects distances in between different locations, vessel capabilities')
     print('inital vessel locations and compatibility between vessels and docks and local demand patterns')
@@ -107,6 +108,7 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
     SOL_DIR = os.path.join(DATA_DIR, "Solutions")
     # print(SOL_DIR)
 
+
     # create new folders if they do not exist
     if os.path.exists(SOL_DIR):
         pass
@@ -116,32 +118,30 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
     # change working directory and set seed
     os.chdir(SOL_DIR)
 
-    with open(os.path.join(SOL_DIR, 'performance_statistics_Gurobi_iteration_' + str(iteration) + '.csv'), 'w') as f:
+    with open(os.path.join(SOL_DIR, 'performance_statistics_Gurobi.txt'), 'w') as f:
         f.write("\n\nInstance,NumResources,NumMaxTrips,TotalTime,Cost\n")
         f.write(f"{basename(str(dirname))},"
-                f"{len(m.i)},{len(m.k)},{run_time},"
-                f"{float(value(m.objective)):.0f}")
+          f"{len(m.i)},{len(m.k)},{run_time},"
+          f"{float(value(m.objective)):.0f}")
         f.close()
 
     #### MAKE ROUTE DETAILS
 
     # create an empty template
     route_details = pd.DataFrame({
-        'segment_id': pd.Series([], dtype='int'),
-        'resource_id': pd.Series([], dtype='str'),
-        'route_segment_id': pd.Series([], dtype='int'),
-        'origin': pd.Series([], dtype='str'),
-        'destination': pd.Series([], dtype='str'),
-        'route_start_time': pd.Series([], dtype='float'),
-        'route_end_time': pd.Series([], dtype='float'),
-        'load_start_time': pd.Series([], dtype='float'),
-        'load_end_time': pd.Series([], dtype='float'),
-        'resource_speed': pd.Series([], dtype='float'),
-        'evacuees': pd.Series([], dtype='int'),
-        'evacuated_location': pd.Series([], dtype='str')
+                   'segment_id': pd.Series([], dtype='int'),
+                   'resource_id': pd.Series([], dtype='str'),
+                   'route_segment_id': pd.Series([], dtype='int'),
+                   'origin': pd.Series([], dtype='str'),
+                   'destination': pd.Series([], dtype='str'),
+                   'route_start_time': pd.Series([], dtype='float'),
+                   'route_end_time': pd.Series([], dtype='float'),
+                   'load_start_time': pd.Series([], dtype='float'),
+                   'load_end_time': pd.Series([], dtype='float'),
+                   'resource_speed': pd.Series([], dtype='float'),
+                   'evacuees': pd.Series([], dtype='int'),
+                   'evacuated_location': pd.Series([], dtype='str')
     })
-
-    route_details = route_details.append(completed_routes, ignore_index = True)
 
     # assign the data to each entry
     for j in m.i:
@@ -255,16 +255,12 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'evacuated_location': "None"}, ignore_index = True)
                             segment_id += 1
 
-    route_details['route_start_time'] += time_passed
-    route_details['route_end_time'] += time_passed
-    route_details['load_start_time'] += time_passed
-    route_details['load_end_time'] += time_passed
-
-    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI.csv'), index = False)
+        
 
     #### END ROUTE DETAILS
 
-    # calculate total expected cost
+    # calculate total expected cost 
     # totcost = sum(value(m.cfix[i]) * value(m.z[i]) for i in m.i) + sum(value(m.ps[xi]) * sum(value(m.var_cost[i]) * value(m.u[i, xi]) for i in m.i) for xi in m.xi)
 
     print(round(value(m.objective),2))
@@ -277,8 +273,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-path", help="the path of the ICEP instance files")
     parser.add_argument("-run_time_limit", type = float, help="the upper time limit for the algorithm run time")
-    parser.add_argument("-update_time", type = float, help="time passed since initial solve")
-    parser.add_argument("-iteration", type = int, help="the update index")
 
     args = parser.parse_args()
 
@@ -295,10 +289,8 @@ def main():
     if not os.path.exists(os.path.join(path, 'Solutions')):
         os.makedirs(os.path.join(path, "Solutions"))
 
-    # parse remaining arguments
     run_time_limit = args.run_time_limit
-    time_passed = args.update_time
-    iteration = args.iteration
+    # print(run_time_limit)
 
     # read in data source files for nodes
     vessel_source = pd.read_csv(source + 'vessels.csv', index_col=False,
@@ -308,13 +300,13 @@ def main():
                                header=0, delimiter = ',', skipinitialspace=True)
     #print(trips_source)
     demand_source = pd.read_csv(source + 'scenarios.csv', index_col = False,
-                                header=0, delimiter = ',', skipinitialspace=True)
+                                  header=0, delimiter = ',', skipinitialspace=True)
     #print(scenarios_src)
     vessel_pos_source = pd.read_csv(source + 'initial vessel docks.csv', index_col = False,
-                                    header=0, delimiter = ',', skipinitialspace=True)
+                                  header=0, delimiter = ',', skipinitialspace=True)
     #print(vessel_pos_source)
     src_node_source = pd.read_csv(source + 'island source.csv', index_col=False,
-                                  header=0, delimiter = ',', skipinitialspace=True)
+                                 header=0, delimiter = ',', skipinitialspace=True)
     #print(src_node_source)
     is_locs_source = pd.read_csv(source + 'island locations.csv', index_col=False,
                                  header=0, delimiter = ',', skipinitialspace=True)
@@ -330,7 +322,7 @@ def main():
     #print(mn_docks_source)
     # vessel compatibility
     compat_source = pd.read_csv(source + 'vessel compatibility.csv', index_col=False,
-                                header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(compat_source)
 
     # check the forma tof the compat_source. If it is wrong, change the format:
@@ -340,76 +332,78 @@ def main():
         pass
 
     alpha_source = pd.read_csv(inc_source + 'alpha.csv', index_col=False,
-                               header=0, delimiter = ',', skipinitialspace=True)
+                    header=0, delimiter = ',', skipinitialspace=True)
     #print(beta_source)
     beta_source = pd.read_csv(inc_source + 'beta.csv', index_col=False,
-                              header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(beta_source)
     gamma_source = pd.read_csv(inc_source + 'gamma.csv', index_col=False,
-                               header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(gamma_source)
     delta_source = pd.read_csv(inc_source + 'delta.csv', index_col=False,
-                               header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(delta_source)
     epsilon_source = pd.read_csv(inc_source + 'epsilon.csv', index_col=False,
-                                 header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(epsilon_source)
     zeta_source = pd.read_csv(inc_source + 'zeta.csv', index_col=False,
-                              header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(zeta_source)
     lambda_source = pd.read_csv(inc_source + 'lambda.csv', index_col=False,
-                                header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
 
     # distances and compatibility
     distance_data = pd.read_csv(inc_source + 'distance matrix.csv', index_col=0,
-                                header=0, delimiter = ',', skipinitialspace=True)
+                        header=0, delimiter = ',', skipinitialspace=True)
     #print(distance_source)
-
-    # load existing solution from previous iteration
-
-    # create target directories
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-    DATA_DIR = os.path.join(BASE_DIR, "ICEP-exact-implementation", rel_path)
-    # print(DATA_DIR)
-    SOL_DIR = os.path.join(DATA_DIR, "Solutions")
-
-    if iteration > 0:
-        previous_route_plan = pd.read_csv(os.path.join(SOL_DIR,
-                                                       'route_plan_scenario_GUROBI_iteration_' + str(iteration - 1) + '.csv'))
-
-    else:
-        previous_route_plan = pd.DataFrame()
 
     print("Starting GUROBI solver to S-ICEP...")
     print("")
 
     start_time = time.time()
 
-    m, completed_routes = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
-                                                          is_locs_source, is_docks_source,
-                                                          mn_locs_source, mn_docks_source,
-                                                          compat_source, distance_data,
-                                                          trips_source, demand_source,
-                                                          src_node_source, alpha_source,
-                                                          beta_source, gamma_source,
-                                                          delta_source, epsilon_source,
-                                                          zeta_source, lambda_source,
-                                                          iteration, time_passed,
-                                                          previous_route_plan)
+    m = pyomo_ICEP_model_generator.main(vessel_source, vessel_pos_source,
+        is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
+        distance_data, trips_source, demand_source, src_node_source,
+        alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
+        lambda_source)
 
-    optimal_solution, run_time = run_S_ICEP_model(m, rel_path,
-                                                  vessel_source,
-                                                  is_docks_source,
-                                                  iteration,
-                                                  completed_routes,
-                                                  time_passed,
-                                                  runtime_limit = run_time_limit)
+    optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
 
     end_time = time.time()
     total_time = end_time - start_time
 
     print('Time to solution:', total_time)
+
+    # print("************************************")
+    # print("The best objective value obtained:", best_cost[0])
+    # print("The best set of route plans obtained:")
+    # for i in range(len(best_route_set)):
+    #     print("Scenario", i+1, ":")
+    #     print("Population not evacuated:")
+    #     print(not_evacuated[i])
+    #     print("Evacuation time:")
+    #     print(best_evacuation_times[i])
+    #     print(best_route_set[i])
+    #     best_route_set[i].to_csv(os.path.join(path, 'solution/Greedy_S_ICEP_best_route_plan_scenario_') + str(i+1) + ".csv")
+
+    # # write a performance file
+    # performance_metrics = open(os.path.join(path, "solution/Greedy_S_ICEP_solution_metrics.txt"),"w+")
+    # for i in range(len(best_route_set)):
+    #     performance_metrics.write("Input parameters:\n")
+    #     performance_metrics.write("Penalty: " + str(penalty) + "\n")
+    #     performance_metrics.write("Upper time limit: " + str(time_limit) + "\n")
+    #     performance_metrics.write("")
+    #     performance_metrics.write("Results: \n")
+    #     performance_metrics.write("Scenario " + str(i+1) + ": \n")
+    #     performance_metrics.write("Population not evacuated: " + str(not_evacuated[i][0]) + "\n")
+    #     performance_metrics.write("Evacuation time: " + str(best_evacuation_times[i]) + "\n")
+    #     performance_metrics.write("Algorithm run time: " + str(run_time))
+    # performance_metrics.close()
+
+    # generate the evolution plots
+    # create_best_cost_plot(best_cost_evo, path)
+    # create_total_cost_plot(all_cost_evo, path)
 
 if __name__ == "__main__":
     main()
