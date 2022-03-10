@@ -3,9 +3,9 @@
 March 8, 2022
 """
 
-import pandas as pd
 import argparse
 import os
+import shutil
 
 def main():
     """
@@ -28,11 +28,20 @@ def main():
 
     for dataset in os.listdir(path):
 
-        # optimize using D-ICEP
-        os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600')
+        if 'interval_15' and 'number_updates_3' in dataset:
 
-        # update route plan with true information revealed
-        os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset)
+            if os.path.exists(os.path.join(path, dataset, 'Solutions')):
+                shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
+
+            # optimize using D-ICEP
+            os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600')
+
+            # update route plan with true information revealed
+            os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset)
+
+        else:
+
+            shutil.rmtree(os.path.join(path, dataset))
 
     return(-1)
 
