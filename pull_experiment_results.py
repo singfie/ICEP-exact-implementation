@@ -23,6 +23,8 @@ def main():
 
     experiment_results = pd.DataFrame()
 
+    print("Number of experiments:", len(os.listdir(os.path.join(os.getcwd(), instance))))
+
     for instance_folder in os.listdir(os.path.join(os.getcwd(), instance)):
 
         for solutions in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions')):
