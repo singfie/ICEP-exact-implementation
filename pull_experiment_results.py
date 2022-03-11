@@ -94,7 +94,10 @@ def main():
                                                                     'update_interval': update_interval,
                                                                     'number_updates': number_updates,
                                                                     'gamma_setting': gamma_setting,
-                                                                    'random_seed': seed},
+                                                                    'random_seed': seed,
+                                                                    'id': str(model_type) + '_' + str(variance_factor) + '_' +
+                                                                          str(update_interval) + '_' + str(number_updates) +
+                                                                          '_' + str(seed) + '_' + str(gamma_setting)},
                                                                    ignore_index = True)
 
                 except:
