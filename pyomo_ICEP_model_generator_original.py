@@ -52,13 +52,13 @@ def times(m, ves):
             m.sub_c.add((c,i,k))
     #m.sub_c.pprint()
     constr = (sum(m.zeta_c[k,h,b,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta) +
-              sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
-              sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
-              (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
-              (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma)) <= m.comp)#+
-    #(sum(m.rt_c[k1] * m.flbc[xi,b,ves,k1,c,k2] for xi,b,ves,k1,c,k2 in m.sub_gamma))
+           sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
+           sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
+           (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
+           (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma)) <= m.comp)#+
+           #(sum(m.rt_c[k1] * m.flbc[xi,b,ves,k1,c,k2] for xi,b,ves,k1,c,k2 in m.sub_gamma))
     m.del_component(m.sub_zeta)
     m.del_component(m.sub_gamma)
     m.del_component(m.sub_delta)
@@ -100,14 +100,14 @@ def times_vess(m, ves):
             m.sub_c.add((c,i,k))
     #m.sub_c.pprint()
     constr = (sum(m.zeta_c[k,h,b,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta) +
-              sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
-              sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
-              (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
-              (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma)) +
-              (sum(m.rt_c[k1] * m.flbc[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma))
-              == m.u[ves])
+           sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
+           sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
+           (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
+           (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma)) +
+           (sum(m.rt_c[k1] * m.flbc[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma))
+           == m.u[ves])
     m.del_component(m.sub_zeta)
     m.del_component(m.sub_gamma)
     m.del_component(m.sub_delta)
@@ -149,13 +149,13 @@ def times_vess_count(m, ves):
             m.sub_c.add((c,i,k))
     #m.sub_c.pprint()
     constr = (sum(m.zeta_c[k,h,b,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta) +
-              sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
-              sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
-              (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
-              (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
-              (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma))
-              == m.time_record[ves])
+           sum(m.gamma_c[b,ves,k1,c,k2] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma) +
+           sum(m.delta_c[c,ves,k1,b,k2] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta) +
+           (sum(m.h_c[h,ves] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.w[k,h,b,ves] for k,h,b,ves in m.sub_zeta)) +
+           (sum(m.b_c[b,ves,k] * m.y[c,ves,k1,b,k2] for c,ves,k1,b,k2 in m.sub_delta)) +
+           (sum(m.c_c[c,ves,k] * m.x[b,ves,k1,c,k2] for b,ves,k1,c,k2 in m.sub_gamma))
+           == m.time_record[ves])
     m.del_component(m.sub_zeta)
     m.del_component(m.sub_gamma)
     m.del_component(m.sub_delta)
@@ -323,12 +323,11 @@ def conservative(m):
 ####### THE MAIN MODEL INSTANCE GENERATOR ########
 
 def main(vessel_source, vessel_pos_source,
-         is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
-         compat_source, distance_data, trips_source, demand_source, src_node_source,
-         alpha_source, beta_source, gamma_source, delta_source, epsilon_source,
-         zeta_source, lambda_source, iteration, time_passed, previous_route_plan):
+    is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,
+    compat_source, distance_data, trips_source, demand_source, src_node_source,
+    alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source, lambda_source):
     """
-    A function that returns a pyomo model implementation of the RH-ICEP model.
+    A function that returns a pyomo model implementation of the S-ICEP model.
     """
 
     # creation of model frame
@@ -342,82 +341,17 @@ def main(vessel_source, vessel_pos_source,
     m.i = Set(initialize = vessels, ordered = True)
     # m.i.pprint()
 
-    completed_routes = pd.DataFrame()
-
-    # print(completed_routes)
-
-    # make changes to initial data if time passed > 0
-    if time_passed > 0:
-
-        # subtract all to zero
-        previous_route_plan['route_start_time'] -= time_passed
-        previous_route_plan['route_end_time'] -= time_passed
-        previous_route_plan['load_start_time'] -= time_passed
-        previous_route_plan['load_end_time'] -= time_passed
-
-        for v in vessels:
-            not_started = False
-            relevant_trips = previous_route_plan[previous_route_plan['resource_id'] == v]
-
-            if not relevant_trips.empty:
-                r = 0
-                while relevant_trips['load_end_time'].iloc[r] < 0 and r < len(relevant_trips) - 1:
-                    r += 1
-
-                # if no more trips make available asap
-                if r >= len(relevant_trips):
-                    time_to_avail = 0
-                # otherwise make available when completed current trip back to safe location
-                else:
-                    # if no trip started yet, re-allocate
-                    if relevant_trips['route_start_time'].iloc[r] > 0:
-                        time_to_avail = relevant_trips['route_start_time'].iloc[r]
-                        print(v, "not staffed yet.")
-                        not_started = True
-                    else:
-                        # make sure that evacuation trips are completed before new dispatch
-                        if 'Evac' in relevant_trips['destination'].iloc[r]:
-                            r += 1
-                            time_to_avail = relevant_trips['load_end_time'].iloc[r]
-                        else:
-                            time_to_avail = relevant_trips['load_end_time'].iloc[r]
-
-                print("Vessel:", v, "available in:", time_to_avail, "minutes")
-
-                if not_started == False:
-                    # assign new starting dock
-                    vessel_source['Regular_origin'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
-                    vessel_pos_source['Dock'][vessel_source['Vessel_name'] == v] = relevant_trips['destination'].iloc[r]
-
-                    completed_routes = completed_routes.append(relevant_trips.iloc[:r+1], ignore_index = True)
-                else:
-                    pass
-
-            else:
-                time_to_avail = vessel_source['time to availability'][vessel_source['Vessel_name'] == v] - time_passed
-
-            # assign new time to availability
-            vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
-
-        if not completed_routes.empty:
-            for t in np.unique(completed_routes['evacuated_location']):
-                location_routes = completed_routes[completed_routes['evacuated_location'] == t]
-                number_already_evacuated_loc = location_routes['evacuees'].sum()
-                demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
-
-        print(demand_source)
-
     # update the round trips source
     # max number of trips is if smallest resource has to do all evacuations
-    total_demand = demand_source['Demand_' + str(iteration)].sum()
+    total_demand = demand_source['Demand_0'].sum()
     smallest_capacity = vessel_source['max_cap'].min()
-    all_needed_trips = max(np.ceil(total_demand/smallest_capacity),2) # require at least two trips
+    max_trips = max(np.ceil(total_demand/smallest_capacity),2)
 
     trips_source = pd.DataFrame()
     trips_source = trips_source.append({'Round trip': 1.0,
                                         'Delay cost': 0.01},
                                        ignore_index = True)
-    while trips_source['Round trip'].iloc[-1] < all_needed_trips:
+    while trips_source['Round trip'].iloc[-1] < max_trips:
         trips_source = trips_source.append({'Round trip': trips_source['Round trip'].iloc[-1] + 1,
                                             'Delay cost': trips_source['Delay cost'].iloc[-1] + 0.01},
                                            ignore_index = True)
@@ -458,7 +392,7 @@ def main(vessel_source, vessel_pos_source,
     h = []
     for i in range(0,len(vessel_pos_source)):
         h.append((vessel_pos_source['Dock'].iloc[i],
-                  vessel_pos_source['Vessel'].iloc[i]))
+                     vessel_pos_source['Vessel'].iloc[i]))
     m.h = Set(initialize = h, ordered = True)
     # m.h.pprint()
 
@@ -499,7 +433,7 @@ def main(vessel_source, vessel_pos_source,
     alpha = []
     for i in range(0, len(alpha_source)):
         alpha.append((alpha_source['Source'].iloc[i],
-                      alpha_source['Island location'].iloc[i]))
+                     alpha_source['Island location'].iloc[i]))
     m.alpha = Set(initialize = alpha, ordered = True)
     # m.alpha.pprint()
 
@@ -513,8 +447,6 @@ def main(vessel_source, vessel_pos_source,
                                  beta_source['Island dock'].iloc[i], k))
     m.beta = Set(initialize = beta, ordered = True)
     # m.beta.pprint()
-    # for i in m.beta:
-    #     print(i)
 
     # gammas
     gamma = []
@@ -526,8 +458,6 @@ def main(vessel_source, vessel_pos_source,
                                   gamma_source['Destination'].iloc[i], k))
     m.gamma = Set(initialize = gamma, ordered = True)
     # m.gamma.pprint()
-    # for i in m.gamma:
-    #     print(i)
 
     # deltas
     delta = []
@@ -539,6 +469,8 @@ def main(vessel_source, vessel_pos_source,
                                   delta_source['Destination'].iloc[i], round_trips[k+1]))
     m.delta = Set(initialize = delta, ordered = True)
     #m.delta.pprint()
+    # for i in m.delta:
+    #     print(i)
 
     # epsilons
     epsilon = []
@@ -604,8 +536,6 @@ def main(vessel_source, vessel_pos_source,
     for i in lambda_caps:
         if demand_source['private_evac'].loc[demand_source['Location'] == i[0]].empty:
             lambda_caps[i] = 0.0
-        if iteration > 0:
-            lambda_caps[i] = 0.0
         else:
             lambda_caps[i] = float(demand_source['private_evac'].loc[demand_source['Location'] == i[0]])
     m.lambda_cap = Param(m.lambdas, initialize = lambda_caps)
@@ -631,9 +561,9 @@ def main(vessel_source, vessel_pos_source,
             for j in is_docks:
                 for l in mn_docks:
                     if k in i and j in i and l in i:
-                        gamma_cost[i] = (float(gamma_source['Distance'][(gamma_source['Origin'] == j)
-                                                                        & (gamma_source['Destination'] == l)])/
-                                         float(vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == k])) * 60
+                        gamma_cost[i] = (float(gamma_source['Distance'][(gamma_source['Origin'] == j) 
+                                                                          & (gamma_source['Destination'] == l)])/
+                        float(vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == k])) * 60
     m.gamma_c = Param(m.gamma, initialize = gamma_cost)
     #m.gamma_c.pprint()
 
@@ -644,8 +574,8 @@ def main(vessel_source, vessel_pos_source,
                 for l in is_docks:
                     if k in i and j in i and l in i:
                         delta_cost[i] = (float(delta_source['Distance'][(delta_source['Origin'] == j)
-                                                                        & (delta_source['Destination'] == l)])/
-                                         float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
+                                                                  & (delta_source['Destination'] == l)])/
+                        float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
     m.delta_c = Param(m.delta, initialize = delta_cost)
     #m.delta_c.pprint()
 
@@ -656,8 +586,8 @@ def main(vessel_source, vessel_pos_source,
                 for l in is_docks:
                     if k in i and j in i and l in i:
                         zeta_cost[i] = (float(zeta_source['Distance'][(zeta_source['Origin'] == j)
-                                                                      & (zeta_source['Destination'] == l)])/
-                                        float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
+                                                                  & (zeta_source['Destination'] == l)])/
+                        float(vessel_source['vmax'].loc[vessel_source['Vessel_name'] == k])) * 60
     m.zeta_c = Param(m.zeta, initialize = zeta_cost)
     #m.zeta_c.pprint()
 
@@ -685,7 +615,7 @@ def main(vessel_source, vessel_pos_source,
     for i in c_cost:
         for k in vessels:
             if k in i:
-                c_cost[i] = float(vessel_source['loading time'].loc[vessel_source['Vessel_name'] == k])
+                c_cost[i] = float(vessel_source['loading time'].loc[vessel_source['Vessel_name'] == k]) 
     m.c_c = Param(m.c, initialize = c_cost)
     #m.c_c.pprint()
 
@@ -707,10 +637,10 @@ def main(vessel_source, vessel_pos_source,
     Evac_demand = generate_comb_2keys(src_node, is_loc)
     Evac_demand = dict.fromkeys(Evac_demand)
     for i in Evac_demand:
-        if demand_source['Demand_' + str(iteration)].loc[(demand_source['Location'] == i[1])].empty:
+        if demand_source['Demand_0'].loc[(demand_source['Location'] == i[1])].empty:
             Evac_demand[i] = 0.0
         else:
-            Evac_demand[i] = float(demand_source['Demand_' + str(iteration)].loc[(demand_source['Location'] == i[1])])
+            Evac_demand[i] = float(demand_source['Demand_0'].loc[(demand_source['Location'] == i[1])])
     m.demand = Param(src_node, is_loc, initialize = Evac_demand) # equivalent to fl_sa
     # m.demand.pprint()
 
@@ -744,7 +674,7 @@ def main(vessel_source, vessel_pos_source,
     ############################# CONSTRAINTS ##############################
 
     # Constraint definition
-
+               
     m.time_const = Constraint(m.i, rule = times)
     # m.time_const.pprint()
 
@@ -762,7 +692,7 @@ def main(vessel_source, vessel_pos_source,
 
     ### lambda arcs (island to mainland through private evacuation)
     m.capa_at = Constraint(m.lambdas, rule = cap_at)
-    #m.capa_at.pprint()
+    #m.capa_at.pprint()  
 
     ## Flow conservation constraints
     # flow through island locations
@@ -798,7 +728,7 @@ def main(vessel_source, vessel_pos_source,
     m.objective = Objective(rule=conservative, sense=minimize, doc='Define stochastic objective function')
     # m.objective.pprint()
 
-    return(m, completed_routes)
+    return(m)
 
 
 if __name__ == "__main__":

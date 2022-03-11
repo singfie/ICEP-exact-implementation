@@ -27,12 +27,15 @@ def main():
 
     for instance_folder in os.listdir(os.path.join(os.getcwd(), instance)):
 
-        if not any(e.endswith('TRUE_DEMAND_REVEAL.csv') for e in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions'))):
+        # devise iteration
+        iteration = instance_folder.split('_')[-3]
+
+        if not any(e.endswith('GUROBI_iteration_' + str(iteration) + '.csv') for e in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions'))):
             print("Files missing in:", instance_folder)
 
         for solutions in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions')):
 
-            if 'TRUE_DEMAND_REVEAL' in solutions:
+            if 'GUROBI_iteration_' + str(iteration) in solutions:
                 try:
                     true_result = pd.read_csv(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions', solutions))
                     # print(true_result)
@@ -69,14 +72,8 @@ def main():
                     records = instance_folder.split('_')
                     demand_capacity_ratio = float(records[5])
                     variance_factor = float(records[8])
-                    if run_mode == 'rolling-horizon':
-                        update_interval = float(records[11])
-                    else:
-                        update_interval = None
-                    if (run_mode == 'rolling-horizon') | (run_mode == 'robust'):
-                        number_updates = float(records[14])
-                    else:
-                        number_updates = None
+                    update_interval = float(records[11])
+                    number_updates = float(records[14])
                     seed = float(records[-1])
                     if run_mode == 'robust':
                         gamma_setting = float(solutions.split('_')[5])

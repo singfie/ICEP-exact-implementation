@@ -138,10 +138,15 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
         'load_end_time': pd.Series([], dtype='float'),
         'resource_speed': pd.Series([], dtype='float'),
         'evacuees': pd.Series([], dtype='int'),
-        'evacuated_location': pd.Series([], dtype='str')
+        'evacuated_location': pd.Series([], dtype='str'),
+        'post_run_correction': pd.Series([], dtype='str')
     })
 
     route_details = route_details.append(completed_routes, ignore_index = True)
+    if not completed_routes.empty:
+        post_run_correction = 'yes'
+    else:
+        post_run_correction = None
 
     # assign the data to each entry
     for j in m.i:
@@ -166,7 +171,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'load_end_time': load_end_time,
                                                                   'resource_speed': vessel_source['vmax'].loc[vessel_source['Vessel_name'] == j].values[0],
                                                                   'evacuees': 0,
-                                                                  'evacuated_location': "None"}, ignore_index = True)
+                                                                  'evacuated_location': "None",
+                                                                  'post_run_correction': post_run_correction}, ignore_index = True)
                             segment_id += 1
                 for a in m.x:
                     if j in a and t in a:
@@ -187,7 +193,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'load_end_time': load_end_time,
                                                                   'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
                                                                   'evacuees': round(m.flbc[a].value),
-                                                                  'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[0]].values[0]}, ignore_index = True)
+                                                                  'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[0]].values[0],
+                                                                  'post_run_correction': post_run_correction}, ignore_index = True)
                             segment_id += 1
                 for a in m.y:
                     if j in a and t == a[2]:
@@ -208,7 +215,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'load_end_time': load_end_time,
                                                                   'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
                                                                   'evacuees': 0,
-                                                                  'evacuated_location': "None"}, ignore_index = True)
+                                                                  'evacuated_location': "None",
+                                                                  'post_run_correction': post_run_correction}, ignore_index = True)
                             segment_id += 1
 
             else:
@@ -231,7 +239,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'load_end_time': load_end_time,
                                                                   'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
                                                                   'evacuees': round(m.flbc[a].value),
-                                                                  'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[0]].values[0]}, ignore_index = True)
+                                                                  'evacuated_location': is_docks_source["Location"][is_docks_source["Dock"] == a[0]].values[0],
+                                                                  'post_run_correction': post_run_correction}, ignore_index = True)
                             segment_id += 1
                 for a in m.y:
                     if j in a and t == a[2]:
@@ -252,7 +261,8 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
                                                                   'load_end_time': load_end_time,
                                                                   'resource_speed': vessel_source['v_loaded'].loc[vessel_source['Vessel_name'] == j].values[0],
                                                                   'evacuees': 0,
-                                                                  'evacuated_location': "None"}, ignore_index = True)
+                                                                  'evacuated_location': "None",
+                                                                  'post_run_correction': post_run_correction}, ignore_index = True)
                             segment_id += 1
 
     route_details['route_start_time'] += time_passed
@@ -376,8 +386,10 @@ def main():
 
     if iteration > 0:
         previous_route_plan = pd.read_csv(os.path.join(SOL_DIR,
-                                                       'route_plan_scenario_GUROBI_iteration_' + str(iteration - 1) + '.csv'))
-
+                                                       'route_plan_scenario_GUROBI_iteration_0.csv'))
+        # make sure update is not run before current route plan is finished to be realistic
+        end_previous_route_plan = previous_route_plan['load_end_time'].max()
+        time_passed = max(end_previous_route_plan, time_passed)
     else:
         previous_route_plan = pd.DataFrame()
 
