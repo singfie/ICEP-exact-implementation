@@ -29,23 +29,25 @@ def main():
 
     for dataset in os.listdir(path):
 
-        if 'interval_15' in dataset:
+        # shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
 
-            shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
+        # read in number of locations
+        demand = pd.read_csv(os.path.join(path, dataset, 'input', 'scenarios.csv'))
 
-            # read in number of locations
-            demand = pd.read_csv(os.path.join(path, dataset, 'input', 'scenarios.csv'))
-            for gamma in range(len(demand) + 1):
+        information = dataset.split('_')
+        iteration = int(information[-3])
+        update_interval = int(information[-6])
+        reveal_time = iteration * update_interval
 
-                # optimize using D-ICEP
-                os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma))
+        for gamma in range(len(demand) + 1):
 
-                # update route plan with true information revealed
-                os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset + ' -gamma ' + str(gamma))
+            # optimize using R-ICEP
+            os.system('python pyomo_ICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma))
 
-        else:
-
-            shutil.rmtree(os.path.join(path, dataset))
+            # update with D-ICEP once true information is revealed
+            os.system('python DICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma) + ' -update_time ' + str(reveal_time) + ' -iteration ' + str(iteration))
+            # # update route plan with true information revealed
+            # os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset + ' -gamma ' + str(gamma))
 
     return(-1)
 

@@ -66,14 +66,8 @@ def main():
                     records = instance_folder.split('_')
                     demand_capacity_ratio = float(records[5])
                     variance_factor = float(records[8])
-                    if run_mode == 'rolling-horizon':
-                        update_interval = float(records[11])
-                    else:
-                        update_interval = None
-                    if (run_mode == 'rolling-horizon') | (run_mode == 'robust'):
-                        number_updates = float(records[14])
-                    else:
-                        number_updates = None
+                    update_interval = float(records[11])
+                    number_updates = float(records[14])
                     seed = float(records[-1])
                     if run_mode == 'robust':
                         gamma_setting = float(solutions.split('_')[5])

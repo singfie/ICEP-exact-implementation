@@ -397,7 +397,8 @@ def main(vessel_source, vessel_pos_source,
                 time_to_avail = vessel_source['time to availability'][vessel_source['Vessel_name'] == v] - time_passed
 
             # assign new time to availability
-            vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = time_to_avail
+            vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = max(0, time_to_avail)
+            print(vessel_source)
 
         if not completed_routes.empty:
             for t in np.unique(completed_routes['evacuated_location']):
