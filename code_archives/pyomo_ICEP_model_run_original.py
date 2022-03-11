@@ -13,7 +13,8 @@ import argparse
 from os.path import basename
 
 # import modules
-import pyomo_ICEP_model_generator_original
+from code_archives import pyomo_ICEP_model_generator_original
+
 
 def reformat_compatibility(matrix):
     """An auxiliary function to reformat the compatibility file"""
@@ -33,8 +34,6 @@ def reformat_compatibility(matrix):
     return newframe
 
 def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source, runtime_limit = 3600):
-
-    import gurobipy
 
     start_time = time.time()
 
@@ -363,10 +362,10 @@ def main():
     start_time = time.time()
 
     m = pyomo_ICEP_model_generator_original.main(vessel_source, vessel_pos_source,
-        is_locs_source, is_docks_source, mn_locs_source, mn_docks_source,compat_source,
-        distance_data, trips_source, demand_source, src_node_source,
-        alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
-        lambda_source)
+                                                 is_locs_source, is_docks_source, mn_locs_source, mn_docks_source, compat_source,
+                                                 distance_data, trips_source, demand_source, src_node_source,
+                                                 alpha_source, beta_source, gamma_source, delta_source, epsilon_source, zeta_source,
+                                                 lambda_source)
 
     optimal_solution, run_time = run_S_ICEP_model(m, rel_path, vessel_source, is_docks_source, runtime_limit = run_time_limit)
 
