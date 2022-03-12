@@ -35,7 +35,7 @@ def main():
 
         for solutions in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions')):
 
-            if 'GUROBI_iteration_' + str(iteration) in solutions:
+            if ('GUROBI_iteration_' + str(iteration) in solutions) or ('GUROBI_iteration_BENCHMARK' in solutions):
                 try:
                     true_result = pd.read_csv(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions', solutions))
                     # print(true_result)
@@ -88,6 +88,9 @@ def main():
                     elif run_mode == 'deterministic':
                         model_type = 'D-ICEP'
 
+                    if 'BENCHMARK' in solutions:
+                        model_type = 'D-ICEP BENCHMARK'
+
                     # record to dataframe
                     experiment_results = experiment_results.append({'dataset': dataset,
                                                                     'model': model_type,
@@ -100,7 +103,10 @@ def main():
                                                                     'update_interval': update_interval,
                                                                     'number_updates': number_updates,
                                                                     'gamma_setting': gamma_setting,
-                                                                    'random_seed': seed},
+                                                                    'random_seed': seed,
+                                                                    'id': str(model_type) + '_' + str(variance_factor) + '_' +
+                                                                          str(update_interval) + '_' + str(number_updates) +
+                                                                          '_' + str(seed) + '_' + str(gamma_setting)},
                                                                    ignore_index = True)
 
                 except:

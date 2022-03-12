@@ -270,7 +270,10 @@ def run_S_ICEP_model(m, dirname, vessel_source, is_docks_source,
     route_details['load_start_time'] += time_passed
     route_details['load_end_time'] += time_passed
 
-    route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
+    if (time_passed == 0) and iteration != 0:
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_BENCHMARK.csv'), index = False)
+    else:
+        route_details.to_csv(os.path.join(SOL_DIR, 'route_plan_scenario_GUROBI_iteration_' + str(iteration) + '.csv'), index = False)
 
     #### END ROUTE DETAILS
 
@@ -384,7 +387,7 @@ def main():
     # print(DATA_DIR)
     SOL_DIR = os.path.join(DATA_DIR, "Solutions")
 
-    if iteration > 0:
+    if time_passed > 0:
         previous_route_plan = pd.read_csv(os.path.join(SOL_DIR,
                                                        'route_plan_scenario_GUROBI_iteration_0.csv'))
         # make sure update is not run before current route plan is finished to be realistic

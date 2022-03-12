@@ -405,7 +405,8 @@ def main(vessel_source, vessel_pos_source,
                 number_already_evacuated_loc = location_routes['evacuees'].sum()
                 demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
 
-        print(demand_source)
+    print(demand_source)
+    print(demand_source['Demand_' + str(iteration)])
 
     # update the round trips source
     # max number of trips is if smallest resource has to do all evacuations
