@@ -12,49 +12,49 @@ def comparison_plots_updates(df, data_path, seed, demand_ratio):
     df = df[(df['random_seed'] == seed) & (df['demand_capacity_ratio'] == demand_ratio)]
 
     # number of updates
-    g0 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
+    g0 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
     # g0.set(yticklabels=[])  # remove the tick labels
     g0.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g0.set(xlabel='Number of information updates')
     g0.set(title='Benchmark')
 
-    g1 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
+    g1 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
     # g0.set(yticklabels=[])  # remove the tick labels
     g1.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g1.set(xlabel='Number of information updates')
     g1.set(title='D-ICEP')
 
-    g2 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
+    g2 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
     # g0.set(yticklabels=[])  # remove the tick labels
     g2.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g2.set(xlabel='Number of information updates')
     g2.set(title='R-ICEP - Gamma: 0')
 
-    g3 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
+    g3 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
     # g0.set(yticklabels=[])  # remove the tick labels
     g3.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g3.set(xlabel='Number of information updates')
     g3.set(title='R-ICEP - Gamma: 1')
 
-    g4 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
+    g4 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
     # g0.set(yticklabels=[])  # remove the tick labels
     g4.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g4.set(xlabel='Number of information updates')
     g4.set(title='R-ICEP - Gamma: 2')
 
-    g5 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
+    g5 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
     # g0.set(yticklabels=[])  # remove the tick labels
     g5.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
     g5.set(xlabel='Number of information updates')
     g5.set(title='R-ICEP - Gamma: 3')
 
-    g6 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
+    g6 = sns.lineplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
     # g0.set(yticklabels=[])  # remove the tick labels
     g6.set(ylabel='True evacuation time')  # remove the axis label
     # g0.set(xticklabels=['low', 'high'])
@@ -261,6 +261,40 @@ def comparison_plots_demand(df, data_path, seed, demand_ratio):
     plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_demand_capacity_ratio_' + str(seed) + '.png'), dpi=300, transparent=False)
     plt.close()
 
+def overview_plot(df, data_path):
+
+    fig, axs = plt.subplots(ncols=2, figsize = (20,5), gridspec_kw=dict(width_ratios=(12,12)))
+
+    df['model_type'] = df['model'] + ' ' + df['gamma_setting'].astype(str)
+    for i in range(len(df)):
+        if 'nan' in df['model_type'].iloc[i]:
+            df['model_type'].iloc[i] = df['model_type'].iloc[i][0:-4]
+
+    # print(np.unique(df['model_type']))
+
+    # number of updates
+    models = ["D-ICEP BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
+    g0 = sns.boxplot(x="model_type", y="evac_time_true", data=df, ax=axs[0], order = models)
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g0.set(xlabel='Model type')
+
+    # number of updates
+    g1 = sns.lineplot(x="model_type", y="evac_time_true", hue = "demand_capacity_ratio", style = "random_seed", data=df, ax=axs[1])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g1.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g1.set(xlabel='Model type')
+
+    fig.set_facecolor("white")
+    fig.suptitle('True evacuation times for each model',
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot.png'), dpi=300, transparent=False)
+    plt.close()
+
 def individual_box_plots(df, data_path):
 
     fig, axs = plt.subplots(ncols=5, figsize = (15,5), gridspec_kw=dict(width_ratios=(4,2,2,2,1)))
@@ -389,15 +423,17 @@ def main():
     # box plots
     individual_box_plots(df, data_path)
 
-    for seed in [123, 124, 125, 126, 127]:
+    overview_plot(df, data_path)
 
-        comparison_plots_updates(df, data_path, seed, 2)
+    # for seed in [123, 124, 125, 126, 127]:
+    #
+    #     comparison_plots_updates(df, data_path, seed, 2)
 
-        comparison_plots_interval(df, data_path, seed, 2)
-
-        comparison_plots_variance(df, data_path, seed, 2)
-
-        comparison_plots_demand(df, data_path, seed, 2)
+        # comparison_plots_interval(df, data_path, seed, 2)
+        #
+        # comparison_plots_variance(df, data_path, seed, 2)
+        #
+        # comparison_plots_demand(df, data_path, seed, 2)
 
     # line plots
     # line_plots(df, data_path)
