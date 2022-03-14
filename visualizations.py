@@ -5,6 +5,262 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+def comparison_plots_updates(df, data_path, seed, demand_ratio):
+
+    fig, axs = plt.subplots(ncols=7, figsize = (25,5), gridspec_kw=dict(width_ratios=(4,4,4,4,4,4,4)))
+
+    df = df[(df['random_seed'] == seed) & (df['demand_capacity_ratio'] == demand_ratio)]
+
+    # number of updates
+    g0 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g0.set(xlabel='Number of information updates')
+    g0.set(title='Benchmark')
+
+    g1 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g1.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g1.set(xlabel='Number of information updates')
+    g1.set(title='D-ICEP')
+
+    g2 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g2.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g2.set(xlabel='Number of information updates')
+    g2.set(title='R-ICEP - Gamma: 0')
+
+    g3 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g3.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g3.set(xlabel='Number of information updates')
+    g3.set(title='R-ICEP - Gamma: 1')
+
+    g4 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g4.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g4.set(xlabel='Number of information updates')
+    g4.set(title='R-ICEP - Gamma: 2')
+
+    g5 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g5.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g5.set(xlabel='Number of information updates')
+    g5.set(title='R-ICEP - Gamma: 3')
+
+    g6 = sns.boxplot(x="number_updates", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g6.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g6.set(xlabel='Number of information updates')
+    g6.set(title='RH-ICEP')
+
+    fig.set_facecolor("white")
+    fig.suptitle('True evacuation times vs information updates under models',
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_comparisons_updates_' + str(seed) + '.png'), dpi=300, transparent=False)
+    plt.close()
+
+def comparison_plots_interval(df, data_path, seed, demand_ratio):
+
+    fig, axs = plt.subplots(ncols=7, figsize = (25,5), gridspec_kw=dict(width_ratios=(2,2,2,2,2,2,2)))
+
+    df = df[(df['random_seed'] == seed) & (df['demand_capacity_ratio'] == demand_ratio)]
+
+    # number of updates
+    g0 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g0.set(xlabel='Update interval')
+    g0.set(title='Benchmark')
+
+    g1 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g1.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g1.set(xlabel='Update interval')
+    g1.set(title='D-ICEP')
+
+    g2 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g2.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g2.set(xlabel='Update interval')
+    g2.set(title='R-ICEP - Gamma: 0')
+
+    g3 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g3.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g3.set(xlabel='Update interval')
+    g3.set(title='R-ICEP - Gamma: 1')
+
+    g4 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g4.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g4.set(xlabel='Update interval')
+    g4.set(title='R-ICEP - Gamma: 2')
+
+    g5 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g5.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g5.set(xlabel='Number of information updates')
+    g5.set(title='R-ICEP - Gamma: 3')
+
+    g6 = sns.boxplot(x="update_interval", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g6.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g6.set(xlabel='Update interval')
+    g3.set(title='RH-ICEP')
+
+    fig.set_facecolor("white")
+    fig.suptitle('True evacuation times vs update intervals under models',
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_comparisons_interval_' + str(seed) + '.png'), dpi=300, transparent=False)
+    plt.close()
+
+def comparison_plots_variance(df, data_path, seed, demand_ratio):
+
+    fig, axs = plt.subplots(ncols=7, figsize = (25,5), gridspec_kw=dict(width_ratios=(2,2,2,2,2,2,2)))
+
+    df = df[(df['random_seed'] == seed) & (df['demand_capacity_ratio'] == demand_ratio)]
+
+    # number of updates
+    g0 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g0.set(xlabel='Demand variance factor')
+    g0.set(title='Benchmark')
+
+    g1 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g1.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g1.set(xlabel='Demand variance factor')
+    g1.set(title='D-ICEP')
+
+    g2 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g2.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g2.set(xlabel='Demand variance factor')
+    g2.set(title='R-ICEP - Gamma: 0')
+
+    g3 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g3.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g3.set(xlabel='Demand variance factor')
+    g3.set(title='R-ICEP - Gamma: 1')
+
+    g4 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g4.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g4.set(xlabel='Demand variance factor')
+    g4.set(title='R-ICEP - Gamma: 2')
+
+    g5 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g5.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g5.set(xlabel='Demand variance factor')
+    g5.set(title='R-ICEP - Gamma: 3')
+
+    g6 = sns.boxplot(x="variance_factor", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g6.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g6.set(xlabel='Demand variance factor')
+    g6.set(title='RH-ICEP')
+
+    fig.set_facecolor("white")
+    fig.suptitle('True evacuation times vs variance factor under models',
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_comparisons_variance_' + str(seed) + '.png'), dpi=300, transparent=False)
+    plt.close()
+
+def comparison_plots_demand(df, data_path, seed, demand_ratio):
+
+    fig, axs = plt.subplots(ncols=7, figsize = (25,5), gridspec_kw=dict(width_ratios=(2,2,2,2,2,2,2)))
+
+    df = df[(df['random_seed'] == seed) & (df['demand_capacity_ratio'] == demand_ratio)]
+
+    # number of updates
+    g0 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[df['model'] == 'D-ICEP BENCHMARK'], ax=axs[0])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g0.set(xlabel='Demand Capacity Ratio')
+    g0.set(title='Benchmark')
+
+    g1 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[df['model'] == 'D-ICEP'], ax=axs[1])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g1.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g1.set(xlabel='Demand Capacity Ratio')
+    g1.set(title='D-ICEP')
+
+    g2 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 0)], ax=axs[2])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g2.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g2.set(xlabel='Demand Capacity Ratio')
+    g2.set(title='R-ICEP - Gamma: 0')
+
+    g3 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 1)], ax=axs[3])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g3.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g3.set(xlabel='Demand Capacity Ratio')
+    g3.set(title='R-ICEP - Gamma: 1')
+
+    g4 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 2)], ax=axs[4])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g4.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g4.set(xlabel='Demand Capacity Ratio')
+    g4.set(title='R-ICEP - Gamma: 2')
+
+    g5 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[(df['model'] == 'R-ICEP') & (df['gamma_setting'] == 3)], ax=axs[5])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g5.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g5.set(xlabel='Demand Capacity Ratio')
+    g5.set(title='R-ICEP - Gamma: 3')
+
+    g6 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=df[df['model'] == 'RH-ICEP'], ax=axs[6])
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g6.set(ylabel='True evacuation time')  # remove the axis label
+    # g0.set(xticklabels=['low', 'high'])
+    g6.set(xlabel='Demand Capacity Ratio')
+    g6.set(title='RH-ICEP')
+
+    fig.set_facecolor("white")
+    fig.suptitle('True evacuation times vs variance factor under models',
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_demand_capacity_ratio_' + str(seed) + '.png'), dpi=300, transparent=False)
+    plt.close()
+
 def individual_box_plots(df, data_path):
 
     fig, axs = plt.subplots(ncols=5, figsize = (15,5), gridspec_kw=dict(width_ratios=(4,2,2,2,1)))
@@ -57,40 +313,40 @@ def individual_box_plots(df, data_path):
                  fontweight=20)
     plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_individual_factors.png'), dpi=300, transparent=False)
 
-    for intervals in np.unique(df['update_interval']):
-
-        for updates in np.unique(df['number_updates']):
-
-            data = df[(df['update_interval'] == intervals) & (df['number_updates'] == updates)]
-
-            fig, axs = plt.subplots(ncols=3, figsize = (8,5), gridspec_kw=dict(width_ratios=(2,2,1)))
-
-            # demand variance factor over iterations
-            g3 = sns.boxplot(x="variance_factor", y="evac_time_true", data=data, ax=axs[0])
-            g3.set(ylabel=None)
-            # g3.set(xticklabels=['low', 'high'])
-            g3.set(xlabel='Variance factor relative to true demand')
-
-            # demand variance factor over iterations
-            g4 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=data, ax=axs[1])
-            g4.set(yticklabels=[])  # remove the tick labels
-            g4.set(ylabel=None)
-            # g4.set(xticklabels=['low', 'high'])
-            g4.set(xlabel='Demand/capacity ratio')
-
-            # total distribution
-            g5 = sns.boxplot(y="evac_time_true", data=data, ax=axs[2])
-            g5.set(yticklabels=[])  # remove the tick labels
-            g5.set(ylabel=None)  # remove the axis label
-            g5.set(xticklabels=[])  # remove the tick labels
-            g5.set(xlabel='Population distribution')
-
-            fig.set_facecolor("white")
-            fig.suptitle('True evacuation times under varying parameter settings',
-                         ha='center',
-                         fontsize=15,
-                         fontweight=20)
-            plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_individual_factors_i_' + str(intervals) + '_u_' + str(updates) + '.png'), dpi=300, transparent=False)
+    # for intervals in np.unique(df['update_interval']):
+    #
+    #     for updates in np.unique(df['number_updates']):
+    #
+    #         data = df[(df['update_interval'] == intervals) & (df['number_updates'] == updates)]
+    #
+    #         fig, axs = plt.subplots(ncols=3, figsize = (8,5), gridspec_kw=dict(width_ratios=(2,2,1)))
+    #
+    #         # demand variance factor over iterations
+    #         g3 = sns.boxplot(x="variance_factor", y="evac_time_true", data=data, ax=axs[0])
+    #         g3.set(ylabel=None)
+    #         # g3.set(xticklabels=['low', 'high'])
+    #         g3.set(xlabel='Variance factor relative to true demand')
+    #
+    #         # demand variance factor over iterations
+    #         g4 = sns.boxplot(x="demand_capacity_ratio", y="evac_time_true", data=data, ax=axs[1])
+    #         g4.set(yticklabels=[])  # remove the tick labels
+    #         g4.set(ylabel=None)
+    #         # g4.set(xticklabels=['low', 'high'])
+    #         g4.set(xlabel='Demand/capacity ratio')
+    #
+    #         # total distribution
+    #         g5 = sns.boxplot(y="evac_time_true", data=data, ax=axs[2])
+    #         g5.set(yticklabels=[])  # remove the tick labels
+    #         g5.set(ylabel=None)  # remove the axis label
+    #         g5.set(xticklabels=[])  # remove the tick labels
+    #         g5.set(xlabel='Population distribution')
+    #
+    #         fig.set_facecolor("white")
+    #         fig.suptitle('True evacuation times under varying parameter settings',
+    #                      ha='center',
+    #                      fontsize=15,
+    #                      fontweight=20)
+    #         plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_individual_factors_i_' + str(intervals) + '_u_' + str(updates) + '.png'), dpi=300, transparent=False)
 
     return(-1)
 
@@ -132,6 +388,16 @@ def main():
 
     # box plots
     individual_box_plots(df, data_path)
+
+    for seed in [123, 124, 125, 126, 127]:
+
+        comparison_plots_updates(df, data_path, seed, 2)
+
+        comparison_plots_interval(df, data_path, seed, 2)
+
+        comparison_plots_variance(df, data_path, seed, 2)
+
+        comparison_plots_demand(df, data_path, seed, 2)
 
     # line plots
     # line_plots(df, data_path)
