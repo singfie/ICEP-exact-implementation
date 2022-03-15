@@ -37,8 +37,8 @@ def diversify_uncertain_experiments():
     random.seed(seed) # setting the seed
 
     # check if a directory for experiment files exists
-    if not os.path.exists(os.path.join(dirname, '2022_03_10_experiment_files')):
-        os.makedirs(os.path.join(dirname, '2022_03_10_experiment_files'))
+    if not os.path.exists(os.path.join(dirname, '2022_03_14_experiment_files')):
+        os.makedirs(os.path.join(dirname, '2022_03_14_experiment_files'))
 
     # read in demand
     demand = pd.read_csv(os.path.join(path, 'input', 'scenarios.csv'))
@@ -63,11 +63,11 @@ def diversify_uncertain_experiments():
 
                 # resulting number_updates
                 if ratio == 2:
-                    number_updates = int(180/time_interval) # 180 minutes updates
+                    number_updates = int(120/time_interval) # 120 minutes updates
                 elif ratio == 3:
-                    number_updates = int(240/time_interval) # 240 mins updates
+                    number_updates = int(180/time_interval) # 180 mins updates
                 elif ratio == 4:
-                    number_updates = int(300/time_interval) # 300 mins updates
+                    number_updates = int(240/time_interval) # 240 mins updates
 
                 ### DEMAND RATIO ###
                 demand = demand[['Scenario','Location','private_evac','Actual_demand']]
@@ -93,7 +93,7 @@ def diversify_uncertain_experiments():
                     demand['Demand_' + str(number_updates)].iloc[j] = demand['Actual_demand'].iloc[j]
 
                 # create a file copy
-                new_file_path = os.path.join(dirname, '2022_03_10_experiment_files', 'experiment_' + rel_path.split('/')[1] +
+                new_file_path = os.path.join(dirname, '2022_03_14_experiment_files', 'experiment_' + rel_path.split('/')[1] +
                                              '_ratio_' + str(ratio) +
                                              '_var_factor_' + str(variance_factor) +
                                              '_update_interval_' + str(time_interval) +
