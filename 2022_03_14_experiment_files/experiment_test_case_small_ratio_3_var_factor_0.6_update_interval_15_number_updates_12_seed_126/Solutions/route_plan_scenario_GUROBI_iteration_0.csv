@@ -1,0 +1,3 @@
+segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location,post_run_correction
+1,Vessel 1,1,Safe dock 00,Evac dock 21,25.18401044781916,40.68799052574241,40.68799052574241,44.68799052574241,22.0,0,None,
+2,Vessel 1,2,Evac dock 21,Safe dock 02,44.68799052574241,55.699416289342324,55.699416289342324,59.699416289342324,22.0,197,Evac Location 2,
