@@ -267,7 +267,7 @@ def overview_plot(data, data_path):
         for variance_factor in [0.2, 0.4, 0.6]:
             df = data[(data['demand_capacity_ratio'] == demand_capacity_ratio) & (data['variance_factor'] == variance_factor)]
 
-            fig, axs = plt.subplots(ncols=4, figsize = (30,5), gridspec_kw=dict(width_ratios=(10,10,10,10)))
+            fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (20,10))
 
             df['model_type'] = df['model'] + ' ' + df['gamma_setting'].astype(str)
             for i in range(len(df)):
@@ -280,14 +280,14 @@ def overview_plot(data, data_path):
 
             # number of updates
             models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
-            g0 = sns.boxplot(x="model_type", y="evac_time_true", data=df, ax=axs[0], order = models)
+            g0 = sns.boxplot(x="model_type", y="evac_time_true", data=df, ax=axs[0][0], order = models)
             # g0.set(yticklabels=[])  # remove the tick labels
             g0.set(ylabel='Evacuation time')  # remove the axis label
             # g0.set(xticklabels=['low', 'high'])
             g0.set(xlabel='Model type')
 
             # number of updates
-            g1 = sns.lineplot(x="update_interval", y="evac_time_true", hue = "model_type", data=df, ax=axs[1])
+            g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "random_seed", data=df, ax=axs[0][1], order = models)
             # g0.set(yticklabels=[])  # remove the tick labels
             g1.set(ylabel='Evacuation time')  # remove the axis label
             # g0.set(xticklabels=['low', 'high'])
@@ -295,13 +295,13 @@ def overview_plot(data, data_path):
             g1.set(xlabel='Update_interval')
 
             # number of updates
-            g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "update_interval", data=df, ax=axs[2], order = models)
+            g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "update_interval", data=df, ax=axs[1][0], order = models)
             # g0.set(yticklabels=[])  # remove the tick labels
             g2.set(ylabel='Evacuation time')  # remove the axis label
             # g0.set(xticklabels=['low', 'high'])
             g2.set(xlabel='Model type')
 
-            g3 = sns.boxplot(x="model_type", y="avg_util_true", data=df, ax=axs[3])
+            g3 = sns.boxplot(x="model_type", y="avg_util_true", data=df, ax=axs[1][1])
             # g0.set(yticklabels=[])  # remove the tick labels
             g3.set(ylabel='Average utilization of resource')  # remove the axis label
             # g0.set(xticklabels=['low', 'high'])
@@ -309,7 +309,7 @@ def overview_plot(data, data_path):
             g3.set(xlabel='Model type')
 
             fig.set_facecolor("white")
-            fig.suptitle('Evacuation times for each model',
+            fig.suptitle('Evacuation times for demand-capacity ratio ' + str(demand_capacity_ratio) + ' and demand variance factor ' + str(variance_factor),
                          ha='center',
                          fontsize=15,
                          fontweight=20)
