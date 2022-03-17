@@ -1,0 +1,9 @@
+Vessel_name,Vessel_type,contract_cost,operating_cost,Regular_origin,max_cap,vmax,v_loaded,loading time,time to availability,information
+Vessel 1,ferry,2000,500,Safe Area 1 Terminal,457,12,12,10,10,https://www.bcferries.com/about/corporate/safety_first/safety_cap_cumberland.html
+Vessel 2,Water taxi,500,150,Evac Area 1 Marina,12,25,25,3,10,
+Vessel 3,Water taxi,500,150,Evac Area 1 Marina,12,25,25,3,30,
+Vessel 4,Water taxi,500,150,Evac Area 1 Marina,12,25,25,3,60,
+Vessel 5,Water taxi,500,250,Safe Area 2 Harbor,38,25,25,5,10,
+Vessel 6,Booze Cruise,1000,250,Safe Area 1 Terminal,120,18,18,10,30,
+Vessel 7,SAR Vessel,0,0,Safe Area 1 Terminal,12,25,25,3,20,
+Vessel 8,SAR Vessel,0,0,Safe Area 2 Harbor,12,25,25,3,30,

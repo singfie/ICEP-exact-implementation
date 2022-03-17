@@ -1,0 +1,11 @@
+Origin,Destination,Distance
+Evac Area 1 Ferry Terminal,Safe Area 1 Terminal,2.8
+Evac Area 1 Marina,Safe Area 1 Terminal,2.8
+Evac Area 1 Beach,Safe Area 1 Terminal,2.6
+Evac Area 2 Marina,Safe Area 1 Terminal,10
+Evac Area 3 Dock,Safe Area 1 Terminal,5
+Evac Area 1 Ferry Terminal,Safe Area 2 Harbor,10.9
+Evac Area 1 Marina,Safe Area 2 Harbor,10.9
+Evac Area 1 Beach,Safe Area 2 Harbor,10.7
+Evac Area 2 Marina,Safe Area 2 Harbor,5
+Evac Area 3 Dock,Safe Area 2 Harbor,8
