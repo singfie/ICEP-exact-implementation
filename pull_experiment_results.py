@@ -31,7 +31,7 @@ def main():
         iteration = instance_folder.split('_')[-3]
 
         # resource folder
-        resources = pd.read_csv(os.path.join(os.getcwd(), instance, 'input', 'vessels.csv'))
+        resources = pd.read_csv(os.path.join(os.getcwd(), instance, instance_folder, 'input', 'vessels.csv'))
 
         if not any(e.endswith('GUROBI_iteration_' + str(iteration) + '.csv') for e in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions'))):
             print("Files missing in:", instance_folder)
@@ -58,7 +58,7 @@ def main():
                         for i in range(len(sub_frame_per_alg)):
                             if sub_frame_per_alg['evacuees'].iloc[i] > 0:
                                 time_utilized += sub_frame_per_alg['load_end_time'].iloc[i] - sub_frame_per_alg['route_start_time'].iloc[i]
-                            if 'Evac location' in sub_frame_per_alg['evacuated_location'].iloc[i]:
+                            if 'Evac' in sub_frame_per_alg['evacuated_location'].iloc[i]:
                                 if sub_frame_per_alg['evacuees'].iloc[i] == 0:
                                     capacity_utilized_as_per_alg.append(0)
                                 else:
@@ -75,11 +75,11 @@ def main():
                         for i in range(len(sub_frame_true)):
                             if sub_frame_true['evacuees'].iloc[i] > 0:
                                 time_utilized_true += sub_frame_true['load_end_time'].iloc[i] - sub_frame_true['route_start_time'].iloc[i]
-                            if 'Evac location' in sub_frame_per_alg['evacuated_location'].iloc[i]:
-                                if sub_frame_per_alg['evacuees'].iloc[i] == 0:
+                            if 'Evac' in sub_frame_true['evacuated_location'].iloc[i]:
+                                if sub_frame_true['evacuees'].iloc[i] == 0:
                                     capacity_utilized_true.append(0)
                                 else:
-                                    capacity_utilized_true.append(sub_frame_per_alg['evacuees'].iloc[i]/float(resources['max_cap'][resources['Vessel_name'] == v]))
+                                    capacity_utilized_true.append(sub_frame_true['evacuees'].iloc[i]/float(resources['max_cap'][resources['Vessel_name'] == v]))
                         time_utilization = time_utilized_true/max(sub_frame_true['load_end_time'])
                         time_utilizations_true.append(time_utilization)
                     avg_utilization_true = np.mean(time_utilizations_true)
