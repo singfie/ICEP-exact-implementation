@@ -35,6 +35,7 @@ def main():
 
             # time of information reveal
             iteration = int(dataset.split('_')[-3])
+            # print(iteration)
             time_of_reveal = iteration * int(dataset.split('_')[-6])
 
             ### RUN BENCHMARK ###
