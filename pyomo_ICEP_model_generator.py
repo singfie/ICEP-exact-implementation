@@ -422,13 +422,13 @@ def main(vessel_source, vessel_pos_source,
                                 # print(completed_routes['evacuated_location'].iloc[last_trip])
                                 last_trip -= 1
                             # print(last_trip)
-                            if not last_trip > -len(completed_routes):
+                            if last_trip > -len(completed_routes):
                                 completed_routes['evacuees'].iloc[last_trip] -= subtract_at_location
                                 # print(completed_routes['evacuees'].iloc[last_trip])
                                 over_evacuated -= subtract_at_location
                                 last_trip -= 1
                             else:
-                                pass
+                                over_evacuated = 0
                     demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
 
     print(demand_source)
