@@ -6,6 +6,7 @@ March 8, 2022
 import pandas as pd
 import argparse
 import os
+import shutil
 
 def main():
     """
@@ -27,6 +28,8 @@ def main():
     path = os.path.join(dirname, rel_path)
 
     for dataset in os.listdir(path):
+
+        # shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
 
         # read in number of updates
         number_updates = int(dataset.split('_')[-3])
