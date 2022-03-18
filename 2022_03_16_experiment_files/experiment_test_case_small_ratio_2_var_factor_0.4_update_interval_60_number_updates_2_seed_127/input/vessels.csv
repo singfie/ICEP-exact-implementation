@@ -1,0 +1,6 @@
+Vessel_name,Vessel_type,contract_cost,operating_cost,Regular_origin,max_cap,vmax,v_loaded,loading time,time to availability,information
+Vessel 1,power boat,6000.0,350.0,Safe dock 00,300,22.0,22.0,4.0,25.184010447819162,
+Vessel 2,military,5000.0,50.0,Safe dock 00,300,11.0,11.0,6.0,22.39509778620926,
+Vessel 3,tourist boat,3000.0,150.0,Safe dock 01,310,15.0,15.0,6.0,79.64143470773472,
+Vessel 4,power boat,4000.0,350.0,Safe dock 02,254,19.0,19.0,10.0,20.14436737035838,
+Vessel 5,water taxi,2000.0,150.0,Safe dock 01,280,16.0,16.0,3.0,44.542657477337606,

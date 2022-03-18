@@ -46,8 +46,6 @@ def main():
 
             # update with D-ICEP once true information is revealed
             os.system('python DICEP_model_run.py -path ' + rel_path + '/' + dataset + ' -run_time_limit 3600' + ' -gamma ' + str(gamma) + ' -update_time ' + str(reveal_time) + ' -iteration ' + str(iteration))
-            # # update route plan with true information revealed
-            # os.system('python simulate_usage_in_execution.py -path ' + rel_path + '/' + dataset + ' -gamma ' + str(gamma))
 
     return(-1)
 

@@ -400,11 +400,43 @@ def main(vessel_source, vessel_pos_source,
             vessel_source['time to availability'][vessel_source['Vessel_name'] == v] = max(0, float(time_to_avail))
             print(vessel_source)
 
+        # if not completed_routes.empty:
+        #     for t in np.unique(completed_routes['evacuated_location']):
+        #         location_routes = completed_routes[completed_routes['evacuated_location'] == t]
+        #         number_already_evacuated_loc = location_routes['evacuees'].sum()
+        #         demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
+
         if not completed_routes.empty:
+            # print(np.unique(completed_routes['evacuated_location']))
             for t in np.unique(completed_routes['evacuated_location']):
-                location_routes = completed_routes[completed_routes['evacuated_location'] == t]
-                number_already_evacuated_loc = location_routes['evacuees'].sum()
-                demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
+                if t != 'None':
+                    location_routes = completed_routes[completed_routes['evacuated_location'] == t]
+                    # print(location_routes)
+                    number_already_evacuated_loc = location_routes['evacuees'].sum()
+                    # print(number_already_evacuated_loc)
+                    # print(float(demand_source['Demand_' + str(iteration)][demand_source['Location'] == t]))
+                    if number_already_evacuated_loc > float(demand_source['Demand_' + str(iteration)][demand_source['Location'] == t]):
+                        last_trip = -1
+                        over_evacuated = number_already_evacuated_loc - float(demand_source['Demand_' + str(iteration)][demand_source['Location'] == t])
+                        while (over_evacuated > 0) & (last_trip > -len(location_routes)):
+                            # print(t)
+                            # print(completed_routes['evacuees'][completed_routes['evacuated_location'] == t].iloc[last_trip])
+                            # print(number_already_evacuated_loc)
+                            subtract_at_location = min(over_evacuated, completed_routes['evacuees'][completed_routes['evacuated_location'] == t].iloc[last_trip])
+                            # print(subtract_at_location)
+                            # print(completed_routes['evacuees'][completed_routes['evacuated_location'] == t].iloc[last_trip])
+                            while (completed_routes['evacuated_location'].iloc[last_trip] != t) & (last_trip > -len(completed_routes)):
+                                # print(completed_routes['evacuated_location'].iloc[last_trip])
+                                last_trip -= 1
+                            # print(last_trip)
+                            if last_trip > -len(completed_routes):
+                                completed_routes['evacuees'].iloc[last_trip] -= subtract_at_location
+                                # print(completed_routes['evacuees'].iloc[last_trip])
+                                over_evacuated -= subtract_at_location
+                                last_trip -= 1
+                            else:
+                                over_evacuated = 0
+                    demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
 
         print(demand_source)
 

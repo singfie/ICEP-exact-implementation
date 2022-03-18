@@ -27,6 +27,8 @@ def main():
 
     for instance_folder in os.listdir(os.path.join(os.getcwd(), instance)):
 
+        resources = pd.read_csv(os.path.join(os.getcwd(), instance, instance_folder, 'input', 'vessels.csv'))
+
         for solutions in os.listdir(os.path.join(os.getcwd(), instance, instance_folder, 'Solutions')):
 
             if 'TRUE_DEMAND_REVEAL' in solutions:
@@ -42,25 +44,39 @@ def main():
                     r_as_per_alg = result_as_per_alg['load_end_time'].max()
                     r_true = true_result['load_end_time'].max()
                     time_utilizations_as_per_alg = []
+                    capacity_utilized_as_per_alg = []
                     for v in np.unique(result_as_per_alg['resource_id']):
                         sub_frame_per_alg = result_as_per_alg[result_as_per_alg['resource_id'] == v]
                         time_utilized = 0
                         for i in range(len(sub_frame_per_alg)):
                             if sub_frame_per_alg['evacuees'].iloc[i] > 0:
                                 time_utilized += sub_frame_per_alg['load_end_time'].iloc[i] - sub_frame_per_alg['route_start_time'].iloc[i]
+                            if 'Evac' in sub_frame_per_alg['evacuated_location'].iloc[i]:
+                                if sub_frame_per_alg['evacuees'].iloc[i] == 0:
+                                    capacity_utilized_as_per_alg.append(0)
+                                else:
+                                    capacity_utilized_as_per_alg.append(sub_frame_per_alg['evacuees'].iloc[i]/float(resources['max_cap'][resources['Vessel_name'] == v]))
                         time_utilization = time_utilized/max(sub_frame_per_alg['load_end_time'])
                         time_utilizations_as_per_alg.append(time_utilization)
                     avg_utilization_as_per_alg = np.mean(time_utilizations_as_per_alg)
+                    avg_cap_util_as_per_alg = np.mean(capacity_utilized_as_per_alg)
                     time_utilizations_true = []
+                    capacity_utilized_true = []
                     for v in np.unique(true_result['resource_id']):
                         sub_frame_true = true_result[true_result['resource_id'] == v]
                         time_utilized_true = 0
                         for i in range(len(sub_frame_true)):
                             if sub_frame_true['evacuees'].iloc[i] > 0:
                                 time_utilized_true += sub_frame_true['load_end_time'].iloc[i] - sub_frame_true['route_start_time'].iloc[i]
+                            if 'Evac' in sub_frame_true['evacuated_location'].iloc[i]:
+                                if sub_frame_true['evacuees'].iloc[i] == 0:
+                                    capacity_utilized_true.append(0)
+                                else:
+                                    capacity_utilized_true.append(sub_frame_true['evacuees'].iloc[i]/float(resources['max_cap'][resources['Vessel_name'] == v]))
                         time_utilization = time_utilized_true/max(sub_frame_true['load_end_time'])
                         time_utilizations_true.append(time_utilization)
                     avg_utilization_true = np.mean(time_utilizations_true)
+                    avg_cap_util_true = np.mean(capacity_utilized_true)
 
                     # independent variables
                     records = instance_folder.split('_')
@@ -89,6 +105,8 @@ def main():
                                                                     'evac_time_true': r_true,
                                                                     'avg_util_per_alg': avg_utilization_as_per_alg,
                                                                     'avg_util_true': avg_utilization_true,
+                                                                    'avg_util_cap_per_alg': avg_cap_util_as_per_alg,
+                                                                    'avg_util_cap_true': avg_cap_util_true,
                                                                     'demand_capacity_ratio': demand_capacity_ratio,
                                                                     'variance_factor': variance_factor,
                                                                     'update_interval': update_interval,
