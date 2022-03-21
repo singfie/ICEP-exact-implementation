@@ -431,8 +431,10 @@ def main(vessel_source, vessel_pos_source,
                                 over_evacuated = 0
                     demand_source['Demand_' + str(iteration)][demand_source['Location'] == t] = max(0,demand_source['Demand_' + str(iteration)][demand_source['Location'] == t].values - number_already_evacuated_loc)
 
-    print(demand_source)
-    print(demand_source['Demand_' + str(iteration)])
+    # print(vessel_source)
+
+    # print(demand_source)
+    # print(demand_source['Demand_' + str(iteration)])
 
     # update the round trips source
     # max number of trips is if smallest resource has to do all evacuations
@@ -594,7 +596,7 @@ def main(vessel_source, vessel_pos_source,
                             zeta.append((round_trips[t], zeta_source['Origin'].iloc[i],
                                          zeta_source['Destination'].iloc[i],k))
     m.zeta = Set(initialize = zeta, ordered = True)
-    #m.zeta.pprint()
+    # m.zeta.pprint()
 
     # lambdas
     lambdas = []

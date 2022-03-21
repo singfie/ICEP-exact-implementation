@@ -1,0 +1,7 @@
+segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location,post_run_correction
+1,Vessel 1,1,Safe Area 1 Terminal,Evac Area 1 Ferry Terminal,10.0,24.0,24.0,34.0,12.0,0,None,
+2,Vessel 1,2,Evac Area 1 Ferry Terminal,Safe Area 1 Terminal,34.0,48.0,48.0,58.0,12.0,83,Evac Area 1,
+1,Vessel 4,1,Safe Area 1 Terminal,Evac Area 3 Dock,10.0,22.0,22.0,27.0,25.0,0,None,
+2,Vessel 4,2,Evac Area 3 Dock,Safe Area 3 Marina,27.0,37.8,37.8,42.8,25.0,38,Evac Area 3,
+1,Vessel 5,1,Safe Area 1 Terminal,Evac Area 3 Dock,30.0,46.66666666666667,46.66666666666667,56.66666666666667,18.0,0,None,
+2,Vessel 5,2,Evac Area 3 Dock,Safe Area 3 Marina,56.66666666666667,71.66666666666667,71.66666666666667,81.66666666666667,18.0,110,Evac Area 3,
