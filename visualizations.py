@@ -261,287 +261,342 @@ def comparison_plots_demand(df, data_path, seed, demand_ratio):
     plt.savefig(os.path.join(data_path.split('/')[0], 'figures/box_model_demand_capacity_ratio_' + str(seed) + '.png'), dpi=300, transparent=False)
     plt.close()
 
-def overview_plot(data, data_path):
+def overview_plot(dataset, data_path):
 
-    for demand_capacity_ratio in [2.0, 3.0, 4.0]:
-        for variance_factor in [0.2, 0.4, 0.6]:
-            df = data[(data['demand_capacity_ratio'] == demand_capacity_ratio) & (data['variance_factor'] == variance_factor)]
+    # for demand_capacity_ratio in [2.0, 3.0, 4.0]:
+    #     for variance_factor in [0.2, 0.4, 0.6]:
+    #         df = data[(data['demand_capacity_ratio'] == demand_capacity_ratio) & (data['variance_factor'] == variance_factor)]
+    #
+    #         fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (20,10))
+    #
+    #         df['model_type'] = df['model'] + ' ' + df['gamma_setting'].astype(str)
+    #         for i in range(len(df)):
+    #             if 'nan' in df['model_type'].iloc[i]:
+    #                 df['model_type'].iloc[i] = df['model_type'].iloc[i][0:-4]
+    #             if 'BENCHMARK' in df['model_type'].iloc[i]:
+    #                 df['model_type'].iloc[i] = 'BENCHMARK'
+    #
+    #         # df['model_type'] = df['model_type'] + ' ' + df['update_interval'].astype(str)
+    #         # for i in range(len(df)):
+    #         #     if 'RH-ICEP' not in df['model_type'].iloc[i]:
+    #         #         df['model_type'].iloc[i] = df['model_type'].iloc[i][0:-5]
+    #
+    #         # number of updates
+    #         models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
+    #         g0 = sns.boxplot(x="model_type", y="evac_time_true", data=df, ax=axs[0][0], order = models)
+    #         # g0.set(yticklabels=[])  # remove the tick labels
+    #         g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+    #         # g0.set(xticklabels=['low', 'high'])
+    #         g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+    #
+    #         # number of updates
+    #         g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "random_seed", data=df, ax=axs[0][1], order = models)
+    #         # g0.set(yticklabels=[])  # remove the tick labels
+    #         g1.set(ylabel='Evacuation time (min)')  # remove the axis label
+    #         # g1.set(yticks=range(150, 450, 50))
+    #         g1.set(ylim=(150))
+    #         # g0.set(xticklabels=['low', 'high'])
+    #         # g1.set(xlim=(0.2,0.8))
+    #         g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+    #         g1.legend(loc="lower right", title="Data set seed", title_fontsize="large")
+    #
+    #         # number of updates
+    #         g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "update_interval", data=df, ax=axs[1][0], order = models)
+    #         # g0.set(yticklabels=[])  # remove the tick labels
+    #         g2.set(ylabel='Evacuation time (min)')  # remove the axis label
+    #         # g2.set(yticks=range(150, 450, 50))
+    #         g2.set(ylim=(150))
+    #         # g0.set(xticklabels=['low', 'high'])
+    #         g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+    #         g2.legend(loc="lower right", title="Update interval", title_fontsize="large")
+    #
+    #         g3 = sns.boxplot(x="model_type", y="avg_util_true", data=df, ax=axs[1][1], order = models)
+    #         # g0.set(yticklabels=[])  # remove the tick labels
+    #         g3.set(ylabel='Average utilization of resource')  # remove the axis label
+    #         # g0.set(xticklabels=['low', 'high'])
+    #         # g3.set(xlim=(0,0.8))
+    #         g3.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+    #
+    #         fig.set_facecolor("white")
+    #         fig.suptitle('Evacuation times for demand-capacity ratio ' + str(demand_capacity_ratio) + ' and demand variance factor ' + str(variance_factor),
+    #                      ha='center',
+    #                      fontsize=15,
+    #                      fontweight=20)
+    #         plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_' + str(variance_factor) + '_' + str(demand_capacity_ratio) + '.png'), dpi=300, transparent=False)
+    #         plt.close()
 
-            fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (20,10))
+    for ds in ["small", "2"]:
 
-            df['model_type'] = df['model'] + ' ' + df['gamma_setting'].astype(str)
-            for i in range(len(df)):
-                if 'nan' in df['model_type'].iloc[i]:
-                    df['model_type'].iloc[i] = df['model_type'].iloc[i][0:-4]
-                if 'BENCHMARK' in df['model_type'].iloc[i]:
-                    df['model_type'].iloc[i] = 'BENCHMARK'
+        data = dataset[dataset['dataset'] == ds]
 
-            # df['model_type'] = df['model_type'] + ' ' + df['update_interval'].astype(str)
-            # for i in range(len(df)):
-            #     if 'RH-ICEP' not in df['model_type'].iloc[i]:
-            #         df['model_type'].iloc[i] = df['model_type'].iloc[i][0:-5]
+        fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (20,10))
 
-            # number of updates
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
+
+        # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
+        # for i in range(len(data)):
+        #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
+        #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
+
+        # number of updates
+        if ds == "small":
             models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
-            g0 = sns.boxplot(x="model_type", y="evac_time_true", data=df, ax=axs[0][0], order = models)
-            # g0.set(yticklabels=[])  # remove the tick labels
-            g0.set(ylabel='Evacuation time (min)')  # remove the axis label
-            # g0.set(xticklabels=['low', 'high'])
-            g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        elif ds == "2":
+            models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0", "R-ICEP 4.0"]
+        g0 = sns.boxplot(x="model_type", y="evac_time_true", data=data, ax=axs[0][0], order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g0.set(xticklabels=['low', 'high'])
+        g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
 
-            # number of updates
-            g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "random_seed", data=df, ax=axs[0][1], order = models)
-            # g0.set(yticklabels=[])  # remove the tick labels
-            g1.set(ylabel='Evacuation time (min)')  # remove the axis label
-            # g1.set(yticks=range(150, 450, 50))
-            g1.set(ylim=(150))
-            # g0.set(xticklabels=['low', 'high'])
-            # g1.set(xlim=(0.2,0.8))
-            g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-            g1.legend(loc="lower right", title="Data set seed", title_fontsize="large")
+        # number of updates
+        g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "variance_factor", data=data, ax=axs[0][1], order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g1.set(ylabel='Evacuation time (min)')  # remove the axis label
+        g1.set(yticks=range(150, 400, 50))
+        g1.set(ylim=(150, 400))
+        # g0.set(xticklabels=['low', 'high'])
+        # g1.set(xlim=(0.2,0.8))
+        g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g1.legend(loc="lower right", title="Variance factor", title_fontsize="large")
 
-            # number of updates
-            g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "update_interval", data=df, ax=axs[1][0], order = models)
-            # g0.set(yticklabels=[])  # remove the tick labels
-            g2.set(ylabel='Evacuation time (min)')  # remove the axis label
-            # g2.set(yticks=range(150, 450, 50))
-            g2.set(ylim=(150))
-            # g0.set(xticklabels=['low', 'high'])
-            g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-            g2.legend(loc="lower right", title="Update interval", title_fontsize="large")
+        # number of updates
+        g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "demand_capacity_ratio", data=data, ax=axs[1][0], order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g2.set(ylabel='Evacuation time (min)')  # remove the axis label
+        g2.set(yticks=range(150, 400, 50))
+        g2.set(ylim=(150, 400))
+        # g0.set(xticklabels=['low', 'high'])
+        g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g2.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
 
-            g3 = sns.boxplot(x="model_type", y="avg_util_true", data=df, ax=axs[1][1], order = models)
-            # g0.set(yticklabels=[])  # remove the tick labels
-            g3.set(ylabel='Average utilization of resource')  # remove the axis label
-            # g0.set(xticklabels=['low', 'high'])
-            # g3.set(xlim=(0,0.8))
-            g3.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g3 = sns.boxplot(x="model_type", y="avg_util_true", data=data, ax=axs[1][1], order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g3.set(ylabel='Average utilization of resource')  # remove the axis label
+        # g0.set(xticklabels=['low', 'high'])
+        # g3.set(xlim=(0,0.8))
+        g3.set(xlabel='Model type (with Gamma setting for R-ICEP)')
 
-            fig.set_facecolor("white")
-            fig.suptitle('Evacuation times for demand-capacity ratio ' + str(demand_capacity_ratio) + ' and demand variance factor ' + str(variance_factor),
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times for different model types for dataset D1',
                          ha='center',
                          fontsize=15,
                          fontweight=20)
-            plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_' + str(variance_factor) + '_' + str(demand_capacity_ratio) + '.png'), dpi=300, transparent=False)
-            plt.close()
+        elif ds == "2":
+            fig.suptitle('Evacuation times for different model types for dataset D2',
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
-    fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (20,10))
+        fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
 
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
 
-    # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
-    # for i in range(len(data)):
-    #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
-    #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
+        # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
+        # for i in range(len(data)):
+        #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
+        #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
 
-    # number of updates
-    models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
-    g0 = sns.boxplot(x="model_type", y="evac_time_true", data=data, ax=axs[0][0], order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g0.set(ylabel='Evacuation time (min)')  # remove the axis label
-    # g0.set(xticklabels=['low', 'high'])
-    g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        # number of updates
+        data['model_type_indicator'] = 0
+        data['model_type_indicator'][data['model_type'] == 'BENCHMARK'] = 1
+        data['model_type_indicator'][data['model_type'] == 'D-ICEP'] = 2
+        data['model_type_indicator'][data['model_type'] == 'RH-ICEP'] = 3
+        data['model_type_indicator'][data['model_type'] == 'R-ICEP 0.0'] = 4
+        data['model_type_indicator'][data['model_type'] == 'R-ICEP 1.0'] = 5
+        data['model_type_indicator'][data['model_type'] == 'R-ICEP 2.0'] = 6
+        data['model_type_indicator'][data['model_type'] == 'R-ICEP 3.0'] = 7
+        if ds == "2":
+            data['model_type_indicator'][data['model_type'] == 'R-ICEP 4.0'] = 8
 
-    # number of updates
-    g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "variance_factor", data=data, ax=axs[0][1], order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g1.set(ylabel='Evacuation time (min)')  # remove the axis label
-    g1.set(yticks=range(150, 400, 50))
-    g1.set(ylim=(150, 400))
-    # g0.set(xticklabels=['low', 'high'])
-    # g1.set(xlim=(0.2,0.8))
-    g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g1.legend(loc="lower right", title="Variance factor", title_fontsize="large")
+        if ds == "small":
+            models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
+        elif ds == "2":
+            models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0", "R-ICEP 4.0"]
+        g0 = sns.lineplot(x="model_type_indicator", y="evac_time_true", data=data, ax=axs, sort = True)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g0.set(yticks=[250, 260, 270, 280, 290, 300, 310, 320, 330, 340])
+        if ds == "small":
+            g0.set(xticks=[1,2,3,4,5,6,7])
+        elif ds == "2":
+            g0.set(xticks=[1,2,3,4,5,6,7,8])
+        g0.set(xticklabels=models)
+        g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g0.grid(b=True, which='major', color='black', linewidth=0.075)
 
-    # number of updates
-    g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "demand_capacity_ratio", data=data, ax=axs[1][0], order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g2.set(ylabel='Evacuation time (min)')  # remove the axis label
-    g2.set(yticks=range(150, 400, 50))
-    g2.set(ylim=(150, 400))
-    # g0.set(xticklabels=['low', 'high'])
-    g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g2.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times for different model types for data set D1' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        elif ds == "2":
+            fig.suptitle('Evacuation times for different model types for data set D2' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_mean_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
-    g3 = sns.boxplot(x="model_type", y="avg_util_true", data=data, ax=axs[1][1], order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g3.set(ylabel='Average utilization of resource')  # remove the axis label
-    # g0.set(xticklabels=['low', 'high'])
-    # g3.set(xlim=(0,0.8))
-    g3.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
 
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times for different model types',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot.png'), dpi=300, transparent=False)
-    plt.close()
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
 
-    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
+        # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
+        # for i in range(len(data)):
+        #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
+        #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
 
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
+        # number of updates
+        if ds == "small":
+            models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
+        elif ds == "2":
+            models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0", "R-ICEP 4.0"]
+        g0 = sns.boxplot(x="model_type", y="evac_time_true", data=data, ax=axs, order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g0.set(xticklabels=['low', 'high'])
+        g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g0.grid(b=True, which='major', color='black', linewidth=0.075)
+        # g0.axes.set_yscale('log') # delete if ugly
 
-    # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
-    # for i in range(len(data)):
-    #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
-    #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times for different model types for data set D1' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        elif ds == "2":
+            fig.suptitle('Evacuation times for different model types for data set D2' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_box_plots_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
-    # number of updates
-    data['model_type_indicator'] = 0
-    data['model_type_indicator'][data['model_type'] == 'BENCHMARK'] = 1
-    data['model_type_indicator'][data['model_type'] == 'D-ICEP'] = 2
-    data['model_type_indicator'][data['model_type'] == 'RH-ICEP'] = 3
-    data['model_type_indicator'][data['model_type'] == 'R-ICEP 0.0'] = 4
-    data['model_type_indicator'][data['model_type'] == 'R-ICEP 1.0'] = 5
-    data['model_type_indicator'][data['model_type'] == 'R-ICEP 2.0'] = 6
-    data['model_type_indicator'][data['model_type'] == 'R-ICEP 3.0'] = 7
+        fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
 
-    models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
-    g0 = sns.lineplot(x="model_type_indicator", y="evac_time_true", data=data, ax=axs, sort = True)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g0.set(ylabel='Evacuation time (min)')  # remove the axis label
-    g0.set(yticks=[250, 260, 270, 280, 290, 300, 310, 320, 330, 340])
-    g0.set(xticks=[1,2,3,4,5,6,7])
-    g0.set(xticklabels=models)
-    g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g0.grid(b=True, which='major', color='black', linewidth=0.075)
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
 
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times for different model types',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_mean.png'), dpi=300, transparent=False)
-    plt.close()
+        # number of updates
+        g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "variance_factor", data=data, ax=axs, order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g1.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g1.set(yticks=range(150, 400, 50))
+        # g1.set(ylim=(150, 400))
+        # g0.set(xticklabels=['low', 'high'])
+        # g1.set(xlim=(0.2,0.8))
+        g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g1.legend(loc="lower right", title="Variance factor", title_fontsize="large")
+        g1.grid(b=True, which='major', color='black', linewidth=0.075)
 
-    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times for different demand variance factor for different model types for data set D1' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        elif ds == "2":
+            fig.suptitle('Evacuation times for different demand variance factor for different model types for data set D2' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_per_variance_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
+        fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
 
-    # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
-    # for i in range(len(data)):
-    #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
-    #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
 
-    # number of updates
-    models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0"]
-    g0 = sns.boxplot(x="model_type", y="evac_time_true", data=data, ax=axs, order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g0.set(ylabel='Evacuation time (min)')  # remove the axis label
-    # g0.set(xticklabels=['low', 'high'])
-    g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g0.grid(b=True, which='major', color='black', linewidth=0.075)
+        # number of updates
+        g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "demand_capacity_ratio", data=data, ax=axs, order = models)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g2.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g2.set(yticks=range(150, 400, 50))
+        # g2.set(ylim=(150, 400))
+        # g0.set(xticklabels=['low', 'high'])
+        g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+        g2.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
+        g2.grid(b=True, which='major', color='black', linewidth=0.075)
 
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times for different model types',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_box_plots.png'), dpi=300, transparent=False)
-    plt.close()
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times per demand-capacity-ratio for different model types for data set D1' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        elif ds == "2":
+            fig.suptitle('Evacuation times per demand-capacity-ratio for different model types for data set D2' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_capacity_ratio_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
-    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
+        fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
 
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
+        data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+        for i in range(len(data)):
+            if 'nan' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+            if 'BENCHMARK' in data['model_type'].iloc[i]:
+                data['model_type'].iloc[i] = 'BENCHMARK'
 
-    # number of updates
-    g1 = sns.barplot(x="model_type", y="evac_time_true", hue = "variance_factor", data=data, ax=axs, order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g1.set(ylabel='Evacuation time (min)')  # remove the axis label
-    g1.set(yticks=range(150, 400, 50))
-    g1.set(ylim=(150, 400))
-    # g0.set(xticklabels=['low', 'high'])
-    # g1.set(xlim=(0.2,0.8))
-    g1.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g1.legend(loc="lower right", title="Variance factor", title_fontsize="large")
-    g1.grid(b=True, which='major', color='black', linewidth=0.075)
+        df = data[data['model_type'] == 'RH-ICEP']
 
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times for different demand variance factor for different model types',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_per_variance.png'), dpi=300, transparent=False)
-    plt.close()
+        # number of updates
+        g0 = sns.barplot(x="update_interval", y="evac_time_true", hue = "demand_capacity_ratio", data=df, ax=axs)
+        # g0.set(yticklabels=[])  # remove the tick labels
+        g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+        # g2.set(yticks=range(150, 400, 50))
+        # g2.set(ylim=(150, 400))
+        # g0.set(xticklabels=['low', 'high'])
+        g0.set(xlabel='Information Update Interval')
+        g0.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
+        g0.grid(b=True, which='major', color='black', linewidth=0.075)
 
-    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
-
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
-
-    # number of updates
-    g2 = sns.barplot(x="model_type", y="evac_time_true", hue = "demand_capacity_ratio", data=data, ax=axs, order = models)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g2.set(ylabel='Evacuation time (min)')  # remove the axis label
-    g2.set(yticks=range(150, 400, 50))
-    g2.set(ylim=(150, 400))
-    # g0.set(xticklabels=['low', 'high'])
-    g2.set(xlabel='Model type (with Gamma setting for R-ICEP)')
-    g2.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
-    g2.grid(b=True, which='major', color='black', linewidth=0.075)
-
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times per demand-capacity-ratio for different model types',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_capacity_ratio.png'), dpi=300, transparent=False)
-    plt.close()
-
-    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
-
-    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
-    for i in range(len(data)):
-        if 'nan' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
-        if 'BENCHMARK' in data['model_type'].iloc[i]:
-            data['model_type'].iloc[i] = 'BENCHMARK'
-
-    df = data[data['model_type'] == 'RH-ICEP']
-
-    # number of updates
-    g0 = sns.barplot(x="update_interval", y="evac_time_true", hue = "demand_capacity_ratio", data=df, ax=axs)
-    # g0.set(yticklabels=[])  # remove the tick labels
-    g0.set(ylabel='Evacuation time (min)')  # remove the axis label
-    # g2.set(yticks=range(150, 400, 50))
-    # g2.set(ylim=(150, 400))
-    # g0.set(xticklabels=['low', 'high'])
-    g0.set(xlabel='Information Update Interval')
-    g0.legend(loc="lower right", title="Demand Capacity Ratio", title_fontsize="large")
-    g0.grid(b=True, which='major', color='black', linewidth=0.075)
-
-    fig.set_facecolor("white")
-    fig.suptitle('Evacuation times for RH-ICEP over different update intervals',
-                 ha='center',
-                 fontsize=15,
-                 fontweight=20)
-    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_rh-icep.png'), dpi=300, transparent=False)
-    plt.close()
+        fig.set_facecolor("white")
+        if ds == "small":
+            fig.suptitle('Evacuation times for RH-ICEP over different update intervals for data set D1' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        elif ds == "2":
+            fig.suptitle('Evacuation times for RH-ICEP over different update intervals for data set D2' ,
+                         ha='center',
+                         fontsize=15,
+                         fontweight=20)
+        plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_rh-icep_' + str(ds) + '.png'), dpi=300, transparent=False)
+        plt.close()
 
 def comparison_plots_individual(df, data_path, seed, interval, demand_capacity_ratio, variance_factor):
 
