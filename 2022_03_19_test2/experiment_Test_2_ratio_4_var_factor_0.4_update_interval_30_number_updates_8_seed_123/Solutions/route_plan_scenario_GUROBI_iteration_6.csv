@@ -1,0 +1,95 @@
+segment_id,resource_id,route_segment_id,origin,destination,route_start_time,route_end_time,load_start_time,load_end_time,resource_speed,evacuees,evacuated_location
+1,Vessel 1,1,Safe Area 1 Terminal,Evac Area 1 Ferry Terminal,10.0,24.0,24.0,34.0,12.0,0,None
+2,Vessel 1,2,Evac Area 1 Ferry Terminal,Safe Area 1 Terminal,34.0,48.0,48.0,58.0,12.0,344,Evac Area 1
+1,Vessel 1,1,Safe Area 1 Terminal,Evac Area 1 Ferry Terminal,90.0,104.0,104.0,114.0,12.0,0,None
+2,Vessel 1,2,Evac Area 1 Ferry Terminal,Safe Area 1 Terminal,114.0,128.0,128.0,138.0,12.0,49,Evac Area 1
+1,Vessel 1,1,Safe Area 1 Terminal,Evac Area 1 Ferry Terminal,150.0,164.0,164.0,174.0,12.0,0,None
+2,Vessel 1,2,Evac Area 1 Ferry Terminal,Safe Area 1 Terminal,174.0,188.0,188.0,198.0,12.0,9,Evac Area 1
+1,Vessel 2,1,Safe Area 2 Harbor,Evac Area 4 Dock,10.0,28.24000000000001,28.24000000000001,31.24000000000001,25.0,0,None
+2,Vessel 2,2,Evac Area 4 Dock,Safe Area 3 Marina,31.24000000000001,49.24000000000001,49.24000000000001,52.24000000000001,25.0,12,Evac Area 4
+1,Vessel 2,1,Safe Area 3 Marina,Evac Area 4 Dock,52.24000000000001,70.24000000000001,70.24000000000001,73.24000000000001,25.0,0,None
+2,Vessel 2,2,Evac Area 4 Dock,Safe Area 3 Marina,73.24000000000001,91.24,91.24,94.24,25.0,12,Evac Area 4
+1,Vessel 2,1,Safe Area 3 Marina,Evac Area 4 Beach,94.24,112.24,112.24,115.24,25.0,0,None
+2,Vessel 2,2,Evac Area 4 Beach,Safe Area 3 Marina,115.24,133.24,133.24,136.24,25.0,12,Evac Area 4
+1,Vessel 2,1,Safe Area 3 Marina,Evac Area 4 Beach,136.24,154.24,154.24,157.24,25.0,0,None
+2,Vessel 2,2,Evac Area 4 Beach,Safe Area 2 Harbor,157.24,175.48000000000002,175.48000000000002,178.48000000000002,25.0,12,Evac Area 4
+1,Vessel 2,1,Safe Area 2 Harbor,Evac Area 2 Marina,178.48000000000002,190.48,190.48,193.48,25.0,0,None
+2,Vessel 2,2,Evac Area 2 Marina,Safe Area 2 Harbor,193.48,205.48,205.48,208.48,25.0,12,Evac Area 2
+1,Vessel 3,1,Safe Area 3 Marina,Evac Area 4 Beach,60.0,78.0,78.0,81.0,25.0,0,None
+2,Vessel 3,2,Evac Area 4 Beach,Safe Area 2 Harbor,81.0,99.24,99.24,102.24,25.0,12,Evac Area 4
+1,Vessel 3,1,Safe Area 2 Harbor,Evac Area 4 Beach,102.24,120.48,120.48,123.48,25.0,0,None
+2,Vessel 3,2,Evac Area 4 Beach,Safe Area 3 Marina,123.48,141.48,141.48,144.48,25.0,12,Evac Area 4
+1,Vessel 3,1,Safe Area 3 Marina,Evac Area 3 Dock,144.48,155.27999999999997,155.27999999999997,158.27999999999997,25.0,0,None
+2,Vessel 3,2,Evac Area 3 Dock,Safe Area 3 Marina,158.27999999999997,169.07999999999998,169.07999999999998,172.07999999999998,25.0,12,Evac Area 3
+1,Vessel 3,1,Safe Area 3 Marina,Evac Area 4 Dock,172.07999999999998,190.08,190.08,193.08,25.0,0,None
+2,Vessel 3,2,Evac Area 4 Dock,Safe Area 2 Harbor,193.08,211.32,211.32,214.32,25.0,12,Evac Area 4
+1,Vessel 4,1,Safe Area 1 Terminal,Evac Area 3 Dock,10.0,22.0,22.0,27.0,25.0,0,None
+2,Vessel 4,2,Evac Area 3 Dock,Safe Area 3 Marina,27.0,37.80000000000001,37.80000000000001,42.80000000000001,25.0,38,Evac Area 3
+1,Vessel 4,1,Safe Area 3 Marina,Evac Area 4 Dock,42.80000000000001,60.8,60.8,65.8,25.0,0,None
+2,Vessel 4,2,Evac Area 4 Dock,Safe Area 2 Harbor,65.8,84.03999999999999,84.03999999999999,89.03999999999999,25.0,38,Evac Area 4
+1,Vessel 4,1,Safe Area 2 Harbor,Evac Area 4 Dock,89.03999999999999,107.28,107.28,112.28,25.0,0,None
+2,Vessel 4,2,Evac Area 4 Dock,Safe Area 3 Marina,112.28,130.27999999999997,130.27999999999997,135.27999999999997,25.0,38,Evac Area 4
+1,Vessel 4,1,Safe Area 3 Marina,Evac Area 4 Dock,135.27999999999997,153.27999999999997,153.27999999999997,158.27999999999997,25.0,0,None
+2,Vessel 4,2,Evac Area 4 Dock,Safe Area 3 Marina,158.27999999999997,176.27999999999997,176.27999999999997,181.28,25.0,38,Evac Area 4
+1,Vessel 5,1,Safe Area 1 Terminal,Evac Area 3 Dock,30.0,46.666666666666686,46.666666666666686,56.66666666666667,18.0,0,None
+2,Vessel 5,2,Evac Area 3 Dock,Safe Area 3 Marina,56.66666666666667,71.66666666666667,71.66666666666667,81.66666666666667,18.0,120,Evac Area 3
+1,Vessel 5,1,Safe Area 3 Marina,Evac Area 3 Dock,81.66666666666667,96.66666666666669,96.66666666666669,106.66666666666669,18.0,0,None
+2,Vessel 5,2,Evac Area 3 Dock,Safe Area 3 Marina,106.66666666666669,121.66666666666669,121.66666666666669,131.66666666666669,18.0,120,Evac Area 3
+1,Vessel 5,1,Safe Area 3 Marina,Evac Area 4 Dock,131.66666666666669,156.66666666666669,156.66666666666669,166.66666666666669,18.0,0,None
+2,Vessel 5,2,Evac Area 4 Dock,Safe Area 3 Marina,166.66666666666669,191.66666666666669,191.66666666666669,201.66666666666669,18.0,120,Evac Area 4
+1,Vessel 6,1,Safe Area 1 Terminal,Evac Area 3 Dock,30.0,42.0,42.0,45.0,25.0,0,None
+2,Vessel 6,2,Evac Area 3 Dock,Safe Area 3 Marina,45.0,55.8,55.8,58.8,25.0,12,Evac Area 3
+1,Vessel 6,1,Safe Area 3 Marina,Evac Area 4 Beach,58.8,76.8,76.8,79.8,25.0,0,None
+2,Vessel 6,2,Evac Area 4 Beach,Safe Area 3 Marina,79.8,97.8,97.8,100.8,25.0,12,Evac Area 4
+1,Vessel 6,1,Safe Area 3 Marina,Evac Area 4 Dock,100.8,118.8,118.8,121.8,25.0,0,None
+2,Vessel 6,2,Evac Area 4 Dock,Safe Area 2 Harbor,121.8,140.04,140.04,143.04,25.0,12,Evac Area 4
+1,Vessel 6,1,Safe Area 2 Harbor,Evac Area 2 Marina,143.04,155.04,155.04,158.04,25.0,0,None
+2,Vessel 6,2,Evac Area 2 Marina,Safe Area 2 Harbor,158.04,170.04,170.04,173.04,25.0,12,Evac Area 2
+1,Vessel 6,1,Safe Area 2 Harbor,Evac Area 4 Dock,173.04,191.28,191.28,194.28,25.0,0,None
+2,Vessel 6,2,Evac Area 4 Dock,Safe Area 2 Harbor,194.28,212.52,212.52,215.52,25.0,12,Evac Area 4
+1,Vessel 2,1,Safe Area 2 Harbor,Evac Area 4 Beach,208.48,226.71999999999997,226.71999999999997,229.71999999999997,25.0,0,None
+2,Vessel 2,2,Evac Area 4 Beach,Safe Area 1 Terminal,229.71999999999997,251.32,251.32,254.32,25.0,12,Evac Area 4
+3,Vessel 2,3,Safe Area 1 Terminal,Evac Area 4 Dock,254.32,275.91999999999996,275.91999999999996,278.91999999999996,25.0,0,None
+4,Vessel 2,4,Evac Area 4 Dock,Safe Area 2 Harbor,278.91999999999996,297.15999999999997,297.15999999999997,300.15999999999997,25.0,12,Evac Area 4
+5,Vessel 2,5,Safe Area 2 Harbor,Evac Area 4 Beach,300.15999999999997,318.4,318.4,321.4,25.0,0,None
+6,Vessel 2,6,Evac Area 4 Beach,Safe Area 3 Marina,321.4,339.4,339.4,342.4,25.0,12,Evac Area 4
+7,Vessel 2,7,Safe Area 3 Marina,Evac Area 4 Dock,342.4,360.4,360.4,363.4,25.0,0,None
+8,Vessel 2,8,Evac Area 4 Dock,Safe Area 3 Marina,363.4,381.4,381.4,384.4,25.0,12,Evac Area 4
+1,Vessel 3,1,Safe Area 2 Harbor,Evac Area 4 Dock,214.32,232.56,232.56,235.56,25.0,0,None
+2,Vessel 3,2,Evac Area 4 Dock,Safe Area 2 Harbor,235.56,253.79999999999998,253.79999999999998,256.79999999999995,25.0,12,Evac Area 4
+3,Vessel 3,3,Safe Area 2 Harbor,Evac Area 4 Beach,256.79999999999995,275.03999999999996,275.03999999999996,278.03999999999996,25.0,0,None
+4,Vessel 3,4,Evac Area 4 Beach,Safe Area 3 Marina,278.03999999999996,296.03999999999996,296.03999999999996,299.03999999999996,25.0,12,Evac Area 4
+5,Vessel 3,5,Safe Area 3 Marina,Evac Area 4 Dock,299.03999999999996,317.03999999999996,317.03999999999996,320.03999999999996,25.0,0,None
+6,Vessel 3,6,Evac Area 4 Dock,Safe Area 3 Marina,320.03999999999996,338.03999999999996,338.03999999999996,341.03999999999996,25.0,12,Evac Area 4
+7,Vessel 3,7,Safe Area 3 Marina,Evac Area 4 Dock,341.03999999999996,359.03999999999996,359.03999999999996,362.03999999999996,25.0,0,None
+8,Vessel 3,8,Evac Area 4 Dock,Safe Area 3 Marina,362.03999999999996,380.03999999999996,380.03999999999996,383.03999999999996,25.0,12,Evac Area 4
+1,Vessel 4,1,Safe Area 3 Marina,Evac Area 4 Dock,181.28,199.28,199.28,204.28,25.0,0,None
+2,Vessel 4,2,Evac Area 4 Dock,Safe Area 3 Marina,204.28,222.28,222.28,227.28,25.0,38,Evac Area 4
+3,Vessel 4,3,Safe Area 3 Marina,Evac Area 4 Dock,227.28,245.28,245.28,250.28,25.0,0,None
+4,Vessel 4,4,Evac Area 4 Dock,Safe Area 3 Marina,250.28,268.28,268.28,273.28,25.0,38,Evac Area 4
+5,Vessel 4,5,Safe Area 3 Marina,Evac Area 4 Dock,273.28,291.28,291.28,296.28,25.0,0,None
+6,Vessel 4,6,Evac Area 4 Dock,Safe Area 3 Marina,296.28,314.28,314.28,319.28,25.0,38,Evac Area 4
+7,Vessel 4,7,Safe Area 3 Marina,Evac Area 4 Dock,319.28,337.28,337.28,342.28,25.0,0,None
+8,Vessel 4,8,Evac Area 4 Dock,Safe Area 3 Marina,342.28,360.28,360.28,365.28,25.0,38,Evac Area 4
+9,Vessel 4,9,Safe Area 3 Marina,Evac Area 4 Dock,365.28,383.28,383.28,388.28,25.0,0,None
+10,Vessel 4,10,Evac Area 4 Dock,Safe Area 3 Marina,388.28,406.28,406.28,411.28,25.0,38,Evac Area 4
+11,Vessel 4,11,Safe Area 3 Marina,Evac Area 4 Dock,411.28,429.28,429.28,434.28,25.0,0,None
+12,Vessel 4,12,Evac Area 4 Dock,Safe Area 3 Marina,434.28,452.28,452.28,457.28,25.0,38,Evac Area 4
+1,Vessel 5,1,Safe Area 3 Marina,Evac Area 4 Dock,201.66666666666669,226.66666666666669,226.66666666666669,236.66666666666669,18.0,0,None
+2,Vessel 5,2,Evac Area 4 Dock,Safe Area 3 Marina,236.66666666666669,261.6666666666667,261.6666666666667,271.6666666666667,18.0,120,Evac Area 4
+3,Vessel 5,3,Safe Area 3 Marina,Evac Area 3 Dock,271.6666666666667,286.6666666666667,286.6666666666667,296.6666666666667,18.0,0,None
+4,Vessel 5,4,Evac Area 3 Dock,Safe Area 3 Marina,296.6666666666667,311.6666666666667,311.6666666666667,321.6666666666667,18.0,97,Evac Area 3
+5,Vessel 5,5,Safe Area 3 Marina,Evac Area 2 Marina,321.6666666666667,345.0,345.0,355.0,18.0,0,None
+6,Vessel 5,6,Evac Area 2 Marina,Safe Area 2 Harbor,355.0,371.6666666666667,371.6666666666667,381.6666666666667,18.0,118,Evac Area 2
+7,Vessel 5,7,Safe Area 2 Harbor,Evac Area 4 Dock,381.6666666666667,407.0,407.0,417.0,18.0,0,None
+8,Vessel 5,8,Evac Area 4 Dock,Safe Area 3 Marina,417.0,442.0,442.0,452.0,18.0,120,Evac Area 4
+1,Vessel 6,1,Safe Area 2 Harbor,Evac Area 4 Beach,215.52,233.76,233.76,236.76,25.0,0,None
+2,Vessel 6,2,Evac Area 4 Beach,Safe Area 1 Terminal,236.76,258.36,258.36,261.36,25.0,12,Evac Area 4
+3,Vessel 6,3,Safe Area 1 Terminal,Evac Area 4 Dock,261.36,282.96,282.96,285.96,25.0,0,None
+4,Vessel 6,4,Evac Area 4 Dock,Safe Area 3 Marina,285.96,303.96,303.96,306.96,25.0,12,Evac Area 4
+5,Vessel 6,5,Safe Area 3 Marina,Evac Area 4 Dock,306.96,324.96,324.96,327.96,25.0,0,None
+6,Vessel 6,6,Evac Area 4 Dock,Safe Area 3 Marina,327.96,345.96,345.96,348.96,25.0,12,Evac Area 4
+7,Vessel 6,7,Safe Area 3 Marina,Evac Area 4 Dock,348.96,366.96,366.96,369.96,25.0,0,None
+8,Vessel 6,8,Evac Area 4 Dock,Safe Area 3 Marina,369.96,387.96,387.96,390.96,25.0,12,Evac Area 4
+9,Vessel 6,9,Safe Area 3 Marina,Evac Area 4 Beach,390.96,408.96,408.96,411.96,25.0,0,None
+10,Vessel 6,10,Evac Area 4 Beach,Safe Area 2 Harbor,411.96,430.2,430.2,433.2,25.0,12,Evac Area 4

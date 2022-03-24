@@ -66,16 +66,16 @@ def main():
 
                     # independent variables
                     records = instance_folder.split('_')
-                    demand_capacity_ratio = float(records[5])
-                    variance_factor = float(records[8])
-                    update_interval = float(records[11])
-                    number_updates = float(records[14])
+                    demand_capacity_ratio = float(records[-12])
+                    variance_factor = float(records[-9])
+                    update_interval = float(records[-6])
+                    number_updates = float(records[-3])
                     seed = float(records[-1])
                     if run_mode == 'robust':
                         gamma_setting = float(solutions.split('_')[5])
                     else:
                         gamma_setting = None
-                    dataset = records[3]
+                    dataset = records[-14]
 
                     if run_mode == 'robust':
                         model_type = 'R-ICEP'

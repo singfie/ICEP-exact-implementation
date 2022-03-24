@@ -28,24 +28,26 @@ def main():
     path = os.path.join(dirname, rel_path)
 
     for dataset in os.listdir(path):
-
+        #
         # shutil.rmtree(os.path.join(path, dataset, 'Solutions'))
 
-        # read in number of updates
-        number_updates = int(dataset.split('_')[-3])
-        # read in update interval
-        update_interval = int(dataset.split('_')[-6])
+        if not os.path.exists(os.path.join(path, dataset, 'Solutions')):
 
-        updates = [0]
-        for i in range(number_updates):
-            updates.append(updates[i] + update_interval)
+            # read in number of updates
+            number_updates = int(dataset.split('_')[-3])
+            # read in update interval
+            update_interval = int(dataset.split('_')[-6])
 
-        update_string = ""
-        for i in updates:
-            update_string += " " + str(i)
+            updates = [0]
+            for i in range(number_updates):
+                updates.append(updates[i] + update_interval)
 
-        os.system("python main_rolling_horizon.py -p " + path + '/' + dataset +
-                  " -r 3600 -u" + update_string + " -i " + str(number_updates))
+            update_string = ""
+            for i in updates:
+                update_string += " " + str(i)
+
+            os.system("python main_rolling_horizon.py -p " + path + '/' + dataset +
+                      " -r 3600 -u" + update_string + " -i " + str(number_updates))
 
     return(-1)
 

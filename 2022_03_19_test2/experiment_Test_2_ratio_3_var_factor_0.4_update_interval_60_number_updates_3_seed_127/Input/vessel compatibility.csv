@@ -1,0 +1,55 @@
+Dock,Resource,Compatibility
+Evac Area 1 Ferry Terminal,Vessel 1,1
+Evac Area 1 Marina,Vessel 1,0
+Evac Area 2 Marina,Vessel 1,0
+Evac Area 3 Dock,Vessel 1,0
+Evac Area 4 Dock,Vessel 1,0
+Evac Area 4 Beach,Vessel 1,0
+Safe Area 1 Terminal,Vessel 1,1
+Safe Area 2 Harbor,Vessel 1,0
+Safe Area 3 Marina,Vessel 1,0
+Evac Area 1 Ferry Terminal,Vessel 2,0
+Evac Area 1 Marina,Vessel 2,1
+Evac Area 2 Marina,Vessel 2,1
+Evac Area 3 Dock,Vessel 2,1
+Evac Area 4 Dock,Vessel 2,1
+Evac Area 4 Beach,Vessel 2,1
+Safe Area 1 Terminal,Vessel 2,1
+Safe Area 2 Harbor,Vessel 2,1
+Safe Area 3 Marina,Vessel 2,1
+Evac Area 1 Ferry Terminal,Vessel 3,0
+Evac Area 1 Marina,Vessel 3,1
+Evac Area 2 Marina,Vessel 3,1
+Evac Area 3 Dock,Vessel 3,1
+Evac Area 4 Dock,Vessel 3,1
+Evac Area 4 Beach,Vessel 3,1
+Safe Area 1 Terminal,Vessel 3,1
+Safe Area 2 Harbor,Vessel 3,1
+Safe Area 3 Marina,Vessel 3,1
+Evac Area 1 Ferry Terminal,Vessel 4,0
+Evac Area 1 Marina,Vessel 4,1
+Evac Area 2 Marina,Vessel 4,1
+Evac Area 3 Dock,Vessel 4,1
+Evac Area 4 Dock,Vessel 4,1
+Evac Area 4 Beach,Vessel 4,0
+Safe Area 1 Terminal,Vessel 4,1
+Safe Area 2 Harbor,Vessel 4,1
+Safe Area 3 Marina,Vessel 4,1
+Evac Area 1 Ferry Terminal,Vessel 5,0
+Evac Area 1 Marina,Vessel 5,1
+Evac Area 2 Marina,Vessel 5,1
+Evac Area 3 Dock,Vessel 5,1
+Evac Area 4 Dock,Vessel 5,1
+Evac Area 4 Beach,Vessel 5,0
+Safe Area 1 Terminal,Vessel 5,1
+Safe Area 2 Harbor,Vessel 5,1
+Safe Area 3 Marina,Vessel 5,1
+Evac Area 1 Ferry Terminal,Vessel 6,0
+Evac Area 1 Marina,Vessel 6,1
+Evac Area 2 Marina,Vessel 6,1
+Evac Area 3 Dock,Vessel 6,1
+Evac Area 4 Dock,Vessel 6,1
+Evac Area 4 Beach,Vessel 6,1
+Safe Area 1 Terminal,Vessel 6,1
+Safe Area 2 Harbor,Vessel 6,1
+Safe Area 3 Marina,Vessel 6,1
