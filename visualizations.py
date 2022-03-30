@@ -387,6 +387,11 @@ def overview_plot(dataset, data_path):
             if 'BENCHMARK' in data['model_type'].iloc[i]:
                 data['model_type'].iloc[i] = 'BENCHMARK'
 
+        print(ds)
+        for dro in np.unique(data['model_type']):
+            part = data[data['model_type'] == dro]
+            print(dro, ":", part['evac_time_true'].mean(), part['evac_time_true'].std())
+
         # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
         # for i in range(len(data)):
         #     if 'RH-ICEP' not in data['model_type'].iloc[i]:

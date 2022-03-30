@@ -91,7 +91,7 @@ def main():
 
     aov_table2_r = sm.stats.anova_lm(model2_r, typ = 3)
 
-    #### Robust vs RH
+    #### Robust Gamma=0 vs RH
 
     rh_r_data = data[data['model'] == 'RH-ICEP']
     benchmark_data = data[(data['model'] == 'R-ICEP') & (data['gamma_setting'] == 0.0)]
@@ -116,9 +116,41 @@ def main():
 
     aov_table_r_rh = sm.stats.anova_lm(model_r_rh, typ = 3)
 
-    model2_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+    # model2_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+    model2_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum)*C(variance_factor, Sum)", data = relevant_data).fit()
 
     aov_table2_r_rh = sm.stats.anova_lm(model2_r_rh, typ = 3)
+
+
+    #### Robust Gamma=3/4 vs RH
+
+    rh_r_data = data[data['model'] == 'RH-ICEP']
+    benchmark_data = data[data['corrected_model'] == 'R-ICEP ROBUST']
+
+    rh_r_data['diff_RH_R'] = 0
+    for i in range(len(rh_data)):
+        bench = benchmark_data['evac_time_true'][(benchmark_data['dataset'] == rh_r_data['dataset'].iloc[i]) &
+                                                 (benchmark_data['random_seed'] == rh_r_data["random_seed"].iloc[i]) &
+                                                 (benchmark_data['demand_capacity_ratio'] == rh_r_data['demand_capacity_ratio'].iloc[i]) &
+                                                 (benchmark_data['update_interval'] == rh_r_data['update_interval'].iloc[i]) &
+                                                 (benchmark_data['variance_factor'] == rh_r_data['variance_factor'].iloc[i])].values
+        print(bench)
+        if len(bench) != 0:
+            rh_r_data['diff_RH_R'].iloc[i] = rh_r_data['evac_time_true'].iloc[i] / bench[0]
+        else:
+            rh_r_data['diff_RH_R'].iloc[i] = None
+
+    relevant_data = rh_r_data[['diff_RH_R', 'demand_capacity_ratio', 'update_interval', 'variance_factor', 'dataset']]
+    print(relevant_data.head())
+
+    model_r_rh_robust = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum)*C(variance_factor, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+
+    aov_table_r_rh_robust = sm.stats.anova_lm(model_r_rh_robust, typ = 3)
+
+    # model2_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+    model2_r_rh_robust = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum)*C(variance_factor, Sum)", data = relevant_data).fit()
+
+    aov_table2_r_rh_robust = sm.stats.anova_lm(model2_r_rh_robust, typ = 3)
 
     print("all interaction effects for RH-ICEP vs. benchmark")
     print(aov_table)
@@ -136,13 +168,21 @@ def main():
     print(aov_table2_r)
     print(model2_r.params)
 
-    print("all interaction effects for RH-ICEP vs. R-ICEP")
+    print("all interaction effects for RH-ICEP vs. R-ICEP Gamma = 0")
     print(aov_table_r_rh)
     # print(model_r_rh.params)
 
-    print("main effects and significant interaction effects for RH-ICEP vs. R-ICEP")
+    print("main effects and significant interaction effects for RH-ICEP vs. R-ICEP Gamma = 0")
     print(aov_table2_r_rh)
     print(model2_r_rh.params)
+
+    print("all interaction effects for RH-ICEP vs. R-ICEP ROBUST")
+    print(aov_table_r_rh_robust)
+    # print(model_r_rh.params)
+
+    print("main effects and significant interaction effects for RH-ICEP vs. R-ICEP ROBUST")
+    print(aov_table2_r_rh_robust)
+    print(model2_r_rh_robust.params)
 
     # interaction_groups = "DCR_" + relevant_data.demand_capacity_ratio.astype(str) + " & " + "UI_" + relevant_data.update_interval.astype(str) + " & " + "VF_" + relevant_data.variance_factor.astype(str) + " & " + "DS_" + relevant_data.dataset.astype(str)
 
