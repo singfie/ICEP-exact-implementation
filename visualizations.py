@@ -325,6 +325,55 @@ def overview_plot(dataset, data_path):
     #         plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_' + str(variance_factor) + '_' + str(demand_capacity_ratio) + '.png'), dpi=300, transparent=False)
     #         plt.close()
 
+    data = dataset
+
+    data['dataset'][data['dataset'] == "small"] = "D1"
+    data['dataset'][data['dataset'] == "2"] = "D2"
+
+    fig, axs = plt.subplots(nrows = 1, ncols = 1, figsize = (10,5))
+
+    data['model_type'] = data['model'] + ' ' + data['gamma_setting'].astype(str)
+    for i in range(len(data)):
+        if 'nan' in data['model_type'].iloc[i]:
+            data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-4]
+        if 'BENCHMARK' in data['model_type'].iloc[i]:
+            data['model_type'].iloc[i] = 'BENCHMARK'
+
+    # data['model_type'] = data['model_type'] + ' ' + data['update_interval'].astype(str)
+    # for i in range(len(data)):
+    #     if 'RH-ICEP' not in data['model_type'].iloc[i]:
+    #         data['model_type'].iloc[i] = data['model_type'].iloc[i][0:-5]
+
+    # number of updates
+    data['model_type_indicator'] = 0
+    data['model_type_indicator'][data['model_type'] == 'BENCHMARK'] = 1
+    data['model_type_indicator'][data['model_type'] == 'D-ICEP'] = 2
+    data['model_type_indicator'][data['model_type'] == 'RH-ICEP'] = 3
+    data['model_type_indicator'][data['model_type'] == 'R-ICEP 0.0'] = 4
+    data['model_type_indicator'][data['model_type'] == 'R-ICEP 1.0'] = 5
+    data['model_type_indicator'][data['model_type'] == 'R-ICEP 2.0'] = 6
+    data['model_type_indicator'][data['model_type'] == 'R-ICEP 3.0'] = 7
+    data['model_type_indicator'][data['model_type'] == 'R-ICEP 4.0'] = 8
+
+    models = ["BENCHMARK", "D-ICEP", "RH-ICEP", "R-ICEP 0.0", "R-ICEP 1.0", "R-ICEP 2.0", "R-ICEP 3.0", "R-ICEP 4.0"]
+    g0 = sns.lineplot(x="model_type_indicator", y="evac_time_true", hue = "dataset", data=data, ax=axs, sort = True)
+    # g0.set(yticklabels=[])  # remove the tick labels
+    g0.set(ylabel='Evacuation time (min)')  # remove the axis label
+    g0.set(yticks=[240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440,
+                   460, 480, 500, 520, 540])
+    g0.set(xticks=[1,2,3,4,5,6,7,8])
+    g0.set(xticklabels=models)
+    g0.set(xlabel='Model type (with Gamma setting for R-ICEP)')
+    g0.grid(b=True, which='major', color='black', linewidth=0.075)
+
+    fig.set_facecolor("white")
+    fig.suptitle('Evacuation times for different model types' ,
+                 ha='center',
+                 fontsize=15,
+                 fontweight=20)
+    plt.savefig(os.path.join(data_path.split('/')[0], 'figures/overview_plot_mean_hue.png'), dpi=300, transparent=False)
+    plt.close()
+
     for ds in ["small", "2"]:
 
         data = dataset[dataset['dataset'] == ds]

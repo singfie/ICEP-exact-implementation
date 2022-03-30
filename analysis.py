@@ -38,7 +38,7 @@ def main():
                                                  (benchmark_data['variance_factor'] == rh_data['variance_factor'].iloc[i])].values
         # print(bench)
         if len(bench) != 0:
-            rh_data['diff_benchmark'].iloc[i] = rh_data['evac_time_true'].iloc[i]/bench[0]
+            rh_data['diff_benchmark'].iloc[i] = rh_data['evac_time_true'].iloc[i] / bench[0]
         else:
             rh_data['diff_benchmark'].iloc[i] = None
 
@@ -48,7 +48,7 @@ def main():
 
     aov_table = sm.stats.anova_lm(model, typ = 3)
 
-    model2 = ols("diff_benchmark ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+    model2 = ols("diff_benchmark ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum)", data = relevant_data).fit()
 
     aov_table2 = sm.stats.anova_lm(model2, typ = 3)
 
@@ -63,11 +63,11 @@ def main():
         elif (data['dataset'].iloc[j] == '2') and (data['model'].iloc[j] == 'R-ICEP') and (data['gamma_setting'].iloc[j] == 4.0):
             data['corrected_model'].iloc[j] = 'R-ICEP ROBUST'
 
-    r_data = data[data['corrected_model'] == 'R-ICEP ROBUST']
+    r_data = data[(data['model'] == 'R-ICEP') & (data['gamma_setting'] == 0.0)]
     benchmark_data = data[data['model'] == 'D-ICEP BENCHMARK']
 
     r_data['diff_benchmark_R'] = 0
-    for i in range(len(rh_data)):
+    for i in range(len(r_data)):
         bench = benchmark_data['evac_time_true'][(benchmark_data['dataset'] == r_data['dataset'].iloc[i]) &
                                                  (benchmark_data['random_seed'] == r_data["random_seed"].iloc[i]) &
                                                  (benchmark_data['demand_capacity_ratio'] == r_data['demand_capacity_ratio'].iloc[i]) &
@@ -75,7 +75,7 @@ def main():
                                                  (benchmark_data['variance_factor'] == r_data['variance_factor'].iloc[i])].values
         # print(bench)
         if len(bench) != 0:
-            r_data['diff_benchmark_R'].iloc[i] = r_data['evac_time_true'].iloc[i]/bench[0]
+            r_data['diff_benchmark_R'].iloc[i] = r_data['evac_time_true'].iloc[i] / bench[0]
         else:
             r_data['diff_benchmark_R'].iloc[i] = None
 
@@ -85,14 +85,16 @@ def main():
 
     aov_table_r = sm.stats.anova_lm(model_r, typ = 3)
 
-    model2_r = ols("diff_benchmark_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(variance_factor, Sum)", data = relevant_data).fit()
+    #model2_r = ols("diff_benchmark_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum) + C(update_interval, Sum)*C(dataset, Sum) + C(update_interval, Sum)*C(variance_factor, Sum)", data = relevant_data).fit()
+    model2_r = ols("diff_benchmark_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum)", data = relevant_data).fit()
+
 
     aov_table2_r = sm.stats.anova_lm(model2_r, typ = 3)
 
     #### Robust vs RH
 
     rh_r_data = data[data['model'] == 'RH-ICEP']
-    benchmark_data = data[data['corrected_model'] == 'R-ICEP ROBUST']
+    benchmark_data = data[(data['model'] == 'R-ICEP') & (data['gamma_setting'] == 0.0)]
 
     rh_r_data['diff_RH_R'] = 0
     for i in range(len(rh_data)):
@@ -103,7 +105,7 @@ def main():
                                                  (benchmark_data['variance_factor'] == rh_r_data['variance_factor'].iloc[i])].values
         print(bench)
         if len(bench) != 0:
-            rh_r_data['diff_RH_R'].iloc[i] = rh_r_data['evac_time_true'].iloc[i]/bench[0]
+            rh_r_data['diff_RH_R'].iloc[i] = rh_r_data['evac_time_true'].iloc[i] / bench[0]
         else:
             rh_r_data['diff_RH_R'].iloc[i] = None
 
