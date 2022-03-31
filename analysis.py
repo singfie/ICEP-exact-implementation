@@ -110,7 +110,7 @@ def main():
             rh_r_data['diff_RH_R'].iloc[i] = None
 
     relevant_data = rh_r_data[['diff_RH_R', 'demand_capacity_ratio', 'update_interval', 'variance_factor', 'dataset']]
-    print(relevant_data.head())
+    print(relevant_data['diff_RH_R'][relevant_data['diff_RH_R'] > 1])
 
     model_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum)*C(variance_factor, Sum)*C(dataset, Sum)", data = relevant_data).fit()
 
@@ -120,6 +120,7 @@ def main():
     model2_r_rh = ols("diff_RH_R ~ C(demand_capacity_ratio, Sum) + C(update_interval, Sum) + C(variance_factor, Sum) + C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(dataset, Sum) + C(demand_capacity_ratio, Sum)*C(update_interval, Sum)*C(variance_factor, Sum)", data = relevant_data).fit()
 
     aov_table2_r_rh = sm.stats.anova_lm(model2_r_rh, typ = 3)
+
 
 
     #### Robust Gamma=3/4 vs RH
