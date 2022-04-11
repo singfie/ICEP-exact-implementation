@@ -13,7 +13,7 @@ and takes the following inputs:
 - update time, which describes the time that has passed since the first solve of the problem. Default should be 0.*
 - iteration, which describes the demand column in the data set. Default here should be 0.*
 
-* These features allow to re-solve the problem after an initial solve; the feature is useful to compare the performance of the algorithm to other algorithms, when better information is revealed at a later stage
+\* These features allow to re-solve the problem after an initial solve; the feature is useful to compare the performance of the algorithm to other algorithms, when better information is revealed at a later stage
 
 # run_experiments.py
 This file runs a benchmark experiment for an input data set, where initially only a first estimate over the evacuation 
