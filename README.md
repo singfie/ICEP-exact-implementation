@@ -32,7 +32,7 @@ and takes the following inputs:
 
 \* These features allow to re-solve the problem after an initial solve; the feature is useful to compare the performance of the algorithm to other algorithms, when better information is revealed at a later stage
 
-# run_experiments.py
+# run_experiments.py (main run file)
 This file runs a benchmark experiment for an input data set, where initially an uncertainty set over the evacuation demand is known, and the true demand is revealed later. 
 It runs in two steps for every instance generated for the experiment:
 1. We solve the robust optimization problem at time zero. The results are saved.
