@@ -18,7 +18,7 @@ The functionality of all files in each branch are described in the README file i
 
 # File description
 
-# pyomo_ICEP_model_generator.py
+## pyomo_ICEP_model_generator.py
 This file generates an instance of a S-ICEP model, given input data that can be solved using the Pyomo environment.
 
 # pyomo_ICEP_model_run.py
