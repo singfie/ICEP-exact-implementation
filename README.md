@@ -11,6 +11,9 @@ The package also includes some work in progress branches on column generation an
 The corresponding research paper published for these algorithms can be found under:
 Krutein, K. F. & Goochild, A. The Isolated Community Evacuation Problem with Mixed Integer Programming. Transportation Research Part E: Logistics & Transportation Review. (2022) Volume: tbd
 
+Furthermore, a case study has been published using the S-ICEP, implemented in the main branch, in:
+Krutein, K. F., McGowan, J. & Goodchild, A. Evacuating isolated islands with marine resources: A Bowen Island case study. International Journal of Disaster Risk Reduction. (2022) 102865. https://doi.org/10.1016/j.ijdrr.2022.102865
+
 The functionality of all files in each branch are described in the README file in each branch. The remainder of this file describes the files in the main branch. 
 
 # File description
