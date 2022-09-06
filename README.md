@@ -9,7 +9,7 @@ Branches exist for:
 The package also includes some work in progress branches on column generation and a step wise solver. These are not functional yet. 
 
 The corresponding research paper published for these algorithms can be found under:
-Krutein, K. F. & Goochild, A. The Isolated Community Evacuation Problem with Mixed Integer Programming. Transportation Research Part E: Logistics & Transportation Review. (2022) Volume: tbd
+Krutein, K. F. & Goochild, A. The Isolated Community Evacuation Problem with Mixed Integer Programming. Transportation Research Part E: Logistics & Transportation Review. (2022) 102710. https://doi.org/10.1016/j.tre.2022.102710
 
 Furthermore, a case study has been published using the S-ICEP, implemented in the main branch, in:
 Krutein, K. F., McGowan, J. & Goodchild, A. Evacuating isolated islands with marine resources: A Bowen Island case study. International Journal of Disaster Risk Reduction. (2022) 102865. https://doi.org/10.1016/j.ijdrr.2022.102865
